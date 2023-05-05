@@ -42,8 +42,6 @@ MUL: '*';
 ASSIGNMENT_OPERATOR: ':=';
 
 
-
-
 //--- PARSER: ---
 stylesheet: styleRule+ EOF | (variableAssignment | styleRule)+ EOF;
 styleRule: selector body;
@@ -60,11 +58,19 @@ declaration: propertyName COLON expression SEMICOLON;
 propertyName: LOWER_IDENT;
 
 expression: operation;
-
-
+literal: colorLiteral | boolLiteral | percentageLiteral | pixelLiteral | scalarLiteral;
+colorLiteral: COLOR;
+boolLiteral: TRUE | FALSE;
+percentageLiteral: PERCENTAGE;
+pixelLiteral: PIXELSIZE;
+scalarLiteral: SCALAR;
 
 variableAssignment: variableReference ASSIGNMENT_OPERATOR expression SEMICOLON;
 variableReference: CAPITAL_IDENT;
+
+operation: operation MUL operation | operation (MIN | PLUS) operation | literal;
+
+ifClause: IF BOX_BRACKET_OPEN expression BOX_BRACKET_CLOSE body;
 
 
 
