@@ -45,15 +45,26 @@ ASSIGNMENT_OPERATOR: ':=';
 
 
 //--- PARSER: ---
-stylesheet: statement+ EOF;
+stylesheet: styleRule+ EOF | (variableAssignment | styleRule)+ EOF;
+styleRule: selector body;
 
-statement: selector OPEN_BRACE declaration* CLOSE_BRACE;
+selector: tagSelector | idSelector | classSelector;
+body: OPEN_BRACE (declarations | variableAssignment)+ CLOSE_BRACE;
 
-selector: (ID_IDENT | CLASS_IDENT | LOWER_IDENT) (PLUS | BOX_BRACKET_OPEN)* ;
+tagSelector: LOWER_IDENT;
+idSelector: ID_IDENT;
+classSelector: CLASS_IDENT;
 
-declaration: property COLON value SEMICOLON;
+declarations: declaration+ | ifClause+;
+declaration: propertyName COLON expression SEMICOLON;
+propertyName: LOWER_IDENT;
 
-property: CAPITAL_IDENT;
+expression: operation;
 
-value: (PIXELSIZE | PERCENTAGE | SCALAR | COLOR | CAPITAL_IDENT | TRUE | FALSE) (PLUS | MIN | MUL)*;
+
+
+variableAssignment: variableReference ASSIGNMENT_OPERATOR expression SEMICOLON;
+variableReference: CAPITAL_IDENT;
+
+
 
