@@ -58,7 +58,7 @@ declaration: propertyName COLON expression SEMICOLON;
 propertyName: LOWER_IDENT;
 
 expression: operation;
-literal: colorLiteral | boolLiteral | percentageLiteral | pixelLiteral | scalarLiteral;
+literal: colorLiteral | boolLiteral | percentageLiteral | pixelLiteral | scalarLiteral | variableReference;
 colorLiteral: COLOR;
 boolLiteral: TRUE | FALSE;
 percentageLiteral: PERCENTAGE;
