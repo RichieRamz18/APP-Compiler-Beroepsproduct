@@ -70,7 +70,7 @@ variableReference: CAPITAL_IDENT;
 
 operation: operation MUL operation | operation (MIN | PLUS) operation | literal;
 
-ifClause: IF BOX_BRACKET_OPEN expression BOX_BRACKET_CLOSE body;
+ifClause: IF BOX_BRACKET_OPEN expression BOX_BRACKET_CLOSE body (ELSE body)?;
 
 
 
