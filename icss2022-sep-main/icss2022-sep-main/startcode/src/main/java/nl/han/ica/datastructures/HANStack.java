@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HANStack<T> implements IHANStack<T>{
-    private List<T> stack;
+    private HANLinkedList<T> stack;
 
     public HANStack (){
-        stack = new ArrayList<>();
+        stack = new HANLinkedList();
     }
     @Override
     public void push(T value) {
-        stack.add(value);
+        stack(value);
     }
 
     @Override
