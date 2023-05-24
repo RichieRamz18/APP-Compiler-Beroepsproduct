@@ -3,5 +3,6 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/APP-Compiler-opdracht" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/icss2022-sep-main/APP-ICSS-Compiler-Opdracht" vcs="Git" />
   </component>
 </project>
