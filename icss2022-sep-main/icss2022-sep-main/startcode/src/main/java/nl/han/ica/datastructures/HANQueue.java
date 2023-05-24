@@ -18,7 +18,7 @@ public class HANQueue<T> implements IHANQueue<T> {
 
     @Override
     public void enqueue(T value) {
-        
+
     }
 
     @Override
@@ -28,11 +28,11 @@ public class HANQueue<T> implements IHANQueue<T> {
 
     @Override
     public T peek() {
-        return null;
+        return queue.getFirst();
     }
 
     @Override
     public int getSize() {
-        return 0;
+        return queue.getSize();
     }
 }
