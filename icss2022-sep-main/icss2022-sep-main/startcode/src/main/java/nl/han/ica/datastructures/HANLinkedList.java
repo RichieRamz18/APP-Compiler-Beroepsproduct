@@ -26,7 +26,7 @@ public class HANLinkedList<T> implements IHANLinkedList<T> {
 
     @Override
     public void insert(int index, T value) {
-
+        
     }
 
     @Override
