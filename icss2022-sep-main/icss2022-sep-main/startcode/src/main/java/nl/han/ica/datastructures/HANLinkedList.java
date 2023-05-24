@@ -20,7 +20,8 @@ public class HANLinkedList<T> implements IHANLinkedList<T> {
 
     @Override
     public void clear() {
-
+        head.next = null;
+        size = 0;
     }
 
     @Override
