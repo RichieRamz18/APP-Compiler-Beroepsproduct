@@ -18,7 +18,7 @@ public class HANQueue<T> implements IHANQueue<T> {
 
     @Override
     public void enqueue(T value) {
-
+        queue.insert(queue.getSize(), value);
     }
 
     @Override
