@@ -23,7 +23,10 @@ public class HANQueue<T> implements IHANQueue<T> {
 
     @Override
     public T dequeue() {
-        return null;
+       T temporary= queue.getFirst();
+       queue.removeFirst();
+
+       return temporary;
     }
 
     @Override
