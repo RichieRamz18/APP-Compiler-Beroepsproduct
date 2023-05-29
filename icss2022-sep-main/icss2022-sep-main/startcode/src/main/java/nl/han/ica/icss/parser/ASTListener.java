@@ -3,6 +3,8 @@ package nl.han.ica.icss.parser;
 import nl.han.ica.datastructures.HANStack;
 import nl.han.ica.datastructures.IHANStack;
 import nl.han.ica.icss.ast.*;
+import nl.han.ica.icss.ast.selectors.ClassSelector;
+import nl.han.ica.icss.ast.selectors.IdSelector;
 import nl.han.ica.icss.ast.selectors.TagSelector;
 import org.antlr.v4.runtime.ParserRuleContext;
 
@@ -61,11 +63,19 @@ public class ASTListener extends ICSSBaseListener {
 		currentContainer.peek().addChild(tagselector);
 	}
 
-	@Override public void enterIdSelector(ICSSParser.IdSelectorContext ctx) { }
+	@Override public void enterIdSelector(ICSSParser.IdSelectorContext ctx) {
+		ASTNode idSelector = new IdSelector(ctx.getText());
+		currentContainer.push(idSelector);
+	}
 
-	@Override public void exitIdSelector(ICSSParser.IdSelectorContext ctx) { }
+	@Override public void exitIdSelector(ICSSParser.IdSelectorContext ctx) {
 
-	@Override public void enterClassSelector(ICSSParser.ClassSelectorContext ctx) { }
+	}
+
+	@Override public void enterClassSelector(ICSSParser.ClassSelectorContext ctx) {
+		ASTNode classSelector = new ClassSelector(ctx.getText());
+		currentContainer.push(classSelector);
+	}
 
 	@Override public void exitClassSelector(ICSSParser.ClassSelectorContext ctx) { }
 
