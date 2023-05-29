@@ -23,6 +23,10 @@ public class ASTListener extends ICSSBaseListener {
     public AST getAST() {
         return ast;
     }
+	@Override public void enterStylesheet(ICSSParser.StylesheetContext ctx) {
+		ASTNode stylesheet = new Stylesheet();
+		currentContainer.push(stylesheet);
+	}
 
 	@Override public void exitStylesheet(ICSSParser.StylesheetContext ctx) {
 
@@ -111,5 +115,10 @@ public class ASTListener extends ICSSBaseListener {
 	@Override public void enterEveryRule(ParserRuleContext ctx) { }
 
 	@Override public void exitEveryRule(ParserRuleContext ctx) { }
+
+	@Override
+	public void enterStyleSheet() {
+
+	}
 
 }
