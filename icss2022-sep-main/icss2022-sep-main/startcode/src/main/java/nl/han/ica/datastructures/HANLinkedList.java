@@ -33,7 +33,10 @@ public class HANLinkedList<T> implements IHANLinkedList<T> {
             return;
         }
         LinkedListNode<T> newNode = new LinkedListNode<>(value);
-        LinkedListNode<T> current;
+        LinkedListNode<T> current = getNode(index - 1);
+        newNode.next = current.next;
+        current.next = newNode;
+        size++;
     }
 
     @Override
