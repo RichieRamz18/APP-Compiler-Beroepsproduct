@@ -69,7 +69,8 @@ public class ASTListener extends ICSSBaseListener {
 	}
 
 	@Override public void exitIdSelector(ICSSParser.IdSelectorContext ctx) {
-
+		ASTNode idSelector = currentContainer.pop();
+		currentContainer.peek().addChild(idSelector);
 	}
 
 	@Override public void enterClassSelector(ICSSParser.ClassSelectorContext ctx) {
@@ -77,7 +78,10 @@ public class ASTListener extends ICSSBaseListener {
 		currentContainer.push(classSelector);
 	}
 
-	@Override public void exitClassSelector(ICSSParser.ClassSelectorContext ctx) { }
+	@Override public void exitClassSelector(ICSSParser.ClassSelectorContext ctx) {
+		ASTNode classSelector = currentContainer.pop();
+		currentContainer.peek().addChild(classSelector);
+	}
 
 	@Override public void enterDeclarations(ICSSParser.DeclarationsContext ctx) { }
 
