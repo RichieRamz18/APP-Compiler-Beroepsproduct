@@ -100,7 +100,10 @@ public class ASTListener extends ICSSBaseListener {
 		currentContainer.peek().addChild(declaration);
 	}
 
-	@Override public void enterPropertyName(ICSSParser.PropertyNameContext ctx) { }
+	@Override public void enterPropertyName(ICSSParser.PropertyNameContext ctx) {
+		ASTNode propertyName = new PropertyName(ctx.getText());
+		currentContainer.peek().addChild(propertyName);
+	}
 
 	@Override public void exitPropertyName(ICSSParser.PropertyNameContext ctx) { }
 
@@ -116,7 +119,9 @@ public class ASTListener extends ICSSBaseListener {
 
 	@Override public void exitColorLiteral(ICSSParser.ColorLiteralContext ctx) { }
 
-	@Override public void enterBoolLiteral(ICSSParser.BoolLiteralContext ctx) { }
+	@Override public void enterBoolLiteral(ICSSParser.BoolLiteralContext ctx) {
+		
+	}
 
 	@Override public void exitBoolLiteral(ICSSParser.BoolLiteralContext ctx) { }
 
