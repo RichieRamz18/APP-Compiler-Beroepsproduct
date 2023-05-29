@@ -5,6 +5,7 @@ import nl.han.ica.datastructures.IHANStack;
 import nl.han.ica.icss.ast.*;
 import nl.han.ica.icss.ast.literals.BoolLiteral;
 import nl.han.ica.icss.ast.literals.ColorLiteral;
+import nl.han.ica.icss.ast.literals.PercentageLiteral;
 import nl.han.ica.icss.ast.selectors.ClassSelector;
 import nl.han.ica.icss.ast.selectors.IdSelector;
 import nl.han.ica.icss.ast.selectors.TagSelector;
@@ -131,7 +132,10 @@ public class ASTListener extends ICSSBaseListener {
 
 	@Override public void exitBoolLiteral(ICSSParser.BoolLiteralContext ctx) { }
 
-	@Override public void enterPercentageLiteral(ICSSParser.PercentageLiteralContext ctx) { }
+	@Override public void enterPercentageLiteral(ICSSParser.PercentageLiteralContext ctx) {
+		ASTNode percentageLiteral = new PercentageLiteral(ctx.getText());
+		currentContainer.peek().addChild(percentageLiteral);
+	}
 
 	@Override public void exitPercentageLiteral(ICSSParser.PercentageLiteralContext ctx) { }
 
