@@ -1,8 +1,4 @@
 package nl.han.ica.datastructures;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class HANStack<T> implements IHANStack<T>{
     private HANLinkedList<T> stack;
 
@@ -26,7 +22,10 @@ public class HANStack<T> implements IHANStack<T>{
 
     @Override
     public T peek() {
-        return null;
+        if(isEmpty()){
+            throw new IllegalStateException("Stack is empty");
+        }
+        return stack.getFirst();
     }
 
     public boolean isEmpty() {
