@@ -32,9 +32,15 @@ public class ASTListener extends ICSSBaseListener {
 		ast.setRoot((Stylesheet) currentContainer.pop());
 	}
 
-	@Override public void enterStyleRule(ICSSParser.StyleRuleContext ctx) { }
+	@Override public void enterStyleRule(ICSSParser.StyleRuleContext ctx) {
+		ASTNode stylerule = new Stylerule();
+		currentContainer.push(stylerule);
+	}
 
-	@Override public void exitStyleRule(ICSSParser.StyleRuleContext ctx) { }
+	@Override public void exitStyleRule(ICSSParser.StyleRuleContext ctx) {
+		ASTNode styleRule = currentContainer.pop();
+		currentContainer.peek().addChild(styleRule);
+	}
 
 	@Override public void enterSelector(ICSSParser.SelectorContext ctx) { }
 
