@@ -3,6 +3,7 @@ package nl.han.ica.icss.parser;
 import nl.han.ica.datastructures.HANStack;
 import nl.han.ica.datastructures.IHANStack;
 import nl.han.ica.icss.ast.*;
+import nl.han.ica.icss.ast.selectors.TagSelector;
 import org.antlr.v4.runtime.ParserRuleContext;
 
 /**
@@ -42,15 +43,18 @@ public class ASTListener extends ICSSBaseListener {
 		currentContainer.peek().addChild(styleRule);
 	}
 
-	@Override public void enterSelector(ICSSParser.SelectorContext ctx) { }
+//	@Override public void enterSelector(ICSSParser.SelectorContext ctx) {
+//	}
+//	@Override public void exitSelector(ICSSParser.SelectorContext ctx) { }
 
-	@Override public void exitSelector(ICSSParser.SelectorContext ctx) { }
+//	@Override public void enterBody(ICSSParser.BodyContext ctx) { }
+//
+//	@Override public void exitBody(ICSSParser.BodyContext ctx) { }
 
-	@Override public void enterBody(ICSSParser.BodyContext ctx) { }
-
-	@Override public void exitBody(ICSSParser.BodyContext ctx) { }
-
-	@Override public void enterTagSelector(ICSSParser.TagSelectorContext ctx) { }
+	@Override public void enterTagSelector(ICSSParser.TagSelectorContext ctx) {
+		ASTNode tagSelector = new TagSelector(ctx.getText());
+		currentContainer.push(tagSelector);
+	}
 
 	@Override public void exitTagSelector(ICSSParser.TagSelectorContext ctx) { }
 
