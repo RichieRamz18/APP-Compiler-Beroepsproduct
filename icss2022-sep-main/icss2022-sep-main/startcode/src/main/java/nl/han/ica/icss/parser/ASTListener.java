@@ -3,9 +3,7 @@ package nl.han.ica.icss.parser;
 import nl.han.ica.datastructures.HANStack;
 import nl.han.ica.datastructures.IHANStack;
 import nl.han.ica.icss.ast.*;
-import nl.han.ica.icss.ast.literals.BoolLiteral;
-import nl.han.ica.icss.ast.literals.ColorLiteral;
-import nl.han.ica.icss.ast.literals.PercentageLiteral;
+import nl.han.ica.icss.ast.literals.*;
 import nl.han.ica.icss.ast.selectors.ClassSelector;
 import nl.han.ica.icss.ast.selectors.IdSelector;
 import nl.han.ica.icss.ast.selectors.TagSelector;
@@ -139,17 +137,29 @@ public class ASTListener extends ICSSBaseListener {
 
 	@Override public void exitPercentageLiteral(ICSSParser.PercentageLiteralContext ctx) { }
 
-	@Override public void enterPixelLiteral(ICSSParser.PixelLiteralContext ctx) { }
+	@Override public void enterPixelLiteral(ICSSParser.PixelLiteralContext ctx) {
+		ASTNode pixelLiteral = new PixelLiteral(ctx.getText());
+		currentContainer.peek().addChild(pixelLiteral);
+	}
 
 	@Override public void exitPixelLiteral(ICSSParser.PixelLiteralContext ctx) { }
 
-	@Override public void enterScalarLiteral(ICSSParser.ScalarLiteralContext ctx) { }
+	@Override public void enterScalarLiteral(ICSSParser.ScalarLiteralContext ctx) {
+		ASTNode scalarLiteral = new ScalarLiteral(ctx.getText());
+		currentContainer.peek().addChild(scalarLiteral);
+	}
 
 	@Override public void exitScalarLiteral(ICSSParser.ScalarLiteralContext ctx) { }
 
-	@Override public void enterVariableAssignment(ICSSParser.VariableAssignmentContext ctx) { }
+	@Override public void enterVariableAssignment(ICSSParser.VariableAssignmentContext ctx) {
+		ASTNode variableAssignment = new VariableAssignment();
+		currentContainer.push(variableAssignment);
+	}
 
-	@Override public void exitVariableAssignment(ICSSParser.VariableAssignmentContext ctx) { }
+	@Override public void exitVariableAssignment(ICSSParser.VariableAssignmentContext ctx) {
+		ASTNode variableAssignment = currentContainer.pop();
+		currentContainer.peek().addChild(variableAssignment);
+	}
 
 	@Override public void enterVariableReference(ICSSParser.VariableReferenceContext ctx) { }
 
