@@ -8,8 +8,7 @@ public class HANLinkedList<T> implements IHANLinkedList<T> {
         head = new LinkedListNode<>(null);
         size = 0;
     }
-
-
+    
     @Override
     public void addFirst(T value) {
         LinkedListNode<T> newNode = new LinkedListNode<>(value);
@@ -49,7 +48,9 @@ public class HANLinkedList<T> implements IHANLinkedList<T> {
 
     @Override
     public void removeFirst() {
-
+        if(isEmpty()){
+            throw new IllegalStateException("Can't remove from an empty list");
+        }
     }
 
     @Override
