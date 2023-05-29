@@ -43,7 +43,11 @@ public class HANLinkedList<T> implements IHANLinkedList<T> {
 
     @Override
     public T get(int pos) {
-        return null;
+        if(pos < 0 || pos >= size){
+            throw new IndexOutOfBoundsException();
+        }
+        LinkedListNode<T> node = getNode(pos);
+        return node.value;
     }
 
     @Override
@@ -70,5 +74,13 @@ public class HANLinkedList<T> implements IHANLinkedList<T> {
 
     public boolean isEmpty(){
         return size == 0;
+    }
+
+    private LinkedListNode<T> getNode(int pos){
+        LinkedListNode<T> current = head.next;
+        for(int i = 0; i < pos; i++){
+            current = current.next;
+        }
+        return current;
     }
 }
