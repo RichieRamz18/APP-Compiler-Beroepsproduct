@@ -11,7 +11,7 @@ public class HANStack<T> implements IHANStack<T>{
     }
     @Override
     public void push(T value) {
-        //stack(value);
+        stack.addFirst(value);
     }
 
     @Override
