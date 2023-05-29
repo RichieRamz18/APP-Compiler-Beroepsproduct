@@ -3,6 +3,8 @@ package nl.han.ica.icss.parser;
 import nl.han.ica.datastructures.HANStack;
 import nl.han.ica.datastructures.IHANStack;
 import nl.han.ica.icss.ast.*;
+import nl.han.ica.icss.ast.literals.BoolLiteral;
+import nl.han.ica.icss.ast.literals.ColorLiteral;
 import nl.han.ica.icss.ast.selectors.ClassSelector;
 import nl.han.ica.icss.ast.selectors.IdSelector;
 import nl.han.ica.icss.ast.selectors.TagSelector;
@@ -115,12 +117,16 @@ public class ASTListener extends ICSSBaseListener {
 
 	@Override public void exitLiteral(ICSSParser.LiteralContext ctx) { }
 
-	@Override public void enterColorLiteral(ICSSParser.ColorLiteralContext ctx) { }
+	@Override public void enterColorLiteral(ICSSParser.ColorLiteralContext ctx) {
+		ASTNode colorLiteral = new ColorLiteral(ctx.getText());
+		currentContainer.peek().addChild(colorLiteral);
+	}
 
 	@Override public void exitColorLiteral(ICSSParser.ColorLiteralContext ctx) { }
 
 	@Override public void enterBoolLiteral(ICSSParser.BoolLiteralContext ctx) {
-		
+		ASTNode boolLiteral = new BoolLiteral(ctx.getText());
+		currentContainer.peek().addChild(boolLiteral);
 	}
 
 	@Override public void exitBoolLiteral(ICSSParser.BoolLiteralContext ctx) { }
