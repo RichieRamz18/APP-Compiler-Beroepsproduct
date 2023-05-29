@@ -38,7 +38,12 @@ public class HANLinkedList<T> implements IHANLinkedList<T> {
 
     @Override
     public void delete(int pos) {
-
+        if(pos < 0 || pos >= size){
+            throw new IndexOutOfBoundsException();
+        }
+        LinkedListNode<T> current = getNode(pos - 1);
+        current.next = current.next.next;
+        size--;
     }
 
     @Override
