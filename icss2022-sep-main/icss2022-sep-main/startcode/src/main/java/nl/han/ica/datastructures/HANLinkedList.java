@@ -26,7 +26,15 @@ public class HANLinkedList<T> implements IHANLinkedList<T> {
 
     @Override
     public void insert(int index, T value) {
-        
+        if(index < 0 || index > size){
+            throw new IndexOutOfBoundsException();
+        }
+        if(index == 0){
+            addFirst(value);
+            return;
+        }
+        LinkedListNode<T> newNode = new LinkedListNode<>(value);
+        LinkedListNode<T> current;
     }
 
     @Override
@@ -46,11 +54,18 @@ public class HANLinkedList<T> implements IHANLinkedList<T> {
 
     @Override
     public T getFirst() {
-        return null;
+        if(isEmpty()){
+            throw new IllegalArgumentException("List is empty");
+        }
+        return head.next.value;
     }
 
     @Override
     public int getSize() {
-        return 0;
+        return size;
+    }
+
+    public boolean isEmpty(){
+        return size == 0;
     }
 }
