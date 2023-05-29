@@ -29,7 +29,7 @@ public class ASTListener extends ICSSBaseListener {
 	}
 
 	@Override public void exitStylesheet(ICSSParser.StylesheetContext ctx) {
-
+		ast.setRoot((Stylesheet) currentContainer.pop());
 	}
 
 	@Override public void enterStyleRule(ICSSParser.StyleRuleContext ctx) { }
