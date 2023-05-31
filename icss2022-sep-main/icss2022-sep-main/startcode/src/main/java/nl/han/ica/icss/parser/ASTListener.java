@@ -4,6 +4,9 @@ import nl.han.ica.datastructures.HANStack;
 import nl.han.ica.datastructures.IHANStack;
 import nl.han.ica.icss.ast.*;
 import nl.han.ica.icss.ast.literals.*;
+import nl.han.ica.icss.ast.operations.AddOperation;
+import nl.han.ica.icss.ast.operations.MultiplyOperation;
+import nl.han.ica.icss.ast.operations.SubtractOperation;
 import nl.han.ica.icss.ast.selectors.ClassSelector;
 import nl.han.ica.icss.ast.selectors.IdSelector;
 import nl.han.ica.icss.ast.selectors.TagSelector;
@@ -108,7 +111,22 @@ public class ASTListener extends ICSSBaseListener {
 
 	@Override public void exitPropertyName(ICSSParser.PropertyNameContext ctx) { }
 
-	@Override public void enterExpression(ICSSParser.ExpressionContext ctx) { }
+	@Override public void enterExpression(ICSSParser.ExpressionContext ctx) {
+		if(ctx.getChildCount() == 2){
+			Operation operation;
+			switch(ctx.getChild(1).getText()){
+				case "*":
+					operation = new MultiplyOperation();
+					break;
+				case "+":
+					operation = new AddOperation();
+					break;
+				default:
+					operation = new SubtractOperation();
+			}
+			currentContainer.push(operation);
+		}
+	}
 
 	@Override public void exitExpression(ICSSParser.ExpressionContext ctx) { }
 
