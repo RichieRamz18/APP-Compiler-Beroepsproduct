@@ -194,6 +194,12 @@ public class ASTListener extends ICSSBaseListener {
 
 	@Override public void exitIfClause(ICSSParser.IfClauseContext ctx) { }
 
+	@Override public void enterElseClause(ICSSParser.ElseClauseContext ctx) {
+		
+	}
+	@Override public void exitElseClause(ICSSParser.ElseClauseContext ctx) {
+
+	}
 
 	@Override public void enterEveryRule(ParserRuleContext ctx) { }
 
