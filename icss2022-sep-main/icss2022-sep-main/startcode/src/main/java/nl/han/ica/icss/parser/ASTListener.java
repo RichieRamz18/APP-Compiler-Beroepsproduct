@@ -211,9 +211,9 @@ public class ASTListener extends ICSSBaseListener {
 
 	@Override public void exitEveryRule(ParserRuleContext ctx) { }
 
-	@Override
-	public void enterStyleSheet() {
-
-	}
+//	@Override
+//	public void enterStyleSheet() {
+//
+//	}
 
 }
