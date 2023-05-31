@@ -128,11 +128,16 @@ public class ASTListener extends ICSSBaseListener {
 		}
 	}
 
-	@Override public void exitExpression(ICSSParser.ExpressionContext ctx) { }
+	@Override public void exitExpression(ICSSParser.ExpressionContext ctx) {
+		if(expressionHasTerminalNode(ctx)){
+			ASTNode operation = currentContainer.pop();
+			currentContainer.peek().addChild(operation);
+		}
+	}
 
-	@Override public void enterLiteral(ICSSParser.LiteralContext ctx) { }
-
-	@Override public void exitLiteral(ICSSParser.LiteralContext ctx) { }
+//	@Override public void enterLiteral(ICSSParser.LiteralContext ctx) { }
+//
+//	@Override public void exitLiteral(ICSSParser.LiteralContext ctx) { }
 
 	@Override public void enterColorLiteral(ICSSParser.ColorLiteralContext ctx) {
 		ASTNode colorLiteral = new ColorLiteral(ctx.getText());
@@ -209,9 +214,12 @@ public class ASTListener extends ICSSBaseListener {
 		currentContainer.peek().addChild(elseClause);
 	}
 
-	@Override public void enterEveryRule(ParserRuleContext ctx) { }
-
-	@Override public void exitEveryRule(ParserRuleContext ctx) { }
+	private boolean expressionHasTerminalNode(ICSSParser.ExpressionContext ctx){
+		return ctx.operation().PLUS() != null || ctx.operation().MIN() != null || ctx.operation().MUL() != null;
+	}
+//	@Override public void enterEveryRule(ParserRuleContext ctx) { }
+//
+//	@Override public void exitEveryRule(ParserRuleContext ctx) { }
 
 //	@Override
 //	public void enterStyleSheet() {
