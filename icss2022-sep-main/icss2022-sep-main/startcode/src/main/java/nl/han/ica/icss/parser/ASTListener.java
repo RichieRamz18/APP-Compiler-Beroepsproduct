@@ -101,8 +101,11 @@ public class ASTListener extends ICSSBaseListener {
 
 	@Override public void exitDeclaration(ICSSParser.DeclarationContext ctx) {
 		ASTNode declaration = currentContainer.pop();
-		if(!currentContainer.)
+		if(!currentContainer.isEmpty()) {
 		currentContainer.peek().addChild(declaration);
+		} else {
+			ast.setRoot((Stylesheet) declaration);
+		}
 	}
 
 	@Override public void enterPropertyName(ICSSParser.PropertyNameContext ctx) {

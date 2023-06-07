@@ -57,7 +57,8 @@ declarations: declaration+ | ifClause+;
 declaration: propertyName COLON expression SEMICOLON;
 propertyName: LOWER_IDENT;
 
-expression: operation;
+expression: literal | expression (MUL) expression | expression (PLUS | MIN) expression;
+
 literal: colorLiteral | boolLiteral | percentageLiteral | pixelLiteral | scalarLiteral | variableReference;
 colorLiteral: COLOR;
 boolLiteral: TRUE | FALSE;
@@ -67,8 +68,6 @@ scalarLiteral: SCALAR;
 
 variableAssignment: variableReference ASSIGNMENT_OPERATOR expression SEMICOLON;
 variableReference: CAPITAL_IDENT;
-
-operation: operation MUL operation | operation (MIN | PLUS) operation | literal;
 
 ifClause: IF BOX_BRACKET_OPEN expression BOX_BRACKET_CLOSE body (ELSE body)?;
 elseClause: ELSE body;
