@@ -195,10 +195,6 @@ public class ASTListener extends ICSSBaseListener {
 
 	@Override public void exitVariableReference(ICSSParser.VariableReferenceContext ctx) { }
 
-//	@Override public void enterOperation(ICSSParser.OperationContext ctx) { }
-//
-//	@Override public void exitOperation(ICSSParser.OperationContext ctx) { }
-
 	@Override public void enterIfClause(ICSSParser.IfClauseContext ctx) {
 		ASTNode ifClause = new IfClause();
 		currentContainer.push(ifClause);

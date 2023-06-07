@@ -124,12 +124,6 @@ public interface ICSSVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitVariableReference(ICSSParser.VariableReferenceContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ICSSParser#operation}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitOperation(ICSSParser.OperationContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link ICSSParser#ifClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
