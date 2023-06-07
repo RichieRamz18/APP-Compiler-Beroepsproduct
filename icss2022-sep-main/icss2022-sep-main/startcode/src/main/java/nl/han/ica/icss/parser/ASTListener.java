@@ -215,7 +215,7 @@ public class ASTListener extends ICSSBaseListener {
 	}
 
 	private boolean expressionHasTerminalNode(ICSSParser.ExpressionContext ctx){
-		return ctx.operation().PLUS() != null || ctx.operation().MIN() != null || ctx.operation().MUL() != null;
+		return ctx.PLUS() != null || ctx.MIN() != null || ctx.MUL() != null;
 	}
 //	@Override public void enterEveryRule(ParserRuleContext ctx) { }
 //
