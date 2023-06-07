@@ -63,8 +63,8 @@ public class ASTListener extends ICSSBaseListener {
 	}
 
 	@Override public void exitTagSelector(ICSSParser.TagSelectorContext ctx) {
-		ASTNode tagselector = currentContainer.pop();
-		currentContainer.peek().addChild(tagselector);
+		ASTNode tagSelector = currentContainer.pop();
+		currentContainer.peek().addChild(tagSelector);
 	}
 
 	@Override public void enterIdSelector(ICSSParser.IdSelectorContext ctx) {
