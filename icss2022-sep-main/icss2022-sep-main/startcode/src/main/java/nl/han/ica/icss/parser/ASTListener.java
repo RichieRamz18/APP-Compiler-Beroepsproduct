@@ -101,6 +101,7 @@ public class ASTListener extends ICSSBaseListener {
 
 	@Override public void exitDeclaration(ICSSParser.DeclarationContext ctx) {
 		ASTNode declaration = currentContainer.pop();
+		if(!currentContainer.)
 		currentContainer.peek().addChild(declaration);
 	}
 
