@@ -13,6 +13,8 @@ import nl.han.ica.icss.ast.selectors.TagSelector;
 import org.antlr.v4.runtime.ParserRuleContext;
 import java.util.logging.*;
 
+import static com.google.common.io.Closeables.logger;
+
 /**
  * This class extracts the ICSS Abstract Syntax Tree from the Antlr Parse tree.
  */
@@ -23,8 +25,8 @@ public class ASTListener extends ICSSBaseListener {
 
 	//Use this to keep track of the parent nodes when recursively traversing the ast
 	private final IHANStack<ASTNode> currentContainer;
-	/* Added a logging to keep track of entering and exiting style rules*/
-	
+	/* Added a logging to keep track of entering and exiting rules*/
+	private static final Logger LOGGER = Logger.getLogger(ASTListener.class.getName());
 
 	public ASTListener() {
 		ast = new AST();
@@ -34,15 +36,18 @@ public class ASTListener extends ICSSBaseListener {
         return ast;
     }
 	@Override public void enterStylesheet(ICSSParser.StylesheetContext ctx) {
+		LOGGER.info("Entering Stylesheet");
 		ASTNode stylesheet = new Stylesheet();
 		currentContainer.push(stylesheet);
 	}
 
 	@Override public void exitStylesheet(ICSSParser.StylesheetContext ctx) {
+		LOGGER.info("Exiting Stylesheet");
 		ast.setRoot((Stylesheet) currentContainer.pop());
 	}
 
 	@Override public void enterStyleRule(ICSSParser.StyleRuleContext ctx) {
+		LOGGER.info("Entering StyleRule");
 		ASTNode stylerule = new Stylerule();
 		currentContainer.push(stylerule);
 	}
@@ -57,6 +62,7 @@ public class ASTListener extends ICSSBaseListener {
 //	}
 
 	@Override public void exitStyleRule(ICSSParser.StyleRuleContext ctx) {
+		LOGGER.info("Exiting StyleRule");
 		ASTNode styleRule = currentContainer.pop();
 		currentContainer.peek().addChild(styleRule);
 	}
@@ -69,31 +75,37 @@ public class ASTListener extends ICSSBaseListener {
 //	@Override public void exitBody(ICSSParser.BodyContext ctx) { }
 
 	@Override public void enterTagSelector(ICSSParser.TagSelectorContext ctx) {
+		LOGGER.info("Entering TagSelector");
 		ASTNode tagSelector = new TagSelector(ctx.getText());
 		currentContainer.push(tagSelector);
 	}
 
 	@Override public void exitTagSelector(ICSSParser.TagSelectorContext ctx) {
+		LOGGER.info("Exiting TagSelector");
 		ASTNode tagSelector = currentContainer.pop();
 		currentContainer.peek().addChild(tagSelector);
 	}
 
 	@Override public void enterIdSelector(ICSSParser.IdSelectorContext ctx) {
+		LOGGER.info("Entering IdSelector");
 		ASTNode idSelector = new IdSelector(ctx.getText());
 		currentContainer.push(idSelector);
 	}
 
 	@Override public void exitIdSelector(ICSSParser.IdSelectorContext ctx) {
+		LOGGER.info("Exiting IdSelector");
 		ASTNode idSelector = currentContainer.pop();
 		currentContainer.peek().addChild(idSelector);
 	}
 
 	@Override public void enterClassSelector(ICSSParser.ClassSelectorContext ctx) {
+		LOGGER.info("Entering ClassSelector");
 		ASTNode classSelector = new ClassSelector(ctx.getText());
 		currentContainer.push(classSelector);
 	}
 
 	@Override public void exitClassSelector(ICSSParser.ClassSelectorContext ctx) {
+		LOGGER.info("Exiting ClassSelector");
 		ASTNode classSelector = currentContainer.pop();
 		currentContainer.peek().addChild(classSelector);
 	}
@@ -106,11 +118,13 @@ public class ASTListener extends ICSSBaseListener {
 //	}
 
 	@Override public void enterDeclaration(ICSSParser.DeclarationContext ctx) {
+		LOGGER.info("Entering Declaration");
 		ASTNode declaration = new Declaration();
 		currentContainer.push(declaration);
 	}
 
 	@Override public void exitDeclaration(ICSSParser.DeclarationContext ctx) {
+		LOGGER.info("Exiting Declaration");
 		ASTNode declaration = currentContainer.pop();
 		if(!currentContainer.isEmpty()) {
 		currentContainer.peek().addChild(declaration);
