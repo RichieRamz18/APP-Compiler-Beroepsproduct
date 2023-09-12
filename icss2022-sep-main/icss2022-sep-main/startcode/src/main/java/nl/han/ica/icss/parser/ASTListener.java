@@ -134,13 +134,17 @@ public class ASTListener extends ICSSBaseListener {
 	}
 
 	@Override public void enterPropertyName(ICSSParser.PropertyNameContext ctx) {
+		LOGGER.info("Entering PropertyName");
 		ASTNode propertyName = new PropertyName(ctx.getText());
 		currentContainer.peek().addChild(propertyName);
 	}
 
-	@Override public void exitPropertyName(ICSSParser.PropertyNameContext ctx) { }
+	@Override public void exitPropertyName(ICSSParser.PropertyNameContext ctx) {
+		LOGGER.info("Exiting PropertyName");
+	}
 
 	@Override public void enterExpression(ICSSParser.ExpressionContext ctx) {
+		LOGGER.info("Entering Expression");
 		if(ctx.getChildCount() == 2){
 			Operation operation;
 			switch(ctx.getChild(1).getText()){
@@ -158,6 +162,7 @@ public class ASTListener extends ICSSBaseListener {
 	}
 
 	@Override public void exitExpression(ICSSParser.ExpressionContext ctx) {
+		LOGGER.info("Exiting Expression");
 		if(expressionHasTerminalNode(ctx)){
 			ASTNode operation = currentContainer.pop();
 			currentContainer.peek().addChild(operation);
@@ -169,72 +174,96 @@ public class ASTListener extends ICSSBaseListener {
 //	@Override public void exitLiteral(ICSSParser.LiteralContext ctx) { }
 
 	@Override public void enterColorLiteral(ICSSParser.ColorLiteralContext ctx) {
+		LOGGER.info("Entering ColorLiteral");
 		ASTNode colorLiteral = new ColorLiteral(ctx.getText());
 		currentContainer.peek().addChild(colorLiteral);
 	}
 
-	@Override public void exitColorLiteral(ICSSParser.ColorLiteralContext ctx) { }
+	@Override public void exitColorLiteral(ICSSParser.ColorLiteralContext ctx) {
+		LOGGER.info("Exiting ColorLiteral");
+	}
 
 	@Override public void enterBoolLiteral(ICSSParser.BoolLiteralContext ctx) {
+		LOGGER.info("Entering BoolLiteral");
 		ASTNode boolLiteral = new BoolLiteral(ctx.getText());
 		currentContainer.peek().addChild(boolLiteral);
 	}
 
-	@Override public void exitBoolLiteral(ICSSParser.BoolLiteralContext ctx) { }
+	@Override public void exitBoolLiteral(ICSSParser.BoolLiteralContext ctx) {
+		LOGGER.info("Exiting BoolLiteral");
+	}
 
 	@Override public void enterPercentageLiteral(ICSSParser.PercentageLiteralContext ctx) {
+		LOGGER.info("Entering PercentageLiteral");
 		ASTNode percentageLiteral = new PercentageLiteral(ctx.getText());
 		currentContainer.peek().addChild(percentageLiteral);
 	}
 
-	@Override public void exitPercentageLiteral(ICSSParser.PercentageLiteralContext ctx) { }
+	@Override public void exitPercentageLiteral(ICSSParser.PercentageLiteralContext ctx) {
+		LOGGER.info("Exiting PercentageLiteral");
+	}
 
 	@Override public void enterPixelLiteral(ICSSParser.PixelLiteralContext ctx) {
+		LOGGER.info("Entering PixelLiteral");
 		ASTNode pixelLiteral = new PixelLiteral(ctx.getText());
 		currentContainer.peek().addChild(pixelLiteral);
 	}
 
-	@Override public void exitPixelLiteral(ICSSParser.PixelLiteralContext ctx) { }
+	@Override public void exitPixelLiteral(ICSSParser.PixelLiteralContext ctx) {
+		LOGGER.info("Exiting PixelLiteral");
+	}
 
 	@Override public void enterScalarLiteral(ICSSParser.ScalarLiteralContext ctx) {
+		LOGGER.info("Entering ScalarLiteral");
 		ASTNode scalarLiteral = new ScalarLiteral(ctx.getText());
 		currentContainer.peek().addChild(scalarLiteral);
 	}
 
-	@Override public void exitScalarLiteral(ICSSParser.ScalarLiteralContext ctx) { }
+	@Override public void exitScalarLiteral(ICSSParser.ScalarLiteralContext ctx) {
+		LOGGER.info("Exiting ScalarLiteral");
+	}
 
 	@Override public void enterVariableAssignment(ICSSParser.VariableAssignmentContext ctx) {
+		LOGGER.info("Entering VariableAssignment");
 		ASTNode variableAssignment = new VariableAssignment();
 		currentContainer.push(variableAssignment);
 	}
 
 	@Override public void exitVariableAssignment(ICSSParser.VariableAssignmentContext ctx) {
+		LOGGER.info("Exiting VariableAssignment");
 		ASTNode variableAssignment = currentContainer.pop();
 		currentContainer.peek().addChild(variableAssignment);
 	}
 
 	@Override public void enterVariableReference(ICSSParser.VariableReferenceContext ctx) {
+		LOGGER.info("Entering VariableReference");
 		ASTNode variableReference = new VariableReference(ctx.getText());
 		currentContainer.peek().addChild(variableReference);
 	}
 
-	@Override public void exitVariableReference(ICSSParser.VariableReferenceContext ctx) { }
+	@Override public void exitVariableReference(ICSSParser.VariableReferenceContext ctx) {
+		LOGGER.info("Exiting VariableReference");
+	}
 
 	@Override public void enterIfClause(ICSSParser.IfClauseContext ctx) {
+		LOGGER.info("Entering IfClause");
 		ASTNode ifClause = new IfClause();
 		currentContainer.push(ifClause);
 	}
 
 	@Override public void exitIfClause(ICSSParser.IfClauseContext ctx) {
+		LOGGER.info("Exiting IfClause");
 		ASTNode ifClause = currentContainer.pop();
 		currentContainer.peek().addChild(ifClause);
 	}
 
 	@Override public void enterElseClause(ICSSParser.ElseClauseContext ctx) {
+		LOGGER.info("Entering ElseClause");
 		ASTNode elseClause = new ElseClause();
 		currentContainer.push(elseClause);
 	}
 	@Override public void exitElseClause(ICSSParser.ElseClauseContext ctx) {
+		LOGGER.info("Exiting ElseClause");
 		ASTNode elseClause = currentContainer.pop();
 		currentContainer.peek().addChild(elseClause);
 	}
