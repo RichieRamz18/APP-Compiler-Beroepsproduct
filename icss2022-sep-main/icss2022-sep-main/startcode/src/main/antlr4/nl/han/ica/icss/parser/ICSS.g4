@@ -59,12 +59,12 @@ propertyName: LOWER_IDENT;
 
 expression: literal | expression (MUL) expression | expression (PLUS | MIN) expression;
 
-literal: colorLiteral | boolLiteral | percentageLiteral | pixelLiteral | scalarLiteral | variableReference;
 colorLiteral: COLOR;
 boolLiteral: TRUE | FALSE;
 percentageLiteral: PERCENTAGE;
 pixelLiteral: PIXELSIZE;
 scalarLiteral: SCALAR;
+literal: colorLiteral | boolLiteral | percentageLiteral | pixelLiteral | scalarLiteral | variableReference;
 
 variableAssignment: variableReference ASSIGNMENT_OPERATOR expression SEMICOLON;
 variableReference: CAPITAL_IDENT;

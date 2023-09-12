@@ -13,8 +13,6 @@ import nl.han.ica.icss.ast.selectors.TagSelector;
 import org.antlr.v4.runtime.ParserRuleContext;
 import java.util.logging.*;
 
-import static com.google.common.io.Closeables.logger;
-
 /**
  * This class extracts the ICSS Abstract Syntax Tree from the Antlr Parse tree.
  */

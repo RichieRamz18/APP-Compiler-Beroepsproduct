@@ -117,16 +117,6 @@ public interface ICSSListener extends ParseTreeListener {
 	 */
 	void exitExpression(ICSSParser.ExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ICSSParser#literal}.
-	 * @param ctx the parse tree
-	 */
-	void enterLiteral(ICSSParser.LiteralContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ICSSParser#literal}.
-	 * @param ctx the parse tree
-	 */
-	void exitLiteral(ICSSParser.LiteralContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link ICSSParser#colorLiteral}.
 	 * @param ctx the parse tree
 	 */
@@ -176,6 +166,16 @@ public interface ICSSListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitScalarLiteral(ICSSParser.ScalarLiteralContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ICSSParser#literal}.
+	 * @param ctx the parse tree
+	 */
+	void enterLiteral(ICSSParser.LiteralContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ICSSParser#literal}.
+	 * @param ctx the parse tree
+	 */
+	void exitLiteral(ICSSParser.LiteralContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ICSSParser#variableAssignment}.
 	 * @param ctx the parse tree

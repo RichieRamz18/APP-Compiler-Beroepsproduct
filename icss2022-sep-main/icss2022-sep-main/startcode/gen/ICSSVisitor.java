@@ -76,12 +76,6 @@ public interface ICSSVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExpression(ICSSParser.ExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ICSSParser#literal}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitLiteral(ICSSParser.LiteralContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link ICSSParser#colorLiteral}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -111,6 +105,12 @@ public interface ICSSVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitScalarLiteral(ICSSParser.ScalarLiteralContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ICSSParser#literal}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLiteral(ICSSParser.LiteralContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ICSSParser#variableAssignment}.
 	 * @param ctx the parse tree
