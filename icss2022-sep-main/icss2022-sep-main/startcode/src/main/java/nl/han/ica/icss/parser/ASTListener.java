@@ -11,6 +11,7 @@ import nl.han.ica.icss.ast.selectors.ClassSelector;
 import nl.han.ica.icss.ast.selectors.IdSelector;
 import nl.han.ica.icss.ast.selectors.TagSelector;
 import org.antlr.v4.runtime.ParserRuleContext;
+import java.util.logging.*;
 
 /**
  * This class extracts the ICSS Abstract Syntax Tree from the Antlr Parse tree.
@@ -22,6 +23,8 @@ public class ASTListener extends ICSSBaseListener {
 
 	//Use this to keep track of the parent nodes when recursively traversing the ast
 	private final IHANStack<ASTNode> currentContainer;
+	/* Added a logging to keep track of entering and exiting style rules*/
+	
 
 	public ASTListener() {
 		ast = new AST();
@@ -44,15 +47,19 @@ public class ASTListener extends ICSSBaseListener {
 		currentContainer.push(stylerule);
 	}
 
+//	@Override public void exitStyleRule(ICSSParser.StyleRuleContext ctx) {
+//		ASTNode styleRule = currentContainer.pop();
+//		if(!currentContainer.isEmpty()) {
+//			currentContainer.peek().addChild(styleRule);
+//		} else {
+//			ast.setRoot((Stylesheet) styleRule);
+//		}
+//	}
+
 	@Override public void exitStyleRule(ICSSParser.StyleRuleContext ctx) {
 		ASTNode styleRule = currentContainer.pop();
-		if(!currentContainer.isEmpty()) {
-			currentContainer.peek().addChild(styleRule);
-		} else {
-			ast.setRoot((Stylesheet) styleRule);
-		}
+		currentContainer.peek().addChild(styleRule);
 	}
-
 //	@Override public void enterSelector(ICSSParser.SelectorContext ctx) {
 //	}
 //	@Override public void exitSelector(ICSSParser.SelectorContext ctx) { }
