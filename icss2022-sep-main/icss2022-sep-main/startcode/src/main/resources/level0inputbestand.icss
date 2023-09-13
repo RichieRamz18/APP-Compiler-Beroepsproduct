@@ -1,12 +1,7 @@
 h1 {
     background-color: #f0f0f0;
     font-size: 24px;
-    text-align: center;
     padding: 10px;
-}
-
-ul {
-    list-style-type: disc;
 }
 
 li {
@@ -17,5 +12,13 @@ li {
 #header {
     background-color: #333333;
     height: 80px;
-    text-align: center;
+    color: #ffffff;
+    padding: 10px;
+}
+
+#button {
+    background-color: #0078d4;
+    color: #ffffff;
+    padding: 10px;
+    font-size: 18px;
 }

@@ -68,7 +68,6 @@ public class Fixtures {
 		h1 {
     		background-color: #f0f0f0;
     		font-size: 24px;
-    		text-align: center;
     		padding: 10px;
     	}
 		*/
@@ -78,8 +77,6 @@ public class Fixtures {
 						.addChild(new ColorLiteral("#f0f0f0")))
 				.addChild((new Declaration("font-size"))
 						.addChild(new PixelLiteral("24px")))
-				.addChild((new Declaration("text-align")))
-						.addChild(new PixelLiteral("center")))
 				.addChild((new Declaration("padding"))
 						.addChild(new PixelLiteral("10px")));
 		/*
@@ -91,8 +88,8 @@ public class Fixtures {
     	}
 		*/
 		stylesheet.addChild((new Stylerule())
-				.addChild(new TagSelector("a"))
-				.addChild((new Declaration("color"))
+				.addChild(new TagSelector("ul"))
+				.addChild((new Declaration("list-style-type"))
 						.addChild(new ColorLiteral("#ff0000")))
 		);
 		/*
