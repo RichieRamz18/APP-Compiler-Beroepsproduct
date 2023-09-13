@@ -236,18 +236,42 @@ public class Fixtures {
 						.addChild(new PixelLiteral("28px")))
 				.addChild((new Declaration("color"))
 						.addChild(new VariableReference("LinkTextColor"))));
+
+		/*
+		ul {
+    		margin-left: 20px;
+		}
+		*/
+		stylesheet.addChild((new Stylerule())
+				.addChild(new TagSelector("ul"))
+				.addChild((new Declaration("margin-left"))
+						.addChild(new PixelLiteral("20px"))));
+
+		/*
+		li {
+    		color: LinkTextColor;
+    		font-size: 18px;
+		}
+		*/
+		stylesheet.addChild((new Stylerule())
+				.addChild(new TagSelector("li"))
+				.addChild((new Declaration("color"))
+						.addChild(new VariableReference("LinkTextColor")))
+				.addChild((new Declaration("font-size"))
+						.addChild(new PixelLiteral("18px"))));
+
 		/*
 		#header {
-    		background-color: #333333;
-    		height: 80px;
-   			color: #ffffff;
+    		background-color: HeadColor;
+   		 	height: 80px;
+    		color: #ffffff;
     		padding: 10px;
 		}
 		*/
 		stylesheet.addChild((new Stylerule())
 				.addChild(new IdSelector("#header"))
 				.addChild((new Declaration("background-color"))
-						.addChild(new ColorLiteral("#333333")))
+						.addChild(new VariableReference("HeadColor")))
 				.addChild((new Declaration("height"))
 						.addChild(new PixelLiteral("80px")))
 				.addChild((new Declaration("color"))
@@ -257,7 +281,7 @@ public class Fixtures {
 
 		/*
 		.button {
-    		background-color: #0078d4;
+    		background-color: HeadColor;
     		color: #ffffff;
     		padding: 10px;
     		font-size: 18px;
@@ -266,7 +290,7 @@ public class Fixtures {
 		stylesheet.addChild((new Stylerule())
 				.addChild(new ClassSelector(".button"))
 				.addChild((new Declaration("background-color"))
-						.addChild(new ColorLiteral("#0078d4")))
+						.addChild(new VariableReference("HeadColor")))
 				.addChild((new Declaration("color"))
 						.addChild(new ColorLiteral("#ffffff")))
 				.addChild((new Declaration("padding"))
