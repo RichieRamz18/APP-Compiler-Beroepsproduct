@@ -206,7 +206,6 @@ public class Fixtures {
 	public static AST uncheckedLevel1inputBestand() {
 		Stylesheet stylesheet = new Stylesheet();
 		/*
-
     		LinkTextColor := #0078d4;
 			HeadColor := #333333;
 			MenuWidth := 540px;

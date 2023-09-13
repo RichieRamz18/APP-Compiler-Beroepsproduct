@@ -80,7 +80,7 @@ class ParserTest {
 	void testParseLevel1inputBestand() throws IOException {
 
 		AST sut = parseTestFile("level1inputbestand.icss");
-		AST exp = Fixtures.uncheckedLevel1();
+		AST exp = Fixtures.uncheckedLevel1inputBestand();
 		assertEquals(exp,sut);
 	}
 	@Test
