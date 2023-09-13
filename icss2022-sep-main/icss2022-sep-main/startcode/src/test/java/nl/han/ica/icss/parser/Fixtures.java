@@ -111,15 +111,23 @@ public class Fixtures {
 						.addChild(new PixelLiteral("10px"))));
 
 		/*
-		.menu {
-			color: #000000;
+		.button {
+    		background-color: #0078d4;
+    		color: #ffffff;
+    		padding: 10px;
+    		font-size: 18px;
 		}
 		*/
 		stylesheet.addChild((new Stylerule())
-				.addChild(new ClassSelector(".menu"))
+				.addChild(new ClassSelector(".button"))
+				.addChild((new Declaration("background-color"))
+						.addChild(new ColorLiteral("#0078d4")))
 				.addChild((new Declaration("color"))
-						.addChild(new ColorLiteral("#000000")))
-		);
+						.addChild(new ColorLiteral("#ffffff")))
+				.addChild((new Declaration("padding"))
+						.addChild(new PixelLiteral("10px")))
+				.addChild((new Declaration("font-size"))
+						.addChild(new PixelLiteral("18px"))));
 
 		return new AST(stylesheet);
 	}

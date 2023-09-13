@@ -1,0 +1,19 @@
+LinkTextColor := #0078d4;
+HeadingFont := "Arial, sans-serif";
+MenuWidth := 540px;
+ShowHeader := TRUE;
+
+h1 {
+    font-family: HeadingFont;
+    font-size: 28px;
+    color: LinkTextColor;
+}
+
+ul {
+    margin-left: 20px;
+}
+
+li {
+    
+
+}
