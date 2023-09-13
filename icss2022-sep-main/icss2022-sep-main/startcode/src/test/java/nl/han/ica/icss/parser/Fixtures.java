@@ -62,6 +62,64 @@ public class Fixtures {
         return new AST(stylesheet);
     }
 
+	public static AST uncheckedLevel0inputBestand() {
+		Stylesheet stylesheet = new Stylesheet();
+		/*
+		h1 {
+    		background-color: #f0f0f0;
+    		font-size: 24px;
+    		text-align: center;
+    		padding: 10px;
+    	}
+		*/
+		stylesheet.addChild((new Stylerule())
+				.addChild(new TagSelector("h1"))
+				.addChild((new Declaration("background-color"))
+						.addChild(new ColorLiteral("#f0f0f0")))
+				.addChild((new Declaration("font-size"))
+						.addChild(new PixelLiteral("24px")))
+				.addChild((new Declaration("text-align")))
+						.addChild(new PixelLiteral("center")))
+				.addChild((new Declaration("padding"))
+						.addChild(new PixelLiteral("10px")));
+		/*
+		a {
+			color: #ff0000;
+		}
+		ul {
+    		list-style-type: disc;
+    	}
+		*/
+		stylesheet.addChild((new Stylerule())
+				.addChild(new TagSelector("a"))
+				.addChild((new Declaration("color"))
+						.addChild(new ColorLiteral("#ff0000")))
+		);
+		/*
+		#menu {
+			width: 520px;
+		}
+		*/
+		stylesheet.addChild((new Stylerule())
+				.addChild(new IdSelector("#menu"))
+				.addChild((new Declaration("width"))
+						.addChild(new PixelLiteral("520px")))
+		);
+		/*
+		.menu {
+			color: #000000;
+		}
+		*/
+		stylesheet.addChild((new Stylerule())
+				.addChild(new ClassSelector(".menu"))
+				.addChild((new Declaration("color"))
+						.addChild(new ColorLiteral("#000000")))
+		);
+
+		return new AST(stylesheet);
+	}
+
+
 	public static AST uncheckedLevel1() {
 		Stylesheet stylesheet = new Stylesheet();
 		/*
