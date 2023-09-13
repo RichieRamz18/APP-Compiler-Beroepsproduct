@@ -78,30 +78,38 @@ public class Fixtures {
 				.addChild((new Declaration("font-size"))
 						.addChild(new PixelLiteral("24px")))
 				.addChild((new Declaration("padding"))
-						.addChild(new PixelLiteral("10px")));
+						.addChild(new PixelLiteral("10px"))));
 		/*
-		a {
-			color: #ff0000;
-		}
-		ul {
-    		list-style-type: disc;
-    	}
-		*/
-		stylesheet.addChild((new Stylerule())
-				.addChild(new TagSelector("ul"))
-				.addChild((new Declaration("list-style-type"))
-						.addChild(new ColorLiteral("#ff0000")))
-		);
-		/*
-		#menu {
-			width: 520px;
+		li {
+    		color: #0078d4;
+    		font-size: 18px;
 		}
 		*/
 		stylesheet.addChild((new Stylerule())
-				.addChild(new IdSelector("#menu"))
-				.addChild((new Declaration("width"))
-						.addChild(new PixelLiteral("520px")))
-		);
+				.addChild(new TagSelector("li"))
+				.addChild((new Declaration("color"))
+						.addChild(new ColorLiteral("#0078d4")))
+				.addChild((new Declaration("font-size"))
+						.addChild(new PixelLiteral("18px"))));
+		/*
+		#header {
+    		background-color: #333333;
+    		height: 80px;
+   			color: #ffffff;
+    		padding: 10px;
+		}
+		*/
+		stylesheet.addChild((new Stylerule())
+				.addChild(new IdSelector("#header"))
+				.addChild((new Declaration("background-color"))
+						.addChild(new ColorLiteral("#333333")))
+				.addChild((new Declaration("height"))
+						.addChild(new PixelLiteral("80px")))
+				.addChild((new Declaration("color"))
+						.addChild(new ColorLiteral("#ffffff")))
+				.addChild((new Declaration("padding"))
+						.addChild(new PixelLiteral("10px"))));
+
 		/*
 		.menu {
 			color: #000000;

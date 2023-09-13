@@ -16,7 +16,7 @@ li {
     padding: 10px;
 }
 
-#button {
+.button {
     background-color: #0078d4;
     color: #ffffff;
     padding: 10px;
