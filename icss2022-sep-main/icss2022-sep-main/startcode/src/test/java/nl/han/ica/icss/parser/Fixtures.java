@@ -435,56 +435,19 @@ public class Fixtures {
 										.addChild(new ScalarLiteral("16"))
 										.addChild(new PixelLiteral("4px"))))));
 
-		/*
-		li {
-    		color: LinkTextColor;
-    		font-size: 18px;
-		}
-		*/
-		stylesheet.addChild((new Stylerule())
-				.addChild(new TagSelector("li"))
-				.addChild((new Declaration("color"))
-						.addChild(new VariableReference("LinkTextColor")))
-				.addChild((new Declaration("font-size"))
-						.addChild(new PixelLiteral("18px"))));
 
 		/*
-		#header {
-    		background-color: HeadColor;
-   		 	height: 80px;
-    		color: #ffffff;
-    		padding: 10px;
+		#sidebar {
+  			background-color: Background;
+  			width: 200px;
 		}
 		*/
 		stylesheet.addChild((new Stylerule())
-				.addChild(new IdSelector("#header"))
+				.addChild(new IdSelector("#sidebar"))
 				.addChild((new Declaration("background-color"))
-						.addChild(new VariableReference("HeadColor")))
-				.addChild((new Declaration("height"))
-						.addChild(new PixelLiteral("80px")))
-				.addChild((new Declaration("color"))
-						.addChild(new ColorLiteral("#ffffff")))
-				.addChild((new Declaration("padding"))
-						.addChild(new PixelLiteral("10px"))));
-
-		/*
-		.button {
-    		background-color: HeadColor;
-    		color: #ffffff;
-    		padding: 10px;
-    		font-size: 18px;
-		}
-		*/
-		stylesheet.addChild((new Stylerule())
-				.addChild(new ClassSelector(".button"))
-				.addChild((new Declaration("background-color"))
-						.addChild(new VariableReference("HeadColor")))
-				.addChild((new Declaration("color"))
-						.addChild(new ColorLiteral("#ffffff")))
-				.addChild((new Declaration("padding"))
-						.addChild(new PixelLiteral("10px")))
-				.addChild((new Declaration("font-size"))
-						.addChild(new PixelLiteral("18px"))));
+						.addChild(new VariableReference("Background")))
+				.addChild((new Declaration("width"))
+						.addChild(new PixelLiteral("200px"))));
 
 		return new AST(stylesheet);
 	}
