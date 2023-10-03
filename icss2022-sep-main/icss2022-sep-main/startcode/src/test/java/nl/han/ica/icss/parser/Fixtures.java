@@ -265,17 +265,18 @@ public class Fixtures {
 
 
 		/*
+
 		#header {
-    		background-color: #333333;
+    		background-color: HeadColor;
     		height: 80px;
-   			color: #ffffff;
+    		color: #ffffff;
     		padding: 10px;
 		}
 		*/
 		stylesheet.addChild((new Stylerule())
 				.addChild(new IdSelector("#header"))
 				.addChild((new Declaration("background-color"))
-						.addChild(new ColorLiteral("#333333")))
+						.addChild(new VariableReference("HeadColor")))
 				.addChild((new Declaration("height"))
 						.addChild(new PixelLiteral("80px")))
 				.addChild((new Declaration("color"))
