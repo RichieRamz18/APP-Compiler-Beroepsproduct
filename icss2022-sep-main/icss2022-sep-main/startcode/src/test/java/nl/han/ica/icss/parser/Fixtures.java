@@ -381,7 +381,7 @@ public class Fixtures {
 	public static AST uncheckedLevel2inputBestand() {
 		Stylesheet stylesheet = new Stylesheet();
 		/*
-			TextColour := #oo88cc;
+			TextColour := #0088cc;
 			Background:= #FFFFFF;
 			FontSize := 16px;
 			UseBackgroundColour := TRUE;
@@ -389,7 +389,7 @@ public class Fixtures {
 		*/
 		stylesheet.addChild(new VariableAssignment())
 				.addChild(new VariableReference("TextColour"))
-				.addChild(new ColorLiteral("#oo88cc"));
+				.addChild(new ColorLiteral("#0088cc"));
 		stylesheet.addChild(new VariableAssignment())
 				.addChild(new VariableReference("Background"))
 				.addChild(new ColorLiteral("#FFFFFF"));

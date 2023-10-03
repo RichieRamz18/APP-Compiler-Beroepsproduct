@@ -1,4 +1,4 @@
-TextColour := #oo88cc;
+TextColour := #0088cc;
 Background:= #FFFFFF;
 FontSize := 16px;
 UseBackgroundColour := TRUE;
