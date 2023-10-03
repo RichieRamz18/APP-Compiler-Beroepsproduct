@@ -377,6 +377,111 @@ public class Fixtures {
 		return new AST(stylesheet);
 	}
 
+	public static AST uncheckedLevel2inputBestand() {
+		Stylesheet stylesheet = new Stylesheet();
+		/*
+			TextColour := #oo88cc;
+			Background:= #FFFFFF;
+			FontSize := 16px;
+			UseBackgroundColour := TRUE;
+			UseTextColour := TRUE;
+		*/
+		stylesheet.addChild(new VariableAssignment())
+				.addChild(new VariableReference("TextColour"))
+				.addChild(new ColorLiteral("#oo88cc"));
+		stylesheet.addChild(new VariableAssignment())
+				.addChild(new VariableReference("Background"))
+				.addChild(new ColorLiteral("#FFFFFF"));
+		stylesheet.addChild(new VariableAssignment())
+				.addChild(new VariableReference("FontSize"))
+				.addChild(new PixelLiteral("16px"));
+		stylesheet.addChild(new VariableAssignment())
+				.addChild(new VariableReference("UseBackgroundColour"))
+				.addChild(new BoolLiteral(true));
+		stylesheet.addChild(new VariableAssignment())
+				.addChild(new VariableReference("UseTextColour"))
+				.addChild(new BoolLiteral(true));
+		/*
+		body {
+  			background-color: Background;
+  			color: TextColour;
+			font-size: FontSize;
+		}
+		*/
+		stylesheet.addChild((new Stylerule())
+				.addChild(new TagSelector("body"))
+				.addChild((new Declaration("background-color"))
+						.addChild(new VariableReference("Background")))
+				.addChild((new Declaration("color"))
+						.addChild(new VariableReference("TextColour"))
+				.addChild((new Declaration("font-size"))
+						.addChild(new VariableReference("FontSize")))));
+
+		/*
+		ul {
+    		margin-left: 20px;
+		}
+		*/
+		stylesheet.addChild((new Stylerule())
+				.addChild(new TagSelector("ul"))
+				.addChild((new Declaration("margin-left"))
+						.addChild(new PixelLiteral("20px"))));
+
+		/*
+		li {
+    		color: LinkTextColor;
+    		font-size: 18px;
+		}
+		*/
+		stylesheet.addChild((new Stylerule())
+				.addChild(new TagSelector("li"))
+				.addChild((new Declaration("color"))
+						.addChild(new VariableReference("LinkTextColor")))
+				.addChild((new Declaration("font-size"))
+						.addChild(new PixelLiteral("18px"))));
+
+		/*
+		#header {
+    		background-color: HeadColor;
+   		 	height: 80px;
+    		color: #ffffff;
+    		padding: 10px;
+		}
+		*/
+		stylesheet.addChild((new Stylerule())
+				.addChild(new IdSelector("#header"))
+				.addChild((new Declaration("background-color"))
+						.addChild(new VariableReference("HeadColor")))
+				.addChild((new Declaration("height"))
+						.addChild(new PixelLiteral("80px")))
+				.addChild((new Declaration("color"))
+						.addChild(new ColorLiteral("#ffffff")))
+				.addChild((new Declaration("padding"))
+						.addChild(new PixelLiteral("10px"))));
+
+		/*
+		.button {
+    		background-color: HeadColor;
+    		color: #ffffff;
+    		padding: 10px;
+    		font-size: 18px;
+		}
+		*/
+		stylesheet.addChild((new Stylerule())
+				.addChild(new ClassSelector(".button"))
+				.addChild((new Declaration("background-color"))
+						.addChild(new VariableReference("HeadColor")))
+				.addChild((new Declaration("color"))
+						.addChild(new ColorLiteral("#ffffff")))
+				.addChild((new Declaration("padding"))
+						.addChild(new PixelLiteral("10px")))
+				.addChild((new Declaration("font-size"))
+						.addChild(new PixelLiteral("18px"))));
+
+		return new AST(stylesheet);
+	}
+
+
 	public static AST uncheckedLevel3() {
 		Stylesheet stylesheet = new Stylesheet();
 		/*
