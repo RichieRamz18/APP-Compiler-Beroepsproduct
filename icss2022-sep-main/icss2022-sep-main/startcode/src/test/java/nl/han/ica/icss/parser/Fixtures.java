@@ -261,11 +261,7 @@ public class Fixtures {
 						.addChild(new VariableReference("LinkTextColor")))
 				.addChild((new Declaration("font-size"))
 						.addChild(new PixelLiteral("18px"))));
-
-
-
 		/*
-
 		#header {
     		background-color: HeadColor;
     		height: 80px;
@@ -286,7 +282,7 @@ public class Fixtures {
 
 		/*
 		.button {
-    		background-color: #0078d4;
+    		background-color: HeadColor;
     		color: #ffffff;
     		padding: 10px;
     		font-size: 18px;
@@ -295,7 +291,7 @@ public class Fixtures {
 		stylesheet.addChild((new Stylerule())
 				.addChild(new ClassSelector(".button"))
 				.addChild((new Declaration("background-color"))
-						.addChild(new ColorLiteral("#0078d4")))
+						.addChild(new VariableReference("HeadColor")))
 				.addChild((new Declaration("color"))
 						.addChild(new ColorLiteral("#ffffff")))
 				.addChild((new Declaration("padding"))
