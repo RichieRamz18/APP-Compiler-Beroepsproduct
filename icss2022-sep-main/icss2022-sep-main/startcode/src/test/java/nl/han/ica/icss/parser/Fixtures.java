@@ -206,72 +206,50 @@ public class Fixtures {
 
 	public static AST uncheckedLevel1inputBestand() {
 		Stylesheet stylesheet = new Stylesheet();
-		/*
-    		LinkTextColor := #0078d4;
-			HeadColor := #333333;
-			MenuWidth := 540px;
-			ShowHeader := TRUE;
-		*/
-		stylesheet.addChild(new VariableAssignment())
-				.addChild(new VariableReference("LinkTextColor"))
-						.addChild(new ColorLiteral("#0078d4"));
-		stylesheet.addChild(new VariableAssignment())
-				.addChild(new VariableReference("HeadColor"))
-						.addChild(new ColorLiteral("#333333"));
-		stylesheet.addChild(new VariableAssignment())
-				.addChild(new VariableReference("MenuWidth"))
-						.addChild(new PixelLiteral("540px"));
-		stylesheet.addChild(new VariableAssignment())
-				.addChild(new VariableReference("ShowHeader"))
-						.addChild(new BoolLiteral(true));
+
+
+
+
+
 		/*
 		h1 {
-    		font-size: 28px;
-    		color: LinkTextColor;
-		}
+    		background-color: #f0f0f0;
+    		font-size: 24px;
+    		padding: 10px;
+    	}
 		*/
 		stylesheet.addChild((new Stylerule())
 				.addChild(new TagSelector("h1"))
+				.addChild((new Declaration("background-color"))
+						.addChild(new ColorLiteral("#f0f0f0")))
 				.addChild((new Declaration("font-size"))
-						.addChild(new PixelLiteral("28px")))
-				.addChild((new Declaration("color"))
-						.addChild(new VariableReference("LinkTextColor"))));
-
-		/*
-		ul {
-    		margin-left: 20px;
-		}
-		*/
-		stylesheet.addChild((new Stylerule())
-				.addChild(new TagSelector("ul"))
-				.addChild((new Declaration("margin-left"))
-						.addChild(new PixelLiteral("20px"))));
-
+						.addChild(new PixelLiteral("24px")))
+				.addChild((new Declaration("padding"))
+						.addChild(new PixelLiteral("10px"))));
 		/*
 		li {
-    		color: LinkTextColor;
+    		color: #0078d4;
     		font-size: 18px;
 		}
 		*/
 		stylesheet.addChild((new Stylerule())
 				.addChild(new TagSelector("li"))
 				.addChild((new Declaration("color"))
-						.addChild(new VariableReference("LinkTextColor")))
+						.addChild(new ColorLiteral("#0078d4")))
 				.addChild((new Declaration("font-size"))
 						.addChild(new PixelLiteral("18px"))));
-
 		/*
 		#header {
-    		background-color: HeadColor;
-   		 	height: 80px;
-    		color: #ffffff;
+    		background-color: #333333;
+    		height: 80px;
+   			color: #ffffff;
     		padding: 10px;
 		}
 		*/
 		stylesheet.addChild((new Stylerule())
 				.addChild(new IdSelector("#header"))
 				.addChild((new Declaration("background-color"))
-						.addChild(new VariableReference("HeadColor")))
+						.addChild(new ColorLiteral("#333333")))
 				.addChild((new Declaration("height"))
 						.addChild(new PixelLiteral("80px")))
 				.addChild((new Declaration("color"))
@@ -281,7 +259,7 @@ public class Fixtures {
 
 		/*
 		.button {
-    		background-color: HeadColor;
+    		background-color: #0078d4;
     		color: #ffffff;
     		padding: 10px;
     		font-size: 18px;
@@ -290,7 +268,7 @@ public class Fixtures {
 		stylesheet.addChild((new Stylerule())
 				.addChild(new ClassSelector(".button"))
 				.addChild((new Declaration("background-color"))
-						.addChild(new VariableReference("HeadColor")))
+						.addChild(new ColorLiteral("#0078d4")))
 				.addChild((new Declaration("color"))
 						.addChild(new ColorLiteral("#ffffff")))
 				.addChild((new Declaration("padding"))
