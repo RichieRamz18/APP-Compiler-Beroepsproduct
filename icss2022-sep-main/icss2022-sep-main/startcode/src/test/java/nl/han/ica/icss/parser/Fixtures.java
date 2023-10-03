@@ -7,6 +7,7 @@ import nl.han.ica.icss.ast.literals.PixelLiteral;
 import nl.han.ica.icss.ast.literals.ScalarLiteral;
 import nl.han.ica.icss.ast.operations.AddOperation;
 import nl.han.ica.icss.ast.operations.MultiplyOperation;
+import nl.han.ica.icss.ast.operations.SubtractOperation;
 import nl.han.ica.icss.ast.selectors.ClassSelector;
 import nl.han.ica.icss.ast.selectors.IdSelector;
 import nl.han.ica.icss.ast.selectors.TagSelector;
@@ -418,14 +419,21 @@ public class Fixtures {
 						.addChild(new VariableReference("FontSize")))));
 
 		/*
-		ul {
-    		margin-left: 20px;
+		h1 {
+  			color: TextColour;
+  			font-size: FontSize + 16 - 4px;
 		}
 		*/
 		stylesheet.addChild((new Stylerule())
-				.addChild(new TagSelector("ul"))
-				.addChild((new Declaration("margin-left"))
-						.addChild(new PixelLiteral("20px"))));
+				.addChild(new TagSelector("h1"))
+				.addChild((new Declaration("color"))
+						.addChild(new VariableReference("TextColour")))
+				.addChild((new Declaration("font-size"))
+						.addChild((new AddOperation())
+								.addChild(new VariableReference("FontSize"))
+								.addChild((new SubtractOperation())
+										.addChild(new ScalarLiteral("16"))
+										.addChild(new PixelLiteral("4px"))))));
 
 		/*
 		li {
