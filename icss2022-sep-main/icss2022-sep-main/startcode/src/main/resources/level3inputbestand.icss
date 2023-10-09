@@ -5,7 +5,6 @@ UseSecondaryColor := TRUE;
 body {
     background-color: #ffffff;
     color: PrimaryColor;
-    font-family: "Arial", sans-serif;
     font-size: 16px;
 }
 
@@ -17,27 +16,18 @@ h1 {
 
 .button {
     background-color: PrimaryColor;
+     if[UseSecondaryColor] {
+        background-color: SecondaryColor;
+     } else {
+        background-color: #000000;
+     }
     color: #ffffff;
     padding: 10px;
-    border: 1px solid PrimaryColor;
-    text-align: center;
-    cursor: pointer;
 }
 
 .menu-item {
     color: PrimaryColor;
     padding: 5px;
-    border-bottom: 1px solid PrimaryColor;
-}
-
-if[UseSecondaryColor] {
-    .special-button {
-        background-color: SecondaryColor;
-    }
-} else {
-    .special-button {
-        background-color: #000000;
-    }
 }
 
 .footer {
