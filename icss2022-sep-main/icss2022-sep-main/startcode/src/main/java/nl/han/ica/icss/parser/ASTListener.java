@@ -50,15 +50,6 @@ public class ASTListener extends ICSSBaseListener {
 		currentContainer.push(stylerule);
 	}
 
-//	@Override public void exitStyleRule(ICSSParser.StyleRuleContext ctx) {
-//		ASTNode styleRule = currentContainer.pop();
-//		if(!currentContainer.isEmpty()) {
-//			currentContainer.peek().addChild(styleRule);
-//		} else {
-//			ast.setRoot((Stylesheet) styleRule);
-//		}
-//	}
-
 	@Override public void exitStyleRule(ICSSParser.StyleRuleContext ctx) {
 		LOGGER.info("Exiting StyleRule");
 		ASTNode styleRule = currentContainer.pop();
