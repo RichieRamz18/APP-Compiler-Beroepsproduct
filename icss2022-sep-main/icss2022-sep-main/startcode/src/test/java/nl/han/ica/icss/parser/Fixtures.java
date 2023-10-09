@@ -383,26 +383,31 @@ public class Fixtures {
 		Stylesheet stylesheet = new Stylesheet();
 		/*
 			TextColour := #0088cc;
-			Background:= #FFFFFF;
+			Background:= #ffffff;
 			FontSize := 16px;
 			UseBackgroundColour := TRUE;
 			UseTextColour := TRUE;
 		*/
-		stylesheet.addChild(new VariableAssignment())
+		stylesheet.addChild((new VariableAssignment())
 				.addChild(new VariableReference("TextColour"))
-				.addChild(new ColorLiteral("#0088cc"));
-		stylesheet.addChild(new VariableAssignment())
+				.addChild(new ColorLiteral("#0088cc"))
+		);
+		stylesheet.addChild((new VariableAssignment())
 				.addChild(new VariableReference("Background"))
-				.addChild(new ColorLiteral("#FFFFFF"));
-		stylesheet.addChild(new VariableAssignment())
+				.addChild(new ColorLiteral("#ffffff"))
+		);
+		stylesheet.addChild((new VariableAssignment())
 				.addChild(new VariableReference("FontSize"))
-				.addChild(new PixelLiteral("16px"));
-		stylesheet.addChild(new VariableAssignment())
+				.addChild(new PixelLiteral("16px"))
+		);
+		stylesheet.addChild((new VariableAssignment())
 				.addChild(new VariableReference("UseBackgroundColour"))
-				.addChild(new BoolLiteral(true));
-		stylesheet.addChild(new VariableAssignment())
+				.addChild(new BoolLiteral(true))
+		);
+		stylesheet.addChild((new VariableAssignment())
 				.addChild(new VariableReference("UseTextColour"))
-				.addChild(new BoolLiteral(true));
+				.addChild(new BoolLiteral(true))
+		);
 		/*
 		body {
   			background-color: Background;
@@ -416,8 +421,7 @@ public class Fixtures {
 						.addChild(new VariableReference("Background")))
 				.addChild((new Declaration("color"))
 						.addChild(new VariableReference("TextColour"))
-				.addChild((new Declaration("font-size"))
-						.addChild(new VariableReference("FontSize")))));
+				));
 
 		/*
 		h1 {
