@@ -212,22 +212,22 @@ public class Fixtures {
 		MenuWidth := 540px;
 		ShowHeader := TRUE;
 		*/
-		stylesheet.addChild((new Stylerule())
-				.addChild(new VariableAssignment())
-						.addChild(new VariableReference("LinkTextColor"))
-								.addChild(new ColorLiteral("#0078d4")));
-		stylesheet.addChild((new Stylerule())
-				.addChild(new VariableAssignment())
-						.addChild(new VariableReference("HeadColor"))
-								.addChild(new ColorLiteral("#333333")));
-		stylesheet.addChild((new Stylerule())
-				.addChild(new VariableAssignment())
-						.addChild(new VariableReference("MenuWidth"))
-								.addChild(new PixelLiteral("540px")));
-		stylesheet.addChild((new Stylerule())
-				.addChild(new VariableAssignment())
-						.addChild(new VariableReference("ShowHeader"))
-								.addChild(new BoolLiteral(true)));
+		stylesheet.addChild((new VariableAssignment())
+				.addChild(new VariableReference("LinkTextColor"))
+				.addChild(new ColorLiteral("#0078d4"))
+		);
+		stylesheet.addChild((new VariableAssignment())
+				.addChild(new VariableReference("HeadColor"))
+				.addChild(new ColorLiteral("#333333"))
+		);
+		stylesheet.addChild((new VariableAssignment())
+				.addChild(new VariableReference("MenuWidth"))
+				.addChild(new PixelLiteral("540px"))
+		);
+		stylesheet.addChild((new VariableAssignment())
+				.addChild(new VariableReference("ShowHeader"))
+				.addChild(new BoolLiteral(true))
+		);
 		/*
 		h1 {
     		font-size: 28px;
@@ -571,6 +571,11 @@ public class Fixtures {
 
 		);
 
+		return new AST(stylesheet);
+	}
+
+	public static AST uncheckedLevel3inputBestand() {
+		Stylesheet stylesheet = new Stylesheet();
 		return new AST(stylesheet);
 	}
 }
