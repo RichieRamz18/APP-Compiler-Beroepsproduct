@@ -43,34 +43,59 @@ ASSIGNMENT_OPERATOR: ':=';
 
 
 //--- PARSER: ---
-stylesheet: styleRule+ EOF | (variableAssignment | styleRule)+ EOF;
-styleRule: selector body;
+//stylesheet: styleRule+ EOF | (variableAssignment | styleRule)+ EOF;
+//styleRule: selector body;
+//
+//selector: tagSelector | idSelector | classSelector;
+//body: OPEN_BRACE (declarations | variableAssignment | ifClause)+ CLOSE_BRACE;
+//
+//tagSelector: LOWER_IDENT;
+//idSelector: ID_IDENT;
+//classSelector: CLASS_IDENT;
+//
+//declarations: declaration+ | ifClause+;
+//declaration: propertyName COLON expression SEMICOLON;
+//propertyName: LOWER_IDENT;
+//
+//expression: literal | expression (MUL) expression | expression (PLUS | MIN) expression;
+//
+//colorLiteral: COLOR;
+//boolLiteral: TRUE | FALSE;
+//percentageLiteral: PERCENTAGE;
+//pixelLiteral: PIXELSIZE;
+//scalarLiteral: SCALAR;
+//literal: colorLiteral | boolLiteral | percentageLiteral | pixelLiteral | scalarLiteral | variableReference;
+//
+//variableAssignment: variableReference ASSIGNMENT_OPERATOR expression SEMICOLON;
+//variableReference: CAPITAL_IDENT;
+//
+//ifClause: IF BOX_BRACKET_OPEN expression BOX_BRACKET_CLOSE body (ELSE body)?;
+//elseClause: ELSE body;
 
-selector: tagSelector | idSelector | classSelector;
-body: OPEN_BRACE (declarations | variableAssignment)+ CLOSE_BRACE;
-
-tagSelector: LOWER_IDENT;
-idSelector: ID_IDENT;
-classSelector: CLASS_IDENT;
-
-declarations: declaration+ | ifClause+;
+stylesheet: variableAssignment* styleRule* EOF;
+styleRule: selector OPEN_BRACE ruleBody CLOSE_BRACE;
 declaration: propertyName COLON expression SEMICOLON;
 propertyName: LOWER_IDENT;
 
-expression: literal | expression (MUL) expression | expression (PLUS | MIN) expression;
+variableAssignment: variableReference ASSIGNMENT_OPERATOR expression+ SEMICOLON;
 
-colorLiteral: COLOR;
+ifClause: IF BOX_BRACKET_OPEN (variableReference | boolLiteral ) BOX_BRACKET_CLOSE OPEN_BRACE ruleBody CLOSE_BRACE elseClause?;
+elseClause: ELSE OPEN_BRACE ruleBody CLOSE_BRACE;
+
+expression: literal | expression (MUL | DIV) expression | expression (PLUS | MIN) expression;
+
 boolLiteral: TRUE | FALSE;
+colorLiteral: COLOR;
 percentageLiteral: PERCENTAGE;
 pixelLiteral: PIXELSIZE;
 scalarLiteral: SCALAR;
-literal: colorLiteral | boolLiteral | percentageLiteral | pixelLiteral | scalarLiteral | variableReference;
-
-variableAssignment: variableReference ASSIGNMENT_OPERATOR expression SEMICOLON;
 variableReference: CAPITAL_IDENT;
+literal: boolLiteral | colorLiteral | percentageLiteral | pixelLiteral | scalarLiteral | variableReference;
 
-ifClause: IF BOX_BRACKET_OPEN expression BOX_BRACKET_CLOSE body (ELSE body)?;
-elseClause: ELSE body;
+classSelector: CLASS_IDENT;
+tagSelector: LOWER_IDENT;
+idSelector: ID_IDENT | COLOR;
+selector: (tagSelector | idSelector | classSelector) (COMMA selector)*;
 
-
+ruleBody: (declaration | ifClause | variableAssignment)*;
 

@@ -293,6 +293,9 @@ public class ASTListener extends ICSSBaseListener {
 	@Override public void exitElseClause(ICSSParser.ElseClauseContext ctx) {
 		LOGGER.info("Exiting ElseClause");
 		ASTNode elseClause = currentContainer.pop();
+
+		ASTNode ifClause = currentContainer.pop();
+		currentContainer.peek().addChild(ifClause);
 		currentContainer.peek().addChild(elseClause);
 	}
 
