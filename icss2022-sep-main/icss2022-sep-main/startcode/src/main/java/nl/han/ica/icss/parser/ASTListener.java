@@ -132,27 +132,33 @@ public class ASTListener extends ICSSBaseListener {
 		LOGGER.info("Exiting PropertyName");
 	}
 
-	@Override public void enterExpression(ICSSParser.ExpressionContext ctx) {
-		LOGGER.info("Entering Expression");
-		if(ctx.MIN() != null){
-			SubtractOperation subtractOperation = new SubtractOperation();
-			this.currentContainer.peek().addChild(subtractOperation);
-			this.currentContainer.push(subtractOperation);
-			return;
-		}if(ctx.MUL() != null){
-			MultiplyOperation multiplyOperation = new MultiplyOperation();
-			this.currentContainer.peek().addChild(multiplyOperation);
-			this.currentContainer.push(multiplyOperation);
-			return;
-		}
-		if(ctx.PLUS() != null){
-			AddOperation addOperation = new AddOperation();
-			this.currentContainer.peek().addChild(addOperation);
-			this.currentContainer.push(addOperation);
-			return;
-		}
+//	@Override public void enterExpression(ICSSParser.ExpressionContext ctx) {
+//		LOGGER.info("Entering Expression");
+//		if(ctx.MIN() != null){
+//			SubtractOperation subtractOperation = new SubtractOperation();
+//			this.currentContainer.peek().addChild(subtractOperation);
+//			this.currentContainer.push(subtractOperation);
+//			return;
+//		}if(ctx.MUL() != null){
+//			MultiplyOperation multiplyOperation = new MultiplyOperation();
+//			this.currentContainer.peek().addChild(multiplyOperation);
+//			this.currentContainer.push(multiplyOperation);
+//			return;
+//		}
+//		if(ctx.PLUS() != null){
+//			AddOperation addOperation = new AddOperation();
+//			this.currentContainer.peek().addChild(addOperation);
+//			this.currentContainer.push(addOperation);
+//			return;
+//		}
+//	}
 
+	public void enterExpression(ICSSParser.ExpressionContext ctx){
+		if (ctx.getChildCount() == 3) {
+			
+		}
 	}
+
 	@Override public void exitExpression(ICSSParser.ExpressionContext ctx) {
 		LOGGER.info("Exiting Expression");
 		if(ctx.PLUS() != null || ctx.MIN() != null || ctx.MUL() != null){
