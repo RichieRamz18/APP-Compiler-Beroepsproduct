@@ -1,0 +1,47 @@
+PrimaryColor := #3498db;
+SecondaryColor := #e74c3c;
+UseSecondaryColor := TRUE;
+
+body {
+    background-color: #ffffff;
+    color: PrimaryColor;
+    font-family: "Arial", sans-serif;
+    font-size: 16px;
+}
+
+h1 {
+    font-size: 24px;
+    color: SecondaryColor;
+    margin-top: 20px;
+}
+
+.button {
+    background-color: PrimaryColor;
+    color: #ffffff;
+    padding: 10px;
+    border: 1px solid PrimaryColor;
+    text-align: center;
+    cursor: pointer;
+}
+
+.menu-item {
+    color: PrimaryColor;
+    padding: 5px;
+    border-bottom: 1px solid PrimaryColor;
+}
+
+if[UseSecondaryColor] {
+    .special-button {
+        background-color: SecondaryColor;
+    }
+} else {
+    .special-button {
+        background-color: #000000;
+    }
+}
+
+.footer {
+    background-color: PrimaryColor;
+    color: #ffffff;
+    padding: 20px;
+}

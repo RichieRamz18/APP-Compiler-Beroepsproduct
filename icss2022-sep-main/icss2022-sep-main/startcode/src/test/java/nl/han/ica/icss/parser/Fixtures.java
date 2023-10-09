@@ -550,12 +550,9 @@ public class Fixtures {
             )
         );
         /*
-
-
          .menu {
 				color: #000000;
     			background-color: LinkColor;
-
 			}
 
         */
