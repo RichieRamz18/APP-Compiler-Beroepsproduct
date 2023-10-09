@@ -19,20 +19,22 @@ public class ICSSParser extends Parser {
 		IF=1, ELSE=2, BOX_BRACKET_OPEN=3, BOX_BRACKET_CLOSE=4, TRUE=5, FALSE=6, 
 		PIXELSIZE=7, PERCENTAGE=8, SCALAR=9, COLOR=10, ID_IDENT=11, CLASS_IDENT=12, 
 		LOWER_IDENT=13, CAPITAL_IDENT=14, WS=15, OPEN_BRACE=16, CLOSE_BRACE=17, 
-		SEMICOLON=18, COLON=19, PLUS=20, MIN=21, MUL=22, ASSIGNMENT_OPERATOR=23;
+		SEMICOLON=18, COLON=19, PLUS=20, MIN=21, MUL=22, ASSIGNMENT_OPERATOR=23, 
+		DIV=24, COMMA=25;
 	public static final int
-		RULE_stylesheet = 0, RULE_styleRule = 1, RULE_selector = 2, RULE_body = 3, 
-		RULE_tagSelector = 4, RULE_idSelector = 5, RULE_classSelector = 6, RULE_declarations = 7, 
-		RULE_declaration = 8, RULE_propertyName = 9, RULE_expression = 10, RULE_colorLiteral = 11, 
-		RULE_boolLiteral = 12, RULE_percentageLiteral = 13, RULE_pixelLiteral = 14, 
-		RULE_scalarLiteral = 15, RULE_literal = 16, RULE_variableAssignment = 17, 
-		RULE_variableReference = 18, RULE_ifClause = 19, RULE_elseClause = 20;
+		RULE_stylesheet = 0, RULE_styleRule = 1, RULE_declaration = 2, RULE_propertyName = 3, 
+		RULE_variableAssignment = 4, RULE_ifClause = 5, RULE_elseClause = 6, RULE_expression = 7, 
+		RULE_boolLiteral = 8, RULE_colorLiteral = 9, RULE_percentageLiteral = 10, 
+		RULE_pixelLiteral = 11, RULE_scalarLiteral = 12, RULE_variableReference = 13, 
+		RULE_literal = 14, RULE_classSelector = 15, RULE_tagSelector = 16, RULE_idSelector = 17, 
+		RULE_selector = 18, RULE_ruleBody = 19;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"stylesheet", "styleRule", "selector", "body", "tagSelector", "idSelector", 
-			"classSelector", "declarations", "declaration", "propertyName", "expression", 
-			"colorLiteral", "boolLiteral", "percentageLiteral", "pixelLiteral", "scalarLiteral", 
-			"literal", "variableAssignment", "variableReference", "ifClause", "elseClause"
+			"stylesheet", "styleRule", "declaration", "propertyName", "variableAssignment", 
+			"ifClause", "elseClause", "expression", "boolLiteral", "colorLiteral", 
+			"percentageLiteral", "pixelLiteral", "scalarLiteral", "variableReference", 
+			"literal", "classSelector", "tagSelector", "idSelector", "selector", 
+			"ruleBody"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -50,7 +52,7 @@ public class ICSSParser extends Parser {
 			null, "IF", "ELSE", "BOX_BRACKET_OPEN", "BOX_BRACKET_CLOSE", "TRUE", 
 			"FALSE", "PIXELSIZE", "PERCENTAGE", "SCALAR", "COLOR", "ID_IDENT", "CLASS_IDENT", 
 			"LOWER_IDENT", "CAPITAL_IDENT", "WS", "OPEN_BRACE", "CLOSE_BRACE", "SEMICOLON", 
-			"COLON", "PLUS", "MIN", "MUL", "ASSIGNMENT_OPERATOR"
+			"COLON", "PLUS", "MIN", "MUL", "ASSIGNMENT_OPERATOR", "DIV", "COMMA"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -107,17 +109,17 @@ public class ICSSParser extends Parser {
 	@SuppressWarnings("CheckReturnValue")
 	public static class StylesheetContext extends ParserRuleContext {
 		public TerminalNode EOF() { return getToken(ICSSParser.EOF, 0); }
-		public List<StyleRuleContext> styleRule() {
-			return getRuleContexts(StyleRuleContext.class);
-		}
-		public StyleRuleContext styleRule(int i) {
-			return getRuleContext(StyleRuleContext.class,i);
-		}
 		public List<VariableAssignmentContext> variableAssignment() {
 			return getRuleContexts(VariableAssignmentContext.class);
 		}
 		public VariableAssignmentContext variableAssignment(int i) {
 			return getRuleContext(VariableAssignmentContext.class,i);
+		}
+		public List<StyleRuleContext> styleRule() {
+			return getRuleContexts(StyleRuleContext.class);
+		}
+		public StyleRuleContext styleRule(int i) {
+			return getRuleContext(StyleRuleContext.class,i);
 		}
 		public StylesheetContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -143,67 +145,38 @@ public class ICSSParser extends Parser {
 		enterRule(_localctx, 0, RULE_stylesheet);
 		int _la;
 		try {
-			setState(57);
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(43);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,3,_ctx) ) {
-			case 1:
-				enterOuterAlt(_localctx, 1);
+			_la = _input.LA(1);
+			while (_la==CAPITAL_IDENT) {
 				{
-				setState(43); 
+				{
+				setState(40);
+				variableAssignment();
+				}
+				}
+				setState(45);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				do {
-					{
-					{
-					setState(42);
-					styleRule();
-					}
-					}
-					setState(45); 
-					_errHandler.sync(this);
-					_la = _input.LA(1);
-				} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 14336L) != 0) );
-				setState(47);
-				match(EOF);
-				}
-				break;
-			case 2:
-				enterOuterAlt(_localctx, 2);
+			}
+			setState(49);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 15360L) != 0)) {
 				{
-				setState(51); 
+				{
+				setState(46);
+				styleRule();
+				}
+				}
+				setState(51);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				do {
-					{
-					setState(51);
-					_errHandler.sync(this);
-					switch (_input.LA(1)) {
-					case CAPITAL_IDENT:
-						{
-						setState(49);
-						variableAssignment();
-						}
-						break;
-					case ID_IDENT:
-					case CLASS_IDENT:
-					case LOWER_IDENT:
-						{
-						setState(50);
-						styleRule();
-						}
-						break;
-					default:
-						throw new NoViableAltException(this);
-					}
-					}
-					setState(53); 
-					_errHandler.sync(this);
-					_la = _input.LA(1);
-				} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 30720L) != 0) );
-				setState(55);
-				match(EOF);
-				}
-				break;
+			}
+			setState(52);
+			match(EOF);
 			}
 		}
 		catch (RecognitionException re) {
@@ -222,9 +195,11 @@ public class ICSSParser extends Parser {
 		public SelectorContext selector() {
 			return getRuleContext(SelectorContext.class,0);
 		}
-		public BodyContext body() {
-			return getRuleContext(BodyContext.class,0);
+		public TerminalNode OPEN_BRACE() { return getToken(ICSSParser.OPEN_BRACE, 0); }
+		public RuleBodyContext ruleBody() {
+			return getRuleContext(RuleBodyContext.class,0);
 		}
+		public TerminalNode CLOSE_BRACE() { return getToken(ICSSParser.CLOSE_BRACE, 0); }
 		public StyleRuleContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -250,415 +225,14 @@ public class ICSSParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(59);
+			setState(54);
 			selector();
-			setState(60);
-			body();
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class SelectorContext extends ParserRuleContext {
-		public TagSelectorContext tagSelector() {
-			return getRuleContext(TagSelectorContext.class,0);
-		}
-		public IdSelectorContext idSelector() {
-			return getRuleContext(IdSelectorContext.class,0);
-		}
-		public ClassSelectorContext classSelector() {
-			return getRuleContext(ClassSelectorContext.class,0);
-		}
-		public SelectorContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_selector; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).enterSelector(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).exitSelector(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ICSSVisitor ) return ((ICSSVisitor<? extends T>)visitor).visitSelector(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final SelectorContext selector() throws RecognitionException {
-		SelectorContext _localctx = new SelectorContext(_ctx, getState());
-		enterRule(_localctx, 4, RULE_selector);
-		try {
-			setState(65);
-			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case LOWER_IDENT:
-				enterOuterAlt(_localctx, 1);
-				{
-				setState(62);
-				tagSelector();
-				}
-				break;
-			case ID_IDENT:
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(63);
-				idSelector();
-				}
-				break;
-			case CLASS_IDENT:
-				enterOuterAlt(_localctx, 3);
-				{
-				setState(64);
-				classSelector();
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class BodyContext extends ParserRuleContext {
-		public TerminalNode OPEN_BRACE() { return getToken(ICSSParser.OPEN_BRACE, 0); }
-		public TerminalNode CLOSE_BRACE() { return getToken(ICSSParser.CLOSE_BRACE, 0); }
-		public List<DeclarationsContext> declarations() {
-			return getRuleContexts(DeclarationsContext.class);
-		}
-		public DeclarationsContext declarations(int i) {
-			return getRuleContext(DeclarationsContext.class,i);
-		}
-		public List<VariableAssignmentContext> variableAssignment() {
-			return getRuleContexts(VariableAssignmentContext.class);
-		}
-		public VariableAssignmentContext variableAssignment(int i) {
-			return getRuleContext(VariableAssignmentContext.class,i);
-		}
-		public List<IfClauseContext> ifClause() {
-			return getRuleContexts(IfClauseContext.class);
-		}
-		public IfClauseContext ifClause(int i) {
-			return getRuleContext(IfClauseContext.class,i);
-		}
-		public BodyContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_body; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).enterBody(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).exitBody(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ICSSVisitor ) return ((ICSSVisitor<? extends T>)visitor).visitBody(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final BodyContext body() throws RecognitionException {
-		BodyContext _localctx = new BodyContext(_ctx, getState());
-		enterRule(_localctx, 6, RULE_body);
-		int _la;
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(67);
+			setState(55);
 			match(OPEN_BRACE);
-			setState(71); 
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			do {
-				{
-				setState(71);
-				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,5,_ctx) ) {
-				case 1:
-					{
-					setState(68);
-					declarations();
-					}
-					break;
-				case 2:
-					{
-					setState(69);
-					variableAssignment();
-					}
-					break;
-				case 3:
-					{
-					setState(70);
-					ifClause();
-					}
-					break;
-				}
-				}
-				setState(73); 
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 24578L) != 0) );
-			setState(75);
+			setState(56);
+			ruleBody();
+			setState(57);
 			match(CLOSE_BRACE);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class TagSelectorContext extends ParserRuleContext {
-		public TerminalNode LOWER_IDENT() { return getToken(ICSSParser.LOWER_IDENT, 0); }
-		public TagSelectorContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_tagSelector; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).enterTagSelector(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).exitTagSelector(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ICSSVisitor ) return ((ICSSVisitor<? extends T>)visitor).visitTagSelector(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final TagSelectorContext tagSelector() throws RecognitionException {
-		TagSelectorContext _localctx = new TagSelectorContext(_ctx, getState());
-		enterRule(_localctx, 8, RULE_tagSelector);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(77);
-			match(LOWER_IDENT);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class IdSelectorContext extends ParserRuleContext {
-		public TerminalNode ID_IDENT() { return getToken(ICSSParser.ID_IDENT, 0); }
-		public IdSelectorContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_idSelector; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).enterIdSelector(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).exitIdSelector(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ICSSVisitor ) return ((ICSSVisitor<? extends T>)visitor).visitIdSelector(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final IdSelectorContext idSelector() throws RecognitionException {
-		IdSelectorContext _localctx = new IdSelectorContext(_ctx, getState());
-		enterRule(_localctx, 10, RULE_idSelector);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(79);
-			match(ID_IDENT);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class ClassSelectorContext extends ParserRuleContext {
-		public TerminalNode CLASS_IDENT() { return getToken(ICSSParser.CLASS_IDENT, 0); }
-		public ClassSelectorContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_classSelector; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).enterClassSelector(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).exitClassSelector(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ICSSVisitor ) return ((ICSSVisitor<? extends T>)visitor).visitClassSelector(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final ClassSelectorContext classSelector() throws RecognitionException {
-		ClassSelectorContext _localctx = new ClassSelectorContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_classSelector);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(81);
-			match(CLASS_IDENT);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class DeclarationsContext extends ParserRuleContext {
-		public List<DeclarationContext> declaration() {
-			return getRuleContexts(DeclarationContext.class);
-		}
-		public DeclarationContext declaration(int i) {
-			return getRuleContext(DeclarationContext.class,i);
-		}
-		public List<IfClauseContext> ifClause() {
-			return getRuleContexts(IfClauseContext.class);
-		}
-		public IfClauseContext ifClause(int i) {
-			return getRuleContext(IfClauseContext.class,i);
-		}
-		public DeclarationsContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_declarations; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).enterDeclarations(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).exitDeclarations(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ICSSVisitor ) return ((ICSSVisitor<? extends T>)visitor).visitDeclarations(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final DeclarationsContext declarations() throws RecognitionException {
-		DeclarationsContext _localctx = new DeclarationsContext(_ctx, getState());
-		enterRule(_localctx, 14, RULE_declarations);
-		try {
-			int _alt;
-			setState(93);
-			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case LOWER_IDENT:
-				enterOuterAlt(_localctx, 1);
-				{
-				setState(84); 
-				_errHandler.sync(this);
-				_alt = 1;
-				do {
-					switch (_alt) {
-					case 1:
-						{
-						{
-						setState(83);
-						declaration();
-						}
-						}
-						break;
-					default:
-						throw new NoViableAltException(this);
-					}
-					setState(86); 
-					_errHandler.sync(this);
-					_alt = getInterpreter().adaptivePredict(_input,7,_ctx);
-				} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
-				}
-				break;
-			case IF:
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(89); 
-				_errHandler.sync(this);
-				_alt = 1;
-				do {
-					switch (_alt) {
-					case 1:
-						{
-						{
-						setState(88);
-						ifClause();
-						}
-						}
-						break;
-					default:
-						throw new NoViableAltException(this);
-					}
-					setState(91); 
-					_errHandler.sync(this);
-					_alt = getInterpreter().adaptivePredict(_input,8,_ctx);
-				} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -703,17 +277,17 @@ public class ICSSParser extends Parser {
 
 	public final DeclarationContext declaration() throws RecognitionException {
 		DeclarationContext _localctx = new DeclarationContext(_ctx, getState());
-		enterRule(_localctx, 16, RULE_declaration);
+		enterRule(_localctx, 4, RULE_declaration);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(95);
+			setState(59);
 			propertyName();
-			setState(96);
+			setState(60);
 			match(COLON);
-			setState(97);
+			setState(61);
 			expression(0);
-			setState(98);
+			setState(62);
 			match(SEMICOLON);
 			}
 		}
@@ -752,12 +326,237 @@ public class ICSSParser extends Parser {
 
 	public final PropertyNameContext propertyName() throws RecognitionException {
 		PropertyNameContext _localctx = new PropertyNameContext(_ctx, getState());
-		enterRule(_localctx, 18, RULE_propertyName);
+		enterRule(_localctx, 6, RULE_propertyName);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(100);
+			setState(64);
 			match(LOWER_IDENT);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class VariableAssignmentContext extends ParserRuleContext {
+		public VariableReferenceContext variableReference() {
+			return getRuleContext(VariableReferenceContext.class,0);
+		}
+		public TerminalNode ASSIGNMENT_OPERATOR() { return getToken(ICSSParser.ASSIGNMENT_OPERATOR, 0); }
+		public TerminalNode SEMICOLON() { return getToken(ICSSParser.SEMICOLON, 0); }
+		public List<ExpressionContext> expression() {
+			return getRuleContexts(ExpressionContext.class);
+		}
+		public ExpressionContext expression(int i) {
+			return getRuleContext(ExpressionContext.class,i);
+		}
+		public VariableAssignmentContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_variableAssignment; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).enterVariableAssignment(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).exitVariableAssignment(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ICSSVisitor ) return ((ICSSVisitor<? extends T>)visitor).visitVariableAssignment(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final VariableAssignmentContext variableAssignment() throws RecognitionException {
+		VariableAssignmentContext _localctx = new VariableAssignmentContext(_ctx, getState());
+		enterRule(_localctx, 8, RULE_variableAssignment);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(66);
+			variableReference();
+			setState(67);
+			match(ASSIGNMENT_OPERATOR);
+			setState(69); 
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			do {
+				{
+				{
+				setState(68);
+				expression(0);
+				}
+				}
+				setState(71); 
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 18400L) != 0) );
+			setState(73);
+			match(SEMICOLON);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class IfClauseContext extends ParserRuleContext {
+		public TerminalNode IF() { return getToken(ICSSParser.IF, 0); }
+		public TerminalNode BOX_BRACKET_OPEN() { return getToken(ICSSParser.BOX_BRACKET_OPEN, 0); }
+		public TerminalNode BOX_BRACKET_CLOSE() { return getToken(ICSSParser.BOX_BRACKET_CLOSE, 0); }
+		public TerminalNode OPEN_BRACE() { return getToken(ICSSParser.OPEN_BRACE, 0); }
+		public RuleBodyContext ruleBody() {
+			return getRuleContext(RuleBodyContext.class,0);
+		}
+		public TerminalNode CLOSE_BRACE() { return getToken(ICSSParser.CLOSE_BRACE, 0); }
+		public VariableReferenceContext variableReference() {
+			return getRuleContext(VariableReferenceContext.class,0);
+		}
+		public BoolLiteralContext boolLiteral() {
+			return getRuleContext(BoolLiteralContext.class,0);
+		}
+		public ElseClauseContext elseClause() {
+			return getRuleContext(ElseClauseContext.class,0);
+		}
+		public IfClauseContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_ifClause; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).enterIfClause(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).exitIfClause(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ICSSVisitor ) return ((ICSSVisitor<? extends T>)visitor).visitIfClause(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final IfClauseContext ifClause() throws RecognitionException {
+		IfClauseContext _localctx = new IfClauseContext(_ctx, getState());
+		enterRule(_localctx, 10, RULE_ifClause);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(75);
+			match(IF);
+			setState(76);
+			match(BOX_BRACKET_OPEN);
+			setState(79);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case CAPITAL_IDENT:
+				{
+				setState(77);
+				variableReference();
+				}
+				break;
+			case TRUE:
+			case FALSE:
+				{
+				setState(78);
+				boolLiteral();
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+			setState(81);
+			match(BOX_BRACKET_CLOSE);
+			setState(82);
+			match(OPEN_BRACE);
+			setState(83);
+			ruleBody();
+			setState(84);
+			match(CLOSE_BRACE);
+			setState(86);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if (_la==ELSE) {
+				{
+				setState(85);
+				elseClause();
+				}
+			}
+
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class ElseClauseContext extends ParserRuleContext {
+		public TerminalNode ELSE() { return getToken(ICSSParser.ELSE, 0); }
+		public TerminalNode OPEN_BRACE() { return getToken(ICSSParser.OPEN_BRACE, 0); }
+		public RuleBodyContext ruleBody() {
+			return getRuleContext(RuleBodyContext.class,0);
+		}
+		public TerminalNode CLOSE_BRACE() { return getToken(ICSSParser.CLOSE_BRACE, 0); }
+		public ElseClauseContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_elseClause; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).enterElseClause(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).exitElseClause(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ICSSVisitor ) return ((ICSSVisitor<? extends T>)visitor).visitElseClause(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final ElseClauseContext elseClause() throws RecognitionException {
+		ElseClauseContext _localctx = new ElseClauseContext(_ctx, getState());
+		enterRule(_localctx, 12, RULE_elseClause);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(88);
+			match(ELSE);
+			setState(89);
+			match(OPEN_BRACE);
+			setState(90);
+			ruleBody();
+			setState(91);
+			match(CLOSE_BRACE);
 			}
 		}
 		catch (RecognitionException re) {
@@ -783,6 +582,7 @@ public class ICSSParser extends Parser {
 			return getRuleContext(ExpressionContext.class,i);
 		}
 		public TerminalNode MUL() { return getToken(ICSSParser.MUL, 0); }
+		public TerminalNode DIV() { return getToken(ICSSParser.DIV, 0); }
 		public TerminalNode PLUS() { return getToken(ICSSParser.PLUS, 0); }
 		public TerminalNode MIN() { return getToken(ICSSParser.MIN, 0); }
 		public ExpressionContext(ParserRuleContext parent, int invokingState) {
@@ -813,40 +613,46 @@ public class ICSSParser extends Parser {
 		int _parentState = getState();
 		ExpressionContext _localctx = new ExpressionContext(_ctx, _parentState);
 		ExpressionContext _prevctx = _localctx;
-		int _startState = 20;
-		enterRecursionRule(_localctx, 20, RULE_expression, _p);
+		int _startState = 14;
+		enterRecursionRule(_localctx, 14, RULE_expression, _p);
 		int _la;
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
 			{
-			setState(103);
+			setState(94);
 			literal();
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(113);
+			setState(104);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,11,_ctx);
+			_alt = getInterpreter().adaptivePredict(_input,6,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(111);
+					setState(102);
 					_errHandler.sync(this);
-					switch ( getInterpreter().adaptivePredict(_input,10,_ctx) ) {
+					switch ( getInterpreter().adaptivePredict(_input,5,_ctx) ) {
 					case 1:
 						{
 						_localctx = new ExpressionContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
-						setState(105);
+						setState(96);
 						if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
-						{
-						setState(106);
-						match(MUL);
+						setState(97);
+						_la = _input.LA(1);
+						if ( !(_la==MUL || _la==DIV) ) {
+						_errHandler.recoverInline(this);
 						}
-						setState(107);
+						else {
+							if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+							_errHandler.reportMatch(this);
+							consume();
+						}
+						setState(98);
 						expression(3);
 						}
 						break;
@@ -854,9 +660,9 @@ public class ICSSParser extends Parser {
 						{
 						_localctx = new ExpressionContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
-						setState(108);
+						setState(99);
 						if (!(precpred(_ctx, 1))) throw new FailedPredicateException(this, "precpred(_ctx, 1)");
-						setState(109);
+						setState(100);
 						_la = _input.LA(1);
 						if ( !(_la==PLUS || _la==MIN) ) {
 						_errHandler.recoverInline(this);
@@ -866,16 +672,16 @@ public class ICSSParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(110);
+						setState(101);
 						expression(2);
 						}
 						break;
 					}
 					} 
 				}
-				setState(115);
+				setState(106);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,11,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,6,_ctx);
 			}
 			}
 		}
@@ -886,49 +692,6 @@ public class ICSSParser extends Parser {
 		}
 		finally {
 			unrollRecursionContexts(_parentctx);
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class ColorLiteralContext extends ParserRuleContext {
-		public TerminalNode COLOR() { return getToken(ICSSParser.COLOR, 0); }
-		public ColorLiteralContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_colorLiteral; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).enterColorLiteral(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).exitColorLiteral(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ICSSVisitor ) return ((ICSSVisitor<? extends T>)visitor).visitColorLiteral(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final ColorLiteralContext colorLiteral() throws RecognitionException {
-		ColorLiteralContext _localctx = new ColorLiteralContext(_ctx, getState());
-		enterRule(_localctx, 22, RULE_colorLiteral);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(116);
-			match(COLOR);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
 		}
 		return _localctx;
 	}
@@ -958,12 +721,12 @@ public class ICSSParser extends Parser {
 
 	public final BoolLiteralContext boolLiteral() throws RecognitionException {
 		BoolLiteralContext _localctx = new BoolLiteralContext(_ctx, getState());
-		enterRule(_localctx, 24, RULE_boolLiteral);
+		enterRule(_localctx, 16, RULE_boolLiteral);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(118);
+			setState(107);
 			_la = _input.LA(1);
 			if ( !(_la==TRUE || _la==FALSE) ) {
 			_errHandler.recoverInline(this);
@@ -973,6 +736,49 @@ public class ICSSParser extends Parser {
 				_errHandler.reportMatch(this);
 				consume();
 			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class ColorLiteralContext extends ParserRuleContext {
+		public TerminalNode COLOR() { return getToken(ICSSParser.COLOR, 0); }
+		public ColorLiteralContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_colorLiteral; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).enterColorLiteral(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).exitColorLiteral(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ICSSVisitor ) return ((ICSSVisitor<? extends T>)visitor).visitColorLiteral(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final ColorLiteralContext colorLiteral() throws RecognitionException {
+		ColorLiteralContext _localctx = new ColorLiteralContext(_ctx, getState());
+		enterRule(_localctx, 18, RULE_colorLiteral);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(109);
+			match(COLOR);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1010,11 +816,11 @@ public class ICSSParser extends Parser {
 
 	public final PercentageLiteralContext percentageLiteral() throws RecognitionException {
 		PercentageLiteralContext _localctx = new PercentageLiteralContext(_ctx, getState());
-		enterRule(_localctx, 26, RULE_percentageLiteral);
+		enterRule(_localctx, 20, RULE_percentageLiteral);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(120);
+			setState(111);
 			match(PERCENTAGE);
 			}
 		}
@@ -1053,11 +859,11 @@ public class ICSSParser extends Parser {
 
 	public final PixelLiteralContext pixelLiteral() throws RecognitionException {
 		PixelLiteralContext _localctx = new PixelLiteralContext(_ctx, getState());
-		enterRule(_localctx, 28, RULE_pixelLiteral);
+		enterRule(_localctx, 22, RULE_pixelLiteral);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(122);
+			setState(113);
 			match(PIXELSIZE);
 			}
 		}
@@ -1096,172 +902,12 @@ public class ICSSParser extends Parser {
 
 	public final ScalarLiteralContext scalarLiteral() throws RecognitionException {
 		ScalarLiteralContext _localctx = new ScalarLiteralContext(_ctx, getState());
-		enterRule(_localctx, 30, RULE_scalarLiteral);
+		enterRule(_localctx, 24, RULE_scalarLiteral);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(124);
+			setState(115);
 			match(SCALAR);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class LiteralContext extends ParserRuleContext {
-		public ColorLiteralContext colorLiteral() {
-			return getRuleContext(ColorLiteralContext.class,0);
-		}
-		public BoolLiteralContext boolLiteral() {
-			return getRuleContext(BoolLiteralContext.class,0);
-		}
-		public PercentageLiteralContext percentageLiteral() {
-			return getRuleContext(PercentageLiteralContext.class,0);
-		}
-		public PixelLiteralContext pixelLiteral() {
-			return getRuleContext(PixelLiteralContext.class,0);
-		}
-		public ScalarLiteralContext scalarLiteral() {
-			return getRuleContext(ScalarLiteralContext.class,0);
-		}
-		public VariableReferenceContext variableReference() {
-			return getRuleContext(VariableReferenceContext.class,0);
-		}
-		public LiteralContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_literal; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).enterLiteral(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).exitLiteral(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ICSSVisitor ) return ((ICSSVisitor<? extends T>)visitor).visitLiteral(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final LiteralContext literal() throws RecognitionException {
-		LiteralContext _localctx = new LiteralContext(_ctx, getState());
-		enterRule(_localctx, 32, RULE_literal);
-		try {
-			setState(132);
-			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case COLOR:
-				enterOuterAlt(_localctx, 1);
-				{
-				setState(126);
-				colorLiteral();
-				}
-				break;
-			case TRUE:
-			case FALSE:
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(127);
-				boolLiteral();
-				}
-				break;
-			case PERCENTAGE:
-				enterOuterAlt(_localctx, 3);
-				{
-				setState(128);
-				percentageLiteral();
-				}
-				break;
-			case PIXELSIZE:
-				enterOuterAlt(_localctx, 4);
-				{
-				setState(129);
-				pixelLiteral();
-				}
-				break;
-			case SCALAR:
-				enterOuterAlt(_localctx, 5);
-				{
-				setState(130);
-				scalarLiteral();
-				}
-				break;
-			case CAPITAL_IDENT:
-				enterOuterAlt(_localctx, 6);
-				{
-				setState(131);
-				variableReference();
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class VariableAssignmentContext extends ParserRuleContext {
-		public VariableReferenceContext variableReference() {
-			return getRuleContext(VariableReferenceContext.class,0);
-		}
-		public TerminalNode ASSIGNMENT_OPERATOR() { return getToken(ICSSParser.ASSIGNMENT_OPERATOR, 0); }
-		public ExpressionContext expression() {
-			return getRuleContext(ExpressionContext.class,0);
-		}
-		public TerminalNode SEMICOLON() { return getToken(ICSSParser.SEMICOLON, 0); }
-		public VariableAssignmentContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_variableAssignment; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).enterVariableAssignment(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).exitVariableAssignment(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ICSSVisitor ) return ((ICSSVisitor<? extends T>)visitor).visitVariableAssignment(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final VariableAssignmentContext variableAssignment() throws RecognitionException {
-		VariableAssignmentContext _localctx = new VariableAssignmentContext(_ctx, getState());
-		enterRule(_localctx, 34, RULE_variableAssignment);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(134);
-			variableReference();
-			setState(135);
-			match(ASSIGNMENT_OPERATOR);
-			setState(136);
-			expression(0);
-			setState(137);
-			match(SEMICOLON);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1299,11 +945,11 @@ public class ICSSParser extends Parser {
 
 	public final VariableReferenceContext variableReference() throws RecognitionException {
 		VariableReferenceContext _localctx = new VariableReferenceContext(_ctx, getState());
-		enterRule(_localctx, 36, RULE_variableReference);
+		enterRule(_localctx, 26, RULE_variableReference);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(139);
+			setState(117);
 			match(CAPITAL_IDENT);
 			}
 		}
@@ -1319,68 +965,96 @@ public class ICSSParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class IfClauseContext extends ParserRuleContext {
-		public TerminalNode IF() { return getToken(ICSSParser.IF, 0); }
-		public TerminalNode BOX_BRACKET_OPEN() { return getToken(ICSSParser.BOX_BRACKET_OPEN, 0); }
-		public ExpressionContext expression() {
-			return getRuleContext(ExpressionContext.class,0);
+	public static class LiteralContext extends ParserRuleContext {
+		public BoolLiteralContext boolLiteral() {
+			return getRuleContext(BoolLiteralContext.class,0);
 		}
-		public TerminalNode BOX_BRACKET_CLOSE() { return getToken(ICSSParser.BOX_BRACKET_CLOSE, 0); }
-		public List<BodyContext> body() {
-			return getRuleContexts(BodyContext.class);
+		public ColorLiteralContext colorLiteral() {
+			return getRuleContext(ColorLiteralContext.class,0);
 		}
-		public BodyContext body(int i) {
-			return getRuleContext(BodyContext.class,i);
+		public PercentageLiteralContext percentageLiteral() {
+			return getRuleContext(PercentageLiteralContext.class,0);
 		}
-		public TerminalNode ELSE() { return getToken(ICSSParser.ELSE, 0); }
-		public IfClauseContext(ParserRuleContext parent, int invokingState) {
+		public PixelLiteralContext pixelLiteral() {
+			return getRuleContext(PixelLiteralContext.class,0);
+		}
+		public ScalarLiteralContext scalarLiteral() {
+			return getRuleContext(ScalarLiteralContext.class,0);
+		}
+		public VariableReferenceContext variableReference() {
+			return getRuleContext(VariableReferenceContext.class,0);
+		}
+		public LiteralContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_ifClause; }
+		@Override public int getRuleIndex() { return RULE_literal; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).enterIfClause(this);
+			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).enterLiteral(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).exitIfClause(this);
+			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).exitLiteral(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ICSSVisitor ) return ((ICSSVisitor<? extends T>)visitor).visitIfClause(this);
+			if ( visitor instanceof ICSSVisitor ) return ((ICSSVisitor<? extends T>)visitor).visitLiteral(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final IfClauseContext ifClause() throws RecognitionException {
-		IfClauseContext _localctx = new IfClauseContext(_ctx, getState());
-		enterRule(_localctx, 38, RULE_ifClause);
-		int _la;
+	public final LiteralContext literal() throws RecognitionException {
+		LiteralContext _localctx = new LiteralContext(_ctx, getState());
+		enterRule(_localctx, 28, RULE_literal);
 		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(141);
-			match(IF);
-			setState(142);
-			match(BOX_BRACKET_OPEN);
-			setState(143);
-			expression(0);
-			setState(144);
-			match(BOX_BRACKET_CLOSE);
-			setState(145);
-			body();
-			setState(148);
+			setState(125);
 			_errHandler.sync(this);
-			_la = _input.LA(1);
-			if (_la==ELSE) {
+			switch (_input.LA(1)) {
+			case TRUE:
+			case FALSE:
+				enterOuterAlt(_localctx, 1);
 				{
-				setState(146);
-				match(ELSE);
-				setState(147);
-				body();
+				setState(119);
+				boolLiteral();
 				}
-			}
-
+				break;
+			case COLOR:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(120);
+				colorLiteral();
+				}
+				break;
+			case PERCENTAGE:
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(121);
+				percentageLiteral();
+				}
+				break;
+			case PIXELSIZE:
+				enterOuterAlt(_localctx, 4);
+				{
+				setState(122);
+				pixelLiteral();
+				}
+				break;
+			case SCALAR:
+				enterOuterAlt(_localctx, 5);
+				{
+				setState(123);
+				scalarLiteral();
+				}
+				break;
+			case CAPITAL_IDENT:
+				enterOuterAlt(_localctx, 6);
+				{
+				setState(124);
+				variableReference();
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1395,40 +1069,327 @@ public class ICSSParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class ElseClauseContext extends ParserRuleContext {
-		public TerminalNode ELSE() { return getToken(ICSSParser.ELSE, 0); }
-		public BodyContext body() {
-			return getRuleContext(BodyContext.class,0);
-		}
-		public ElseClauseContext(ParserRuleContext parent, int invokingState) {
+	public static class ClassSelectorContext extends ParserRuleContext {
+		public TerminalNode CLASS_IDENT() { return getToken(ICSSParser.CLASS_IDENT, 0); }
+		public ClassSelectorContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_elseClause; }
+		@Override public int getRuleIndex() { return RULE_classSelector; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).enterElseClause(this);
+			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).enterClassSelector(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).exitElseClause(this);
+			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).exitClassSelector(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ICSSVisitor ) return ((ICSSVisitor<? extends T>)visitor).visitElseClause(this);
+			if ( visitor instanceof ICSSVisitor ) return ((ICSSVisitor<? extends T>)visitor).visitClassSelector(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final ElseClauseContext elseClause() throws RecognitionException {
-		ElseClauseContext _localctx = new ElseClauseContext(_ctx, getState());
-		enterRule(_localctx, 40, RULE_elseClause);
+	public final ClassSelectorContext classSelector() throws RecognitionException {
+		ClassSelectorContext _localctx = new ClassSelectorContext(_ctx, getState());
+		enterRule(_localctx, 30, RULE_classSelector);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(127);
+			match(CLASS_IDENT);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class TagSelectorContext extends ParserRuleContext {
+		public TerminalNode LOWER_IDENT() { return getToken(ICSSParser.LOWER_IDENT, 0); }
+		public TagSelectorContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_tagSelector; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).enterTagSelector(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).exitTagSelector(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ICSSVisitor ) return ((ICSSVisitor<? extends T>)visitor).visitTagSelector(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final TagSelectorContext tagSelector() throws RecognitionException {
+		TagSelectorContext _localctx = new TagSelectorContext(_ctx, getState());
+		enterRule(_localctx, 32, RULE_tagSelector);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(129);
+			match(LOWER_IDENT);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class IdSelectorContext extends ParserRuleContext {
+		public TerminalNode ID_IDENT() { return getToken(ICSSParser.ID_IDENT, 0); }
+		public TerminalNode COLOR() { return getToken(ICSSParser.COLOR, 0); }
+		public IdSelectorContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_idSelector; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).enterIdSelector(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).exitIdSelector(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ICSSVisitor ) return ((ICSSVisitor<? extends T>)visitor).visitIdSelector(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final IdSelectorContext idSelector() throws RecognitionException {
+		IdSelectorContext _localctx = new IdSelectorContext(_ctx, getState());
+		enterRule(_localctx, 34, RULE_idSelector);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(131);
+			_la = _input.LA(1);
+			if ( !(_la==COLOR || _la==ID_IDENT) ) {
+			_errHandler.recoverInline(this);
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
+				consume();
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class SelectorContext extends ParserRuleContext {
+		public TagSelectorContext tagSelector() {
+			return getRuleContext(TagSelectorContext.class,0);
+		}
+		public IdSelectorContext idSelector() {
+			return getRuleContext(IdSelectorContext.class,0);
+		}
+		public ClassSelectorContext classSelector() {
+			return getRuleContext(ClassSelectorContext.class,0);
+		}
+		public List<TerminalNode> COMMA() { return getTokens(ICSSParser.COMMA); }
+		public TerminalNode COMMA(int i) {
+			return getToken(ICSSParser.COMMA, i);
+		}
+		public List<SelectorContext> selector() {
+			return getRuleContexts(SelectorContext.class);
+		}
+		public SelectorContext selector(int i) {
+			return getRuleContext(SelectorContext.class,i);
+		}
+		public SelectorContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_selector; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).enterSelector(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).exitSelector(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ICSSVisitor ) return ((ICSSVisitor<? extends T>)visitor).visitSelector(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final SelectorContext selector() throws RecognitionException {
+		SelectorContext _localctx = new SelectorContext(_ctx, getState());
+		enterRule(_localctx, 36, RULE_selector);
+		try {
+			int _alt;
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(136);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case LOWER_IDENT:
+				{
+				setState(133);
+				tagSelector();
+				}
+				break;
+			case COLOR:
+			case ID_IDENT:
+				{
+				setState(134);
+				idSelector();
+				}
+				break;
+			case CLASS_IDENT:
+				{
+				setState(135);
+				classSelector();
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+			setState(142);
+			_errHandler.sync(this);
+			_alt = getInterpreter().adaptivePredict(_input,9,_ctx);
+			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
+				if ( _alt==1 ) {
+					{
+					{
+					setState(138);
+					match(COMMA);
+					setState(139);
+					selector();
+					}
+					} 
+				}
+				setState(144);
+				_errHandler.sync(this);
+				_alt = getInterpreter().adaptivePredict(_input,9,_ctx);
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class RuleBodyContext extends ParserRuleContext {
+		public List<DeclarationContext> declaration() {
+			return getRuleContexts(DeclarationContext.class);
+		}
+		public DeclarationContext declaration(int i) {
+			return getRuleContext(DeclarationContext.class,i);
+		}
+		public List<IfClauseContext> ifClause() {
+			return getRuleContexts(IfClauseContext.class);
+		}
+		public IfClauseContext ifClause(int i) {
+			return getRuleContext(IfClauseContext.class,i);
+		}
+		public List<VariableAssignmentContext> variableAssignment() {
+			return getRuleContexts(VariableAssignmentContext.class);
+		}
+		public VariableAssignmentContext variableAssignment(int i) {
+			return getRuleContext(VariableAssignmentContext.class,i);
+		}
+		public RuleBodyContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_ruleBody; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).enterRuleBody(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ICSSListener ) ((ICSSListener)listener).exitRuleBody(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ICSSVisitor ) return ((ICSSVisitor<? extends T>)visitor).visitRuleBody(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final RuleBodyContext ruleBody() throws RecognitionException {
+		RuleBodyContext _localctx = new RuleBodyContext(_ctx, getState());
+		enterRule(_localctx, 38, RULE_ruleBody);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(150);
-			match(ELSE);
-			setState(151);
-			body();
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 24578L) != 0)) {
+				{
+				setState(148);
+				_errHandler.sync(this);
+				switch (_input.LA(1)) {
+				case LOWER_IDENT:
+					{
+					setState(145);
+					declaration();
+					}
+					break;
+				case IF:
+					{
+					setState(146);
+					ifClause();
+					}
+					break;
+				case CAPITAL_IDENT:
+					{
+					setState(147);
+					variableAssignment();
+					}
+					break;
+				default:
+					throw new NoViableAltException(this);
+				}
+				}
+				setState(152);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -1444,7 +1405,7 @@ public class ICSSParser extends Parser {
 
 	public boolean sempred(RuleContext _localctx, int ruleIndex, int predIndex) {
 		switch (ruleIndex) {
-		case 10:
+		case 7:
 			return expression_sempred((ExpressionContext)_localctx, predIndex);
 		}
 		return true;
@@ -1460,93 +1421,94 @@ public class ICSSParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\u0017\u009a\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001"+
+		"\u0004\u0001\u0019\u009a\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001"+
 		"\u0002\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004"+
 		"\u0002\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007"+
 		"\u0002\b\u0007\b\u0002\t\u0007\t\u0002\n\u0007\n\u0002\u000b\u0007\u000b"+
 		"\u0002\f\u0007\f\u0002\r\u0007\r\u0002\u000e\u0007\u000e\u0002\u000f\u0007"+
 		"\u000f\u0002\u0010\u0007\u0010\u0002\u0011\u0007\u0011\u0002\u0012\u0007"+
-		"\u0012\u0002\u0013\u0007\u0013\u0002\u0014\u0007\u0014\u0001\u0000\u0004"+
-		"\u0000,\b\u0000\u000b\u0000\f\u0000-\u0001\u0000\u0001\u0000\u0001\u0000"+
-		"\u0001\u0000\u0004\u00004\b\u0000\u000b\u0000\f\u00005\u0001\u0000\u0001"+
-		"\u0000\u0003\u0000:\b\u0000\u0001\u0001\u0001\u0001\u0001\u0001\u0001"+
-		"\u0002\u0001\u0002\u0001\u0002\u0003\u0002B\b\u0002\u0001\u0003\u0001"+
-		"\u0003\u0001\u0003\u0001\u0003\u0004\u0003H\b\u0003\u000b\u0003\f\u0003"+
-		"I\u0001\u0003\u0001\u0003\u0001\u0004\u0001\u0004\u0001\u0005\u0001\u0005"+
-		"\u0001\u0006\u0001\u0006\u0001\u0007\u0004\u0007U\b\u0007\u000b\u0007"+
-		"\f\u0007V\u0001\u0007\u0004\u0007Z\b\u0007\u000b\u0007\f\u0007[\u0003"+
-		"\u0007^\b\u0007\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\t\u0001"+
-		"\t\u0001\n\u0001\n\u0001\n\u0001\n\u0001\n\u0001\n\u0001\n\u0001\n\u0001"+
-		"\n\u0005\np\b\n\n\n\f\ns\t\n\u0001\u000b\u0001\u000b\u0001\f\u0001\f\u0001"+
-		"\r\u0001\r\u0001\u000e\u0001\u000e\u0001\u000f\u0001\u000f\u0001\u0010"+
-		"\u0001\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0001\u0010\u0003\u0010"+
-		"\u0085\b\u0010\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011"+
-		"\u0001\u0012\u0001\u0012\u0001\u0013\u0001\u0013\u0001\u0013\u0001\u0013"+
-		"\u0001\u0013\u0001\u0013\u0001\u0013\u0003\u0013\u0095\b\u0013\u0001\u0014"+
-		"\u0001\u0014\u0001\u0014\u0001\u0014\u0000\u0001\u0014\u0015\u0000\u0002"+
-		"\u0004\u0006\b\n\f\u000e\u0010\u0012\u0014\u0016\u0018\u001a\u001c\u001e"+
-		" \"$&(\u0000\u0002\u0001\u0000\u0014\u0015\u0001\u0000\u0005\u0006\u0098"+
-		"\u00009\u0001\u0000\u0000\u0000\u0002;\u0001\u0000\u0000\u0000\u0004A"+
-		"\u0001\u0000\u0000\u0000\u0006C\u0001\u0000\u0000\u0000\bM\u0001\u0000"+
-		"\u0000\u0000\nO\u0001\u0000\u0000\u0000\fQ\u0001\u0000\u0000\u0000\u000e"+
-		"]\u0001\u0000\u0000\u0000\u0010_\u0001\u0000\u0000\u0000\u0012d\u0001"+
-		"\u0000\u0000\u0000\u0014f\u0001\u0000\u0000\u0000\u0016t\u0001\u0000\u0000"+
-		"\u0000\u0018v\u0001\u0000\u0000\u0000\u001ax\u0001\u0000\u0000\u0000\u001c"+
-		"z\u0001\u0000\u0000\u0000\u001e|\u0001\u0000\u0000\u0000 \u0084\u0001"+
-		"\u0000\u0000\u0000\"\u0086\u0001\u0000\u0000\u0000$\u008b\u0001\u0000"+
-		"\u0000\u0000&\u008d\u0001\u0000\u0000\u0000(\u0096\u0001\u0000\u0000\u0000"+
-		"*,\u0003\u0002\u0001\u0000+*\u0001\u0000\u0000\u0000,-\u0001\u0000\u0000"+
-		"\u0000-+\u0001\u0000\u0000\u0000-.\u0001\u0000\u0000\u0000./\u0001\u0000"+
-		"\u0000\u0000/0\u0005\u0000\u0000\u00010:\u0001\u0000\u0000\u000014\u0003"+
-		"\"\u0011\u000024\u0003\u0002\u0001\u000031\u0001\u0000\u0000\u000032\u0001"+
-		"\u0000\u0000\u000045\u0001\u0000\u0000\u000053\u0001\u0000\u0000\u0000"+
-		"56\u0001\u0000\u0000\u000067\u0001\u0000\u0000\u000078\u0005\u0000\u0000"+
-		"\u00018:\u0001\u0000\u0000\u00009+\u0001\u0000\u0000\u000093\u0001\u0000"+
-		"\u0000\u0000:\u0001\u0001\u0000\u0000\u0000;<\u0003\u0004\u0002\u0000"+
-		"<=\u0003\u0006\u0003\u0000=\u0003\u0001\u0000\u0000\u0000>B\u0003\b\u0004"+
-		"\u0000?B\u0003\n\u0005\u0000@B\u0003\f\u0006\u0000A>\u0001\u0000\u0000"+
-		"\u0000A?\u0001\u0000\u0000\u0000A@\u0001\u0000\u0000\u0000B\u0005\u0001"+
-		"\u0000\u0000\u0000CG\u0005\u0010\u0000\u0000DH\u0003\u000e\u0007\u0000"+
-		"EH\u0003\"\u0011\u0000FH\u0003&\u0013\u0000GD\u0001\u0000\u0000\u0000"+
-		"GE\u0001\u0000\u0000\u0000GF\u0001\u0000\u0000\u0000HI\u0001\u0000\u0000"+
-		"\u0000IG\u0001\u0000\u0000\u0000IJ\u0001\u0000\u0000\u0000JK\u0001\u0000"+
-		"\u0000\u0000KL\u0005\u0011\u0000\u0000L\u0007\u0001\u0000\u0000\u0000"+
-		"MN\u0005\r\u0000\u0000N\t\u0001\u0000\u0000\u0000OP\u0005\u000b\u0000"+
-		"\u0000P\u000b\u0001\u0000\u0000\u0000QR\u0005\f\u0000\u0000R\r\u0001\u0000"+
-		"\u0000\u0000SU\u0003\u0010\b\u0000TS\u0001\u0000\u0000\u0000UV\u0001\u0000"+
-		"\u0000\u0000VT\u0001\u0000\u0000\u0000VW\u0001\u0000\u0000\u0000W^\u0001"+
-		"\u0000\u0000\u0000XZ\u0003&\u0013\u0000YX\u0001\u0000\u0000\u0000Z[\u0001"+
-		"\u0000\u0000\u0000[Y\u0001\u0000\u0000\u0000[\\\u0001\u0000\u0000\u0000"+
-		"\\^\u0001\u0000\u0000\u0000]T\u0001\u0000\u0000\u0000]Y\u0001\u0000\u0000"+
-		"\u0000^\u000f\u0001\u0000\u0000\u0000_`\u0003\u0012\t\u0000`a\u0005\u0013"+
-		"\u0000\u0000ab\u0003\u0014\n\u0000bc\u0005\u0012\u0000\u0000c\u0011\u0001"+
-		"\u0000\u0000\u0000de\u0005\r\u0000\u0000e\u0013\u0001\u0000\u0000\u0000"+
-		"fg\u0006\n\uffff\uffff\u0000gh\u0003 \u0010\u0000hq\u0001\u0000\u0000"+
-		"\u0000ij\n\u0002\u0000\u0000jk\u0005\u0016\u0000\u0000kp\u0003\u0014\n"+
-		"\u0003lm\n\u0001\u0000\u0000mn\u0007\u0000\u0000\u0000np\u0003\u0014\n"+
-		"\u0002oi\u0001\u0000\u0000\u0000ol\u0001\u0000\u0000\u0000ps\u0001\u0000"+
-		"\u0000\u0000qo\u0001\u0000\u0000\u0000qr\u0001\u0000\u0000\u0000r\u0015"+
-		"\u0001\u0000\u0000\u0000sq\u0001\u0000\u0000\u0000tu\u0005\n\u0000\u0000"+
-		"u\u0017\u0001\u0000\u0000\u0000vw\u0007\u0001\u0000\u0000w\u0019\u0001"+
-		"\u0000\u0000\u0000xy\u0005\b\u0000\u0000y\u001b\u0001\u0000\u0000\u0000"+
-		"z{\u0005\u0007\u0000\u0000{\u001d\u0001\u0000\u0000\u0000|}\u0005\t\u0000"+
-		"\u0000}\u001f\u0001\u0000\u0000\u0000~\u0085\u0003\u0016\u000b\u0000\u007f"+
-		"\u0085\u0003\u0018\f\u0000\u0080\u0085\u0003\u001a\r\u0000\u0081\u0085"+
-		"\u0003\u001c\u000e\u0000\u0082\u0085\u0003\u001e\u000f\u0000\u0083\u0085"+
-		"\u0003$\u0012\u0000\u0084~\u0001\u0000\u0000\u0000\u0084\u007f\u0001\u0000"+
-		"\u0000\u0000\u0084\u0080\u0001\u0000\u0000\u0000\u0084\u0081\u0001\u0000"+
-		"\u0000\u0000\u0084\u0082\u0001\u0000\u0000\u0000\u0084\u0083\u0001\u0000"+
-		"\u0000\u0000\u0085!\u0001\u0000\u0000\u0000\u0086\u0087\u0003$\u0012\u0000"+
-		"\u0087\u0088\u0005\u0017\u0000\u0000\u0088\u0089\u0003\u0014\n\u0000\u0089"+
-		"\u008a\u0005\u0012\u0000\u0000\u008a#\u0001\u0000\u0000\u0000\u008b\u008c"+
-		"\u0005\u000e\u0000\u0000\u008c%\u0001\u0000\u0000\u0000\u008d\u008e\u0005"+
-		"\u0001\u0000\u0000\u008e\u008f\u0005\u0003\u0000\u0000\u008f\u0090\u0003"+
-		"\u0014\n\u0000\u0090\u0091\u0005\u0004\u0000\u0000\u0091\u0094\u0003\u0006"+
-		"\u0003\u0000\u0092\u0093\u0005\u0002\u0000\u0000\u0093\u0095\u0003\u0006"+
-		"\u0003\u0000\u0094\u0092\u0001\u0000\u0000\u0000\u0094\u0095\u0001\u0000"+
-		"\u0000\u0000\u0095\'\u0001\u0000\u0000\u0000\u0096\u0097\u0005\u0002\u0000"+
-		"\u0000\u0097\u0098\u0003\u0006\u0003\u0000\u0098)\u0001\u0000\u0000\u0000"+
-		"\u000e-359AGIV[]oq\u0084\u0094";
+		"\u0012\u0002\u0013\u0007\u0013\u0001\u0000\u0005\u0000*\b\u0000\n\u0000"+
+		"\f\u0000-\t\u0000\u0001\u0000\u0005\u00000\b\u0000\n\u0000\f\u00003\t"+
+		"\u0000\u0001\u0000\u0001\u0000\u0001\u0001\u0001\u0001\u0001\u0001\u0001"+
+		"\u0001\u0001\u0001\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0001"+
+		"\u0002\u0001\u0003\u0001\u0003\u0001\u0004\u0001\u0004\u0001\u0004\u0004"+
+		"\u0004F\b\u0004\u000b\u0004\f\u0004G\u0001\u0004\u0001\u0004\u0001\u0005"+
+		"\u0001\u0005\u0001\u0005\u0001\u0005\u0003\u0005P\b\u0005\u0001\u0005"+
+		"\u0001\u0005\u0001\u0005\u0001\u0005\u0001\u0005\u0003\u0005W\b\u0005"+
+		"\u0001\u0006\u0001\u0006\u0001\u0006\u0001\u0006\u0001\u0006\u0001\u0007"+
+		"\u0001\u0007\u0001\u0007\u0001\u0007\u0001\u0007\u0001\u0007\u0001\u0007"+
+		"\u0001\u0007\u0001\u0007\u0005\u0007g\b\u0007\n\u0007\f\u0007j\t\u0007"+
+		"\u0001\b\u0001\b\u0001\t\u0001\t\u0001\n\u0001\n\u0001\u000b\u0001\u000b"+
+		"\u0001\f\u0001\f\u0001\r\u0001\r\u0001\u000e\u0001\u000e\u0001\u000e\u0001"+
+		"\u000e\u0001\u000e\u0001\u000e\u0003\u000e~\b\u000e\u0001\u000f\u0001"+
+		"\u000f\u0001\u0010\u0001\u0010\u0001\u0011\u0001\u0011\u0001\u0012\u0001"+
+		"\u0012\u0001\u0012\u0003\u0012\u0089\b\u0012\u0001\u0012\u0001\u0012\u0005"+
+		"\u0012\u008d\b\u0012\n\u0012\f\u0012\u0090\t\u0012\u0001\u0013\u0001\u0013"+
+		"\u0001\u0013\u0005\u0013\u0095\b\u0013\n\u0013\f\u0013\u0098\t\u0013\u0001"+
+		"\u0013\u0000\u0001\u000e\u0014\u0000\u0002\u0004\u0006\b\n\f\u000e\u0010"+
+		"\u0012\u0014\u0016\u0018\u001a\u001c\u001e \"$&\u0000\u0004\u0002\u0000"+
+		"\u0016\u0016\u0018\u0018\u0001\u0000\u0014\u0015\u0001\u0000\u0005\u0006"+
+		"\u0001\u0000\n\u000b\u0097\u0000+\u0001\u0000\u0000\u0000\u00026\u0001"+
+		"\u0000\u0000\u0000\u0004;\u0001\u0000\u0000\u0000\u0006@\u0001\u0000\u0000"+
+		"\u0000\bB\u0001\u0000\u0000\u0000\nK\u0001\u0000\u0000\u0000\fX\u0001"+
+		"\u0000\u0000\u0000\u000e]\u0001\u0000\u0000\u0000\u0010k\u0001\u0000\u0000"+
+		"\u0000\u0012m\u0001\u0000\u0000\u0000\u0014o\u0001\u0000\u0000\u0000\u0016"+
+		"q\u0001\u0000\u0000\u0000\u0018s\u0001\u0000\u0000\u0000\u001au\u0001"+
+		"\u0000\u0000\u0000\u001c}\u0001\u0000\u0000\u0000\u001e\u007f\u0001\u0000"+
+		"\u0000\u0000 \u0081\u0001\u0000\u0000\u0000\"\u0083\u0001\u0000\u0000"+
+		"\u0000$\u0088\u0001\u0000\u0000\u0000&\u0096\u0001\u0000\u0000\u0000("+
+		"*\u0003\b\u0004\u0000)(\u0001\u0000\u0000\u0000*-\u0001\u0000\u0000\u0000"+
+		"+)\u0001\u0000\u0000\u0000+,\u0001\u0000\u0000\u0000,1\u0001\u0000\u0000"+
+		"\u0000-+\u0001\u0000\u0000\u0000.0\u0003\u0002\u0001\u0000/.\u0001\u0000"+
+		"\u0000\u000003\u0001\u0000\u0000\u00001/\u0001\u0000\u0000\u000012\u0001"+
+		"\u0000\u0000\u000024\u0001\u0000\u0000\u000031\u0001\u0000\u0000\u0000"+
+		"45\u0005\u0000\u0000\u00015\u0001\u0001\u0000\u0000\u000067\u0003$\u0012"+
+		"\u000078\u0005\u0010\u0000\u000089\u0003&\u0013\u00009:\u0005\u0011\u0000"+
+		"\u0000:\u0003\u0001\u0000\u0000\u0000;<\u0003\u0006\u0003\u0000<=\u0005"+
+		"\u0013\u0000\u0000=>\u0003\u000e\u0007\u0000>?\u0005\u0012\u0000\u0000"+
+		"?\u0005\u0001\u0000\u0000\u0000@A\u0005\r\u0000\u0000A\u0007\u0001\u0000"+
+		"\u0000\u0000BC\u0003\u001a\r\u0000CE\u0005\u0017\u0000\u0000DF\u0003\u000e"+
+		"\u0007\u0000ED\u0001\u0000\u0000\u0000FG\u0001\u0000\u0000\u0000GE\u0001"+
+		"\u0000\u0000\u0000GH\u0001\u0000\u0000\u0000HI\u0001\u0000\u0000\u0000"+
+		"IJ\u0005\u0012\u0000\u0000J\t\u0001\u0000\u0000\u0000KL\u0005\u0001\u0000"+
+		"\u0000LO\u0005\u0003\u0000\u0000MP\u0003\u001a\r\u0000NP\u0003\u0010\b"+
+		"\u0000OM\u0001\u0000\u0000\u0000ON\u0001\u0000\u0000\u0000PQ\u0001\u0000"+
+		"\u0000\u0000QR\u0005\u0004\u0000\u0000RS\u0005\u0010\u0000\u0000ST\u0003"+
+		"&\u0013\u0000TV\u0005\u0011\u0000\u0000UW\u0003\f\u0006\u0000VU\u0001"+
+		"\u0000\u0000\u0000VW\u0001\u0000\u0000\u0000W\u000b\u0001\u0000\u0000"+
+		"\u0000XY\u0005\u0002\u0000\u0000YZ\u0005\u0010\u0000\u0000Z[\u0003&\u0013"+
+		"\u0000[\\\u0005\u0011\u0000\u0000\\\r\u0001\u0000\u0000\u0000]^\u0006"+
+		"\u0007\uffff\uffff\u0000^_\u0003\u001c\u000e\u0000_h\u0001\u0000\u0000"+
+		"\u0000`a\n\u0002\u0000\u0000ab\u0007\u0000\u0000\u0000bg\u0003\u000e\u0007"+
+		"\u0003cd\n\u0001\u0000\u0000de\u0007\u0001\u0000\u0000eg\u0003\u000e\u0007"+
+		"\u0002f`\u0001\u0000\u0000\u0000fc\u0001\u0000\u0000\u0000gj\u0001\u0000"+
+		"\u0000\u0000hf\u0001\u0000\u0000\u0000hi\u0001\u0000\u0000\u0000i\u000f"+
+		"\u0001\u0000\u0000\u0000jh\u0001\u0000\u0000\u0000kl\u0007\u0002\u0000"+
+		"\u0000l\u0011\u0001\u0000\u0000\u0000mn\u0005\n\u0000\u0000n\u0013\u0001"+
+		"\u0000\u0000\u0000op\u0005\b\u0000\u0000p\u0015\u0001\u0000\u0000\u0000"+
+		"qr\u0005\u0007\u0000\u0000r\u0017\u0001\u0000\u0000\u0000st\u0005\t\u0000"+
+		"\u0000t\u0019\u0001\u0000\u0000\u0000uv\u0005\u000e\u0000\u0000v\u001b"+
+		"\u0001\u0000\u0000\u0000w~\u0003\u0010\b\u0000x~\u0003\u0012\t\u0000y"+
+		"~\u0003\u0014\n\u0000z~\u0003\u0016\u000b\u0000{~\u0003\u0018\f\u0000"+
+		"|~\u0003\u001a\r\u0000}w\u0001\u0000\u0000\u0000}x\u0001\u0000\u0000\u0000"+
+		"}y\u0001\u0000\u0000\u0000}z\u0001\u0000\u0000\u0000}{\u0001\u0000\u0000"+
+		"\u0000}|\u0001\u0000\u0000\u0000~\u001d\u0001\u0000\u0000\u0000\u007f"+
+		"\u0080\u0005\f\u0000\u0000\u0080\u001f\u0001\u0000\u0000\u0000\u0081\u0082"+
+		"\u0005\r\u0000\u0000\u0082!\u0001\u0000\u0000\u0000\u0083\u0084\u0007"+
+		"\u0003\u0000\u0000\u0084#\u0001\u0000\u0000\u0000\u0085\u0089\u0003 \u0010"+
+		"\u0000\u0086\u0089\u0003\"\u0011\u0000\u0087\u0089\u0003\u001e\u000f\u0000"+
+		"\u0088\u0085\u0001\u0000\u0000\u0000\u0088\u0086\u0001\u0000\u0000\u0000"+
+		"\u0088\u0087\u0001\u0000\u0000\u0000\u0089\u008e\u0001\u0000\u0000\u0000"+
+		"\u008a\u008b\u0005\u0019\u0000\u0000\u008b\u008d\u0003$\u0012\u0000\u008c"+
+		"\u008a\u0001\u0000\u0000\u0000\u008d\u0090\u0001\u0000\u0000\u0000\u008e"+
+		"\u008c\u0001\u0000\u0000\u0000\u008e\u008f\u0001\u0000\u0000\u0000\u008f"+
+		"%\u0001\u0000\u0000\u0000\u0090\u008e\u0001\u0000\u0000\u0000\u0091\u0095"+
+		"\u0003\u0004\u0002\u0000\u0092\u0095\u0003\n\u0005\u0000\u0093\u0095\u0003"+
+		"\b\u0004\u0000\u0094\u0091\u0001\u0000\u0000\u0000\u0094\u0092\u0001\u0000"+
+		"\u0000\u0000\u0094\u0093\u0001\u0000\u0000\u0000\u0095\u0098\u0001\u0000"+
+		"\u0000\u0000\u0096\u0094\u0001\u0000\u0000\u0000\u0096\u0097\u0001\u0000"+
+		"\u0000\u0000\u0097\'\u0001\u0000\u0000\u0000\u0098\u0096\u0001\u0000\u0000"+
+		"\u0000\f+1GOVfh}\u0088\u008e\u0094\u0096";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
