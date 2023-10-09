@@ -169,7 +169,6 @@ public class ASTListener extends ICSSBaseListener {
 			currentContainer.push(operation);
 		}
 	}
-
 	@Override public void exitExpression(ICSSParser.ExpressionContext ctx) {
 		LOGGER.info("Exiting Expression");
 		if(ctx.PLUS() != null || ctx.MIN() != null || ctx.MUL() != null){
