@@ -259,7 +259,7 @@ public class ASTListener extends ICSSBaseListener {
 		LOGGER.info("Exiting IfClause");
 		ASTNode ifClause = currentContainer.pop();
 
-		// Checks the body size of the ifClause
+		// Checks the body size of the ifClause, because of bug with ElseClause
 		if (ifClause instanceof IfClause) {
 			IfClause ifClauseNode = (IfClause) ifClause;
 			int bodySize = ifClauseNode.body.size();
