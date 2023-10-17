@@ -258,6 +258,15 @@ public class ASTListener extends ICSSBaseListener {
 	@Override public void exitIfClause(ICSSParser.IfClauseContext ctx) {
 		LOGGER.info("Exiting IfClause");
 		ASTNode ifClause = currentContainer.pop();
+
+		// Checks the body size of the ifClause
+		if (ifClause instanceof IfClause) {
+			IfClause ifClauseNode = (IfClause) ifClause;
+			int bodySize = ifClauseNode.body.size();
+			System.out.println("IfClause body size: " + bodySize);
+		}
+
+		// Add ifClause to the parent node
 		currentContainer.peek().addChild(ifClause);
 	}
 
