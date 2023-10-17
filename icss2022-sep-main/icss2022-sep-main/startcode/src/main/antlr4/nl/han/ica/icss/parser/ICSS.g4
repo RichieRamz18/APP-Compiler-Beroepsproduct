@@ -74,24 +74,31 @@ ASSIGNMENT_OPERATOR: ':=';
 //ifClause: IF BOX_BRACKET_OPEN expression BOX_BRACKET_CLOSE body (ELSE body)?;
 //elseClause: ELSE body;
 
+
+//Stylesheet
 stylesheet: variableAssignment* styleRule* EOF;
+
 styleRule: selector OPEN_BRACE ruleBody CLOSE_BRACE;
 declaration: propertyName COLON expression SEMICOLON;
 propertyName: LOWER_IDENT;
 
 variableAssignment: variableReference ASSIGNMENT_OPERATOR expression+ SEMICOLON;
+variableReference: CAPITAL_IDENT;
 
 ifClause: IF BOX_BRACKET_OPEN (variableReference | boolLiteral ) BOX_BRACKET_CLOSE OPEN_BRACE ruleBody CLOSE_BRACE elseClause?;
 elseClause: ELSE OPEN_BRACE ruleBody CLOSE_BRACE;
 
-expression: literal | expression (MUL | DIV) expression | expression (PLUS | MIN) expression;
+expression: expression (MUL) expression #multiplyOperation |
+            expression (DIV) expression #divideOperation |
+            expression (PLUS) expression #addOperation |
+            expression (MIN) expression #subtractOperation |
+            literal #lit;
 
 boolLiteral: TRUE | FALSE;
 colorLiteral: COLOR;
 percentageLiteral: PERCENTAGE;
 pixelLiteral: PIXELSIZE;
 scalarLiteral: SCALAR;
-variableReference: CAPITAL_IDENT;
 literal: boolLiteral | colorLiteral | percentageLiteral | pixelLiteral | scalarLiteral | variableReference;
 
 classSelector: CLASS_IDENT;
