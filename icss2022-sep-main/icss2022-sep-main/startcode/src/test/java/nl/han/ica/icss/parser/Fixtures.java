@@ -434,11 +434,11 @@ public class Fixtures {
 				.addChild((new Declaration("color"))
 						.addChild(new VariableReference("TextColour")))
 				.addChild((new Declaration("font-size"))
-						.addChild((new AddOperation())
-								.addChild(new VariableReference("FontSize"))
-								.addChild((new SubtractOperation())
-										.addChild(new ScalarLiteral("16"))
-										.addChild(new PixelLiteral("4px"))))));
+						.addChild((new SubtractOperation())
+								.addChild(new AddOperation()
+										.addChild(new VariableReference("FontSize"))
+										.addChild(new ScalarLiteral("16")))
+								.addChild(new PixelLiteral("4px")))));
 
 
 		/*

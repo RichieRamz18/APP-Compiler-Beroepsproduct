@@ -125,73 +125,73 @@ public class ASTListener extends ICSSBaseListener {
 		LOGGER.info("Exiting PropertyName");
 	}
 
-	@Override
-	public void enterMultiplyOperation(ICSSParser.MultiplyOperationContext ctx) {
-		Operation operation = new MultiplyOperation();
-		currentContainer.peek().addChild(operation);
-		currentContainer.push(operation);
-	}
-	
-	@Override
-	public void enterMultiplyOperation(ICSSParser.MultiplyOperationContext ctx) {
-		Operation operation = new MultiplyOperation();
-		currentContainer.peek().addChild(operation);
-		currentContainer.push(operation);
-	}
-
-	/**
-	 * Pops the item at the top of the stack (MultiplyOperation)
-	 * @param ctx
-	 */
-	@Override
-	public void exitMultiplyOperation(ICSSParser.MultiplyOperationContext ctx) {
-		currentContainer.pop();
-	}
-
-	/**
-	 * Creates a new AddOperation,
-	 * adds it as a child to the item at the top of the stack
-	 * and pushes it to the stack
-	 * @param ctx
-	 */
-	@Override
-	public void enterAddOperation(ICSSParser.AddOperationContext ctx) {
-		Operation operation = new AddOperation();
-		currentContainer.peek().addChild(operation);
-		currentContainer.push(operation);
-	}
-
-	/**
-	 * Pops the item at the top of the stack (AddOperation)
-	 * @param ctx
-	 */
-	@Override
-	public void exitAddOperation(ICSSParser.AddOperationContext ctx) {
-		currentContainer.pop();
-	}
-
-	/**
-	 * Creates a new SubtractOperation,
-	 * adds it as a child to the item at the top of the stack
-	 * and pushes it to the stack
-	 * @param ctx
-	 */
-	@Override
-	public void enterSubtractOperation(ICSSParser.SubtractOperationContext ctx) {
-		Operation operation = new SubtractOperation();
-		currentContainer.peek().addChild(operation);
-		currentContainer.push(operation);
-	}
-
-	/**
-	 * Pops the item at the top of the stack (SubtractOperation)
-	 * @param ctx
-	 */
-	@Override
-	public void exitSubtractOperation(ICSSParser.SubtractOperationContext ctx) {
-		currentContainer.pop();
-	}
-
+//	@Override
+//	public void enterMultiplyOperation(ICSSParser.MultiplyOperationContext ctx) {
+//		Operation operation = new MultiplyOperation();
+//		currentContainer.peek().addChild(operation);
+//		currentContainer.push(operation);
+//	}
+//
+//	@Override
+//	public void enterMultiplyOperation(ICSSParser.MultiplyOperationContext ctx) {
+//		Operation operation = new MultiplyOperation();
+//		currentContainer.peek().addChild(operation);
+//		currentContainer.push(operation);
+//	}
+//
+//	/**
+//	 * Pops the item at the top of the stack (MultiplyOperation)
+//	 * @param ctx
+//	 */
+//	@Override
+//	public void exitMultiplyOperation(ICSSParser.MultiplyOperationContext ctx) {
+//		currentContainer.pop();
+//	}
+//
+//	/**
+//	 * Creates a new AddOperation,
+//	 * adds it as a child to the item at the top of the stack
+//	 * and pushes it to the stack
+//	 * @param ctx
+//	 */
+//	@Override
+//	public void enterAddOperation(ICSSParser.AddOperationContext ctx) {
+//		Operation operation = new AddOperation();
+//		currentContainer.peek().addChild(operation);
+//		currentContainer.push(operation);
+//	}
+//
+//	/**
+//	 * Pops the item at the top of the stack (AddOperation)
+//	 * @param ctx
+//	 */
+//	@Override
+//	public void exitAddOperation(ICSSParser.AddOperationContext ctx) {
+//		currentContainer.pop();
+//	}
+//
+//	/**
+//	 * Creates a new SubtractOperation,
+//	 * adds it as a child to the item at the top of the stack
+//	 * and pushes it to the stack
+//	 * @param ctx
+//	 */
+//	@Override
+//	public void enterSubtractOperation(ICSSParser.SubtractOperationContext ctx) {
+//		Operation operation = new SubtractOperation();
+//		currentContainer.peek().addChild(operation);
+//		currentContainer.push(operation);
+//	}
+//
+//	/**
+//	 * Pops the item at the top of the stack (SubtractOperation)
+//	 * @param ctx
+//	 */
+//	@Override
+//	public void exitSubtractOperation(ICSSParser.SubtractOperationContext ctx) {
+//		currentContainer.pop();
+//	}
+//
 
 //	@Override public void enterExpression(ICSSParser.ExpressionContext ctx) {
 //		LOGGER.info("Entering Expression");
@@ -214,29 +214,29 @@ public class ASTListener extends ICSSBaseListener {
 //		}
 //	}
 
-//	public void enterExpression(ICSSParser.ExpressionContext ctx){
-//		if (ctx.getChildCount() == 3) {
-//			Operation operation;
-//			switch (ctx.getChild(1).getText()){
-//				case "*":
-//					operation = new MultiplyOperation();
-//					break;
-//				case "+":
-//					operation = new AddOperation();
-//					break;
-//				default:
-//					operation = new SubtractOperation();
-//			}
-//			currentContainer.push(operation);
-//		}
-//	}
-//	@Override public void exitExpression(ICSSParser.ExpressionContext ctx) {
-//		LOGGER.info("Exiting Expression");
-//		if(ctx.PLUS() != null || ctx.MIN() != null || ctx.MUL() != null){
-//			ASTNode operation = currentContainer.pop();
-//			currentContainer.peek().addChild(operation);
-//		}
-//	}
+	public void enterExpression(ICSSParser.ExpressionContext ctx){
+		if (ctx.getChildCount() == 3) {
+			Operation operation;
+			switch (ctx.getChild(1).getText()){
+				case "*":
+					operation = new MultiplyOperation();
+					break;
+				case "+":
+					operation = new AddOperation();
+					break;
+				default:
+					operation = new SubtractOperation();
+			}
+			currentContainer.push(operation);
+		}
+	}
+	@Override public void exitExpression(ICSSParser.ExpressionContext ctx) {
+		LOGGER.info("Exiting Expression");
+		if(ctx.PLUS() != null || ctx.MIN() != null || ctx.MUL() != null){
+			ASTNode operation = currentContainer.pop();
+			currentContainer.peek().addChild(operation);
+		}
+	}
 
 	@Override public void enterColorLiteral(ICSSParser.ColorLiteralContext ctx) {
 		LOGGER.info("Entering ColorLiteral");
