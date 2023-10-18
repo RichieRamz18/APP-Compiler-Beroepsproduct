@@ -313,36 +313,40 @@ public class ASTListener extends ICSSBaseListener {
 	@Override public void enterIfClause(ICSSParser.IfClauseContext ctx) {
 		LOGGER.info("Entering IfClause");
 		ASTNode ifClause = new IfClause();
+		currentContainer.peek().addChild(ifClause);
 		currentContainer.push(ifClause);
 	}
 
 	@Override public void exitIfClause(ICSSParser.IfClauseContext ctx) {
 		LOGGER.info("Exiting IfClause");
-		ASTNode ifClause = currentContainer.pop();
+		//ASTNode ifClause = currentContainer.pop();
+		currentContainer.pop();
 
 		// Checks the body size of the ifClause, because of bug with ElseClause
-		if (ifClause instanceof IfClause) {
-			IfClause ifClauseNode = (IfClause) ifClause;
-			int bodySize = ifClauseNode.body.size();
-			System.out.println("IfClause body size: " + bodySize);
-		}
-
-		// Add ifClause to the parent node
-		currentContainer.peek().addChild(ifClause);
+//		if (ifClause instanceof IfClause) {
+//			IfClause ifClauseNode = (IfClause) ifClause;
+//			int bodySize = ifClauseNode.body.size();
+//			System.out.println("IfClause body size: " + bodySize);
+//		}
+//
+//		// Add ifClause to the parent node
+//		currentContainer.peek().addChild(ifClause);
 	}
 
 	@Override public void enterElseClause(ICSSParser.ElseClauseContext ctx) {
 		LOGGER.info("Entering ElseClause");
 		ASTNode elseClause = new ElseClause();
+		currentContainer.peek().addChild(elseClause);
 		currentContainer.push(elseClause);
 	}
 	@Override public void exitElseClause(ICSSParser.ElseClauseContext ctx) {
 		LOGGER.info("Exiting ElseClause");
-		ASTNode elseClause = currentContainer.pop();
+		currentContainer.pop();
+//		ASTNode elseClause = currentContainer.pop();
 
-		ASTNode ifClause = currentContainer.pop();
-		currentContainer.peek().addChild(ifClause);
-		currentContainer.peek().addChild(elseClause);
+//		ASTNode ifClause = currentContainer.pop();
+//		currentContainer.peek().addChild(ifClause);
+//		currentContainer.peek().addChild(elseClause);
 	}
 
 //	private boolean expressionHasTerminalNode(ICSSParser.ExpressionContext ctx){
