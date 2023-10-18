@@ -3,6 +3,7 @@ package nl.han.ica.icss.checker;
 import nl.han.ica.datastructures.HANLinkedList;
 import nl.han.ica.datastructures.IHANLinkedList;
 import nl.han.ica.icss.ast.*;
+import nl.han.ica.icss.ast.literals.*;
 import nl.han.ica.icss.ast.types.ExpressionType;
 
 import java.util.HashMap;
@@ -42,8 +43,29 @@ public class Checker {
     }
 
     private ExpressionType resolveExpressionType(Expression expression){
+        if(expression instanceof BoolLiteral){
+            return ExpressionType.BOOL;
+        } else if (expression instanceof ColorLiteral){
+            return ExpressionType.COLOR;
+        } else if (expression instanceof PercentageLiteral){
+            return ExpressionType.PERCENTAGE;
+        } else if (expression instanceof PixelLiteral){
+            return ExpressionType.PIXEL;
+        } else if (expression instanceof ScalarLiteral){
+            return ExpressionType.SCALAR;
+        } else if (expression instanceof Operation){
+            //return //checkOperationResultType implementeren
+        } else if (expression instanceof VariableReference){
+            if(variableTypes.getFirst().containsKey(((VariableReference) expression).name)){
+                return variableTypes.getFirst().get(((VariableReference) expression).name);
+            }
+        }
 
+        return ExpressionType.UNDEFINED;
     }
 
-    
+    private ExpressionType checkOperationResultType(Operation operation){
+        return ExpressionType.UNDEFINED;
+        //TODO: implementeren
+    }
 }
