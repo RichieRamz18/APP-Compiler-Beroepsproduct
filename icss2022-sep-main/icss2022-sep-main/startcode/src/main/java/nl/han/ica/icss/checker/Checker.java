@@ -18,8 +18,8 @@ public class Checker {
         variableTypes = new HANLinkedList<>();
         variableTypes.addFirst(new HashMap<>());
 
-
-
+        findAllVariables(ast.root);
+        //checkAST(ast.root);
     }
 
     private void checkUndefinedVariables(ASTNode toBeChecked) {

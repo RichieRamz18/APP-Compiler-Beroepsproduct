@@ -146,28 +146,64 @@ public class ASTListener extends ICSSBaseListener {
 //		}
 //	}
 
-	public void enterExpression(ICSSParser.ExpressionContext ctx){
-		if (ctx.getChildCount() == 3) {
-			Operation operation;
-			switch (ctx.getChild(1).getText()){
-				case "*":
-					operation = new MultiplyOperation();
-					break;
-				case "+":
-					operation = new AddOperation();
-					break;
-				default:
-					operation = new SubtractOperation();
-			}
-			currentContainer.push(operation);
-		}
+//	public void enterExpression(ICSSParser.ExpressionContext ctx){
+//		if (ctx.getChildCount() == 3) {
+//			Operation operation;
+//			switch (ctx.getChild(1).getText()){
+//				case "*":
+//					operation = new MultiplyOperation();
+//					break;
+//				case "+":
+//					operation = new AddOperation();
+//					break;
+//				default:
+//					operation = new SubtractOperation();
+//			}
+//			currentContainer.push(operation);
+//		}
+//	}
+//	@Override public void exitExpression(ICSSParser.ExpressionContext ctx) {
+//		LOGGER.info("Exiting Expression");
+//		if(ctx. != null || ctx.MIN() != null || ctx.MUL() != null){
+//			ASTNode operation = currentContainer.pop();
+//			currentContainer.peek().addChild(operation);
+//		}
+//	}
+
+	@Override public void enterMultiplyOperation(ICSSParser.MultiplyOperationContext ctx) {
+		LOGGER.info("Entering MultiplyOperation");
+		ASTNode multiplyOperation = new MultiplyOperation();
+		currentContainer.peek().addChild(multiplyOperation);
+		currentContainer.push(multiplyOperation);
 	}
-	@Override public void exitExpression(ICSSParser.ExpressionContext ctx) {
-		LOGGER.info("Exiting Expression");
-		if(ctx.PLUS() != null || ctx.MIN() != null || ctx.MUL() != null){
-			ASTNode operation = currentContainer.pop();
-			currentContainer.peek().addChild(operation);
-		}
+
+	@Override public void exitMultiplyOperation(ICSSParser.MultiplyOperationContext ctx) {
+		LOGGER.info("Exiting MultiplyOperation");
+		currentContainer.pop();
+	}
+
+	@Override public void enterAddOperation(ICSSParser.AddOperationContext ctx) {
+		LOGGER.info("Entering AddOperation");
+		ASTNode addOperation = new AddOperation();
+		currentContainer.peek().addChild(addOperation);
+		currentContainer.push(addOperation);
+	}
+
+	@Override public void exitAddOperation(ICSSParser.AddOperationContext ctx) {
+		LOGGER.info("Exiting AddOperation");
+		currentContainer.pop();
+	}
+
+	@Override public void enterSubtractOperation(ICSSParser.SubtractOperationContext ctx) {
+		LOGGER.info("Entering SubtractOperation");
+		ASTNode subtractOperation = new SubtractOperation();
+		currentContainer.peek().addChild(subtractOperation);
+		currentContainer.push(subtractOperation);
+	}
+
+	@Override public void exitSubtractOperation(ICSSParser.SubtractOperationContext ctx) {
+		LOGGER.info("Exiting SubtractOperation");
+		currentContainer.pop();
 	}
 
 	@Override public void enterColorLiteral(ICSSParser.ColorLiteralContext ctx) {
