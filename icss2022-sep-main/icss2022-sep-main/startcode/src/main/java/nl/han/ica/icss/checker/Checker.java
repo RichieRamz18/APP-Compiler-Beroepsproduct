@@ -19,7 +19,11 @@ public class Checker {
         variableTypes.addFirst(new HashMap<>());
 
         findAllVariables(ast.root);
-        //checkAST(ast.root);
+        checkAST(ast.root);
+    }
+
+    private void checkAST(ASTNode node){
+        checkUndefinedVariables(node);
     }
 
     private void checkUndefinedVariables(ASTNode toBeChecked) {
