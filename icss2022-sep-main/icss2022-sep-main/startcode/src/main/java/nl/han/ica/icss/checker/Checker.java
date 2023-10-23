@@ -26,12 +26,18 @@ public class Checker {
         checkUndefinedVariables(node);
     }
 
+
+    /*
+    * Function for CH01: Controleer of er geen variabelen worden gebruikt die niet gedefinieerd zijn.
+    * @param toBeChecked: The node that needs to be checked
+    * */
     private void checkUndefinedVariables(ASTNode toBeChecked) {
         if(toBeChecked.getChildren().size() != 1){
             if(toBeChecked instanceof VariableReference){
-                // if(!variableTypes.contains(toBeChecked)){
-                //     // throw new Exception("Variable not defined");
-                // }
+                String name = ((VariableReference) toBeChecked).name;
+                if(!variableTypes.getFirst().containsKey(name)) {
+                    toBeChecked.setError("Variable " + name + " is not defined and can't be used");
+                }
             }
         }
     }
