@@ -577,6 +577,25 @@ public class Fixtures {
 
 	public static AST uncheckedLevel3inputBestand() {
 		Stylesheet stylesheet = new Stylesheet();
+		/*
+		PrimaryColor := #3498db;
+		SecondaryColor := #e74c3c;
+		UseSecondaryColor := TRUE;
+		*/
+		stylesheet.addChild((new VariableAssignment())
+				.addChild(new VariableReference("PrimaryColor"))
+				.addChild(new ColorLiteral("#3498db"))
+		);
+		stylesheet.addChild((new VariableAssignment())
+				.addChild(new VariableReference("SecondaryColor"))
+				.addChild(new ColorLiteral("#e74c3c"))
+		);
+		stylesheet.addChild((new VariableAssignment())
+				.addChild(new VariableReference("UseSecondaryColor"))
+				.addChild(new BoolLiteral(true))
+		);
+
+
 		return new AST(stylesheet);
 	}
 }
