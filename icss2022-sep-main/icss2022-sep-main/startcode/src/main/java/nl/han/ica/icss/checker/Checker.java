@@ -4,6 +4,8 @@ import nl.han.ica.datastructures.HANLinkedList;
 import nl.han.ica.datastructures.IHANLinkedList;
 import nl.han.ica.icss.ast.*;
 import nl.han.ica.icss.ast.literals.*;
+import nl.han.ica.icss.ast.operations.AddOperation;
+import nl.han.ica.icss.ast.operations.SubtractOperation;
 import nl.han.ica.icss.ast.types.ExpressionType;
 
 import java.util.HashMap;
@@ -27,7 +29,9 @@ public class Checker {
     }
 
     /*
-    * Function for CH01: Controleer of er geen variabelen worden gebruikt die niet gedefinieerd zijn.
+    * Function for CH01:
+    * "Controleer of er geen variabelen worden gebruikt die niet gedefinieerd zijn."
+    *
     * @param toBeChecked: The node that needs to be checked
     * */
     private void checkUndefinedVariables(ASTNode toBeChecked) {
@@ -40,6 +44,42 @@ public class Checker {
             }
         }
     }
+
+    /*
+     * Function for CH02:
+     * "Controleer of de operanden van de operaties plus en min van gelijke type zijn.
+     * Je mag geen pixels bij percentages optellen bijvoorbeeld.
+     * Controleer dat bij vermenigvuldigen minimaal een operand een scalaire waarde is."
+     *
+     * @param toBeChecked: The node that needs to be checked
+     * */
+    private void checkOperationTypes(ASTNode toBeChecked) {
+        if(toBeChecked.getChildren().size() != 1){
+            if(toBeChecked instanceof AddOperation || toBeChecked instanceof SubtractOperation){
+                if (((Operation) toBeChecked).lhs instanceof VariableReference){
+                    if (variableTypes.getFirst().containsKey(((VariableReference) ((Operation) toBeChecked).lhs).name)) {
+                        if (variableTypes.getFirst().get(((VariableReference) ((Operation) toBeChecked).lhs).name) != resolveExpressionType(((Operation) toBeChecked).rhs)) {
+                            toBeChecked.setError("The operand types must be of the same type!");
+                        }
+                    }
+                } else if (((Operation) toBeChecked).rhs instanceof VariableReference) {
+                    if (variableTypes.getFirst().containsKey(((VariableReference) ((Operation) toBeChecked).rhs).name)) {
+
+                    }
+                }
+            }
+        }
+    }
+
+    /*
+     * Function for CH02:
+     * "Controleer of de operanden van de operaties plus en min van gelijke type zijn.
+     * Je mag geen pixels bij percentages optellen bijvoorbeeld.
+     * Controleer dat bij vermenigvuldigen minimaal een operand een scalaire waarde is."
+     *
+     * @param toBeChecked: The node that needs to be checked
+     * */
+
 
 
     private void findAllVariables(ASTNode toBeFound){
