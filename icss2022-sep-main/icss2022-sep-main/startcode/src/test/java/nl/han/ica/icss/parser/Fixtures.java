@@ -595,6 +595,31 @@ public class Fixtures {
 				.addChild(new BoolLiteral(true))
 		);
 
+		/*
+		body {
+    		background-color: #ffffff;
+    		color: PrimaryColor;
+    		font-size: 16px;
+		}
+		*/
+		stylesheet.addChild((new Stylerule())
+				.addChild(new TagSelector("body"))
+				.addChild((new Declaration("background-color"))
+						.addChild(new ColorLiteral("#ffffff")))
+				.addChild((new Declaration("color"))
+						.addChild(new VariableReference("PrimaryColor")))
+				.addChild((new Declaration("font-size"))
+						.addChild(new PixelLiteral("16px")))
+		);
+		/*
+		h1 {
+			font-size: 24px;
+			color: SecondaryColor;
+			margin-top: 20px;
+		}
+		*/
+		
+
 
 		return new AST(stylesheet);
 	}
