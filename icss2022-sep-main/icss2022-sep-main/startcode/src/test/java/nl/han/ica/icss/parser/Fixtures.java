@@ -654,6 +654,29 @@ public class Fixtures {
 				.addChild((new Declaration("padding"))
 						.addChild(new PixelLiteral("10px")));
 
+		/*
+		* .menu-item {
+    		color: PrimaryColor;
+    		padding: 5px;
+		}
+		*/
+		stylesheet.addChild(new Stylerule())
+				.addChild((new ClassSelector(".menu-item"))
+						.addChild((new Declaration("color"))
+								.addChild(new VariableReference("PrimaryColor"))))
+						.addChild((new Declaration("padding"))
+								.addChild(new PixelLiteral("5px")));
+
+		/*
+		.footer {
+    		background-color: PrimaryColor;
+    		color: #ffffff;
+    		padding: 20px;
+		}
+		 */
+
+		
+
 		return new AST(stylesheet);
 	}
 }
