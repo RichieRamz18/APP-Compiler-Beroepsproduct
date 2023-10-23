@@ -125,50 +125,7 @@ public class ASTListener extends ICSSBaseListener {
 		LOGGER.info("Exiting PropertyName");
 	}
 
-//	@Override public void enterExpression(ICSSParser.ExpressionContext ctx) {
-//		LOGGER.info("Entering Expression");
-//		if(ctx.MIN() != null){
-//			SubtractOperation subtractOperation = new SubtractOperation();
-//			this.currentContainer.peek().addChild(subtractOperation);
-//			this.currentContainer.push(subtractOperation);
-//			return;
-//		}if(ctx.MUL() != null){
-//			MultiplyOperation multiplyOperation = new MultiplyOperation();
-//			this.currentContainer.peek().addChild(multiplyOperation);
-//			this.currentContainer.push(multiplyOperation);
-//			return;
-//		}
-//		if(ctx.PLUS() != null){
-//			AddOperation addOperation = new AddOperation();
-//			this.currentContainer.peek().addChild(addOperation);
-//			this.currentContainer.push(addOperation);
-//			return;
-//		}
-//	}
 
-//	public void enterExpression(ICSSParser.ExpressionContext ctx){
-//		if (ctx.getChildCount() == 3) {
-//			Operation operation;
-//			switch (ctx.getChild(1).getText()){
-//				case "*":
-//					operation = new MultiplyOperation();
-//					break;
-//				case "+":
-//					operation = new AddOperation();
-//					break;
-//				default:
-//					operation = new SubtractOperation();
-//			}
-//			currentContainer.push(operation);
-//		}
-//	}
-//	@Override public void exitExpression(ICSSParser.ExpressionContext ctx) {
-//		LOGGER.info("Exiting Expression");
-//		if(ctx. != null || ctx.MIN() != null || ctx.MUL() != null){
-//			ASTNode operation = currentContainer.pop();
-//			currentContainer.peek().addChild(operation);
-//		}
-//	}
 
 	@Override public void enterMultiplyOperation(ICSSParser.MultiplyOperationContext ctx) {
 		LOGGER.info("Entering MultiplyOperation");
@@ -316,17 +273,5 @@ public class ASTListener extends ICSSBaseListener {
 //		currentContainer.peek().addChild(ifClause);
 //		currentContainer.peek().addChild(elseClause);
 	}
-
-//	private boolean expressionHasTerminalNode(ICSSParser.ExpressionContext ctx){
-//		return ctx.PLUS() != null || ctx.MIN() != null || ctx.MUL() != null;
-//	}
-//	@Override public void enterEveryRule(ParserRuleContext ctx) { }
-//
-//	@Override public void exitEveryRule(ParserRuleContext ctx) { }
-
-//	@Override
-//	public void enterStyleSheet() {
-//
-//	}
 
 }
