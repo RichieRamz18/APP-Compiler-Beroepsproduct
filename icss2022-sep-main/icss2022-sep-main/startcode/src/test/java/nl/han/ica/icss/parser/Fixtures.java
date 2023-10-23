@@ -626,8 +626,35 @@ public class Fixtures {
 						.addChild(new VariableReference("SecondaryColor")))
 				.addChild((new Declaration("margin-top"))
 						.addChild(new PixelLiteral("20px")));
-
+		/*
+		.button {
+    		background-color: PrimaryColor;
+     			if[UseSecondaryColor] {
+        			background-color: SecondaryColor;
+     			} else {
+        			background-color: #000000;
+     			}
+   	 		color: #ffffff;
+    		padding: 10px;
+		}
+		 */
+		stylesheet.addChild(new Stylerule())
+				.addChild(new ClassSelector(".button"))
+				.addChild((new Declaration("background-color"))
+						.addChild(new VariableReference("PrimaryColor")))
+				.addChild((new IfClause())
+						.addChild(new VariableReference("UseSecondaryColor"))
+						.addChild((new Declaration("background-color"))
+								.addChild(new VariableReference("SecondaryColor")))
+						.addChild((new ElseClause())
+								.addChild(new Declaration("background-color"))
+								.addChild(new ColorLiteral("#000000"))))
+				.addChild((new Declaration("color"))
+						.addChild(new ColorLiteral("#ffffff")))
+				.addChild((new Declaration("padding"))
+						.addChild(new PixelLiteral("10px")));
 
 		return new AST(stylesheet);
 	}
 }
+
