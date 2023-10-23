@@ -26,6 +26,8 @@ public class Checker {
 
     private void checkAST(ASTNode node){
         checkUndefinedVariables(node);
+        //checkOperationTypes(node); TO DO: implementeren
+        checkNoColorsInOperation(node);
     }
 
     /*
