@@ -72,13 +72,32 @@ public class Checker {
     }
 
     /*
-     * Function for CH02:
-     * "Controleer of de operanden van de operaties plus en min van gelijke type zijn.
-     * Je mag geen pixels bij percentages optellen bijvoorbeeld.
-     * Controleer dat bij vermenigvuldigen minimaal een operand een scalaire waarde is."
+     * Function for CH03:
+     * "Controleer of er geen kleuren worden gebruikt in operaties (plus, min of keer)."
+     * Checks if either the left or right side of an operation is a Colorliteral
+     * or VariableReference with ExpressionType color, else sets an error.
      *
      * @param toBeChecked: The node that needs to be checked
      * */
+    private void checkNoColorsInOperation(ASTNode toBeChecked){
+        if (toBeChecked.getChildren().size() != 1){
+            if (toBeChecked instanceof Operation){
+                if (((Operation) toBeChecked).lhs instanceof VariableReference) {
+                    if (variableTypes.getFirst().get(((VariableReference) ((Operation) toBeChecked).lhs).name) == ExpressionType.COLOR) {
+                        toBeChecked.setError("Colors can't be used in operations!");
+                    }
+                }
+                if (((Operation) toBeChecked).rhs instanceof VariableReference) {
+                    if (variableTypes.getFirst().get(((VariableReference) ((Operation) toBeChecked).rhs).name) == ExpressionType.COLOR) {
+                        toBeChecked.setError("Colors can't be used in operations!");
+                    }
+                }
+                if (((Operation) toBeChecked).lhs instanceof ColorLiteral || ((Operation) toBeChecked).rhs instanceof ColorLiteral) {
+                    toBeChecked.setError("Colors can't be used in operations!");
+                }
+            }
+        }
+    }
 
 
 
