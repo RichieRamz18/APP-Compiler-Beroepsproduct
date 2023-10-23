@@ -9,8 +9,5 @@
         <module name="icsstool" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="icsstool" target="13" />
-    </bytecodeTargetLevel>
   </component>
 </project>

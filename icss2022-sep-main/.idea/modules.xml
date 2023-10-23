@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/icss2022-sep-main.iml" filepath="$PROJECT_DIR$/.idea/icss2022-sep-main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/icss2022-sep-main/startcode/icsstool.iml" filepath="$PROJECT_DIR$/icss2022-sep-main/startcode/icsstool.iml" />
     </modules>
   </component>
 </project>
