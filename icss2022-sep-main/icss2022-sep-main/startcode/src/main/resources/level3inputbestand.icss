@@ -25,11 +25,6 @@ h1 {
     padding: 10px;
 }
 
-.menu-item {
-    color: PrimaryColor;
-    padding: 5px;
-}
-
 .footer {
     background-color: PrimaryColor;
     color: #ffffff;

@@ -618,14 +618,15 @@ public class Fixtures {
 			margin-top: 20px;
 		}
 		*/
-		stylesheet.addChild((new Stylerule()))
+		stylesheet.addChild((new Stylerule())
 				.addChild(new TagSelector("h1"))
 				.addChild((new Declaration("font-size"))
 						.addChild(new PixelLiteral("24px")))
 				.addChild((new Declaration("color"))
 						.addChild(new VariableReference("SecondaryColor")))
 				.addChild((new Declaration("margin-top"))
-						.addChild(new PixelLiteral("20px")));
+						.addChild(new PixelLiteral("20px")))
+		);
 		/*
 		.button {
     		background-color: PrimaryColor;
@@ -638,34 +639,25 @@ public class Fixtures {
     		padding: 10px;
 		}
 		 */
-		stylesheet.addChild(new Stylerule())
+		stylesheet.addChild((new Stylerule())
 				.addChild(new ClassSelector(".button"))
+
 				.addChild((new Declaration("background-color"))
 						.addChild(new VariableReference("PrimaryColor")))
+
 				.addChild((new IfClause())
-						.addChild(new VariableReference("UseSecondaryColor"))
-						.addChild((new Declaration("background-color"))
-								.addChild(new VariableReference("SecondaryColor")))
-						.addChild((new ElseClause())
-								.addChild(new Declaration("background-color"))
-								.addChild(new ColorLiteral("#000000"))))
+								.addChild(new VariableReference("UseSecondaryColor"))
+								.addChild((new Declaration("background-color")
+										.addChild(new VariableReference("SecondaryColor"))))
+								.addChild((new ElseClause())
+										.addChild((new Declaration("background-color")
+												.addChild(new ColorLiteral("#000000"))))))
 				.addChild((new Declaration("color"))
 						.addChild(new ColorLiteral("#ffffff")))
-				.addChild((new Declaration("padding"))
-						.addChild(new PixelLiteral("10px")));
 
-		/*
-		* .menu-item {
-    		color: PrimaryColor;
-    		padding: 5px;
-		}
-		*/
-		stylesheet.addChild(new Stylerule())
-				.addChild((new ClassSelector(".menu-item"))
-						.addChild((new Declaration("color"))
-								.addChild(new VariableReference("PrimaryColor"))))
-						.addChild((new Declaration("padding"))
-								.addChild(new PixelLiteral("5px")));
+				.addChild((new Declaration("padding"))
+						.addChild(new PixelLiteral("10px")))
+		);
 
 		/*
 		.footer {
@@ -674,15 +666,20 @@ public class Fixtures {
     		padding: 20px;
 		}
 		 */
-		stylesheet.addChild(new Stylerule())
-				.addChild(new ClassSelector(".footer"))
-					.addChild(new Declaration("background-color")
-							.addChild(new VariableReference("PrimaryColor")))
-					.addChild(new Declaration("color")
-							.addChild(new ColorLiteral("#ffffff")))
-					.addChild(new Declaration("padding")
-							.addChild(new PixelLiteral("20px")));
 
+		stylesheet.addChild((new Stylerule())
+				.addChild(new ClassSelector(".footer"))
+
+				.addChild((new Declaration("background-color"))
+						.addChild(new VariableReference("PrimaryColor"))
+				)
+				.addChild((new Declaration("color"))
+						.addChild(new ColorLiteral("#ffffff"))
+				)
+				.addChild((new Declaration("padding"))
+						.addChild(new PixelLiteral("20px"))
+				)
+		);
 		return new AST(stylesheet);
 	}
 }
