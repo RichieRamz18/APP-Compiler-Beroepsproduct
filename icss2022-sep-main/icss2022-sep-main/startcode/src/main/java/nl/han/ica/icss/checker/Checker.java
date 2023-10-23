@@ -26,7 +26,6 @@ public class Checker {
         checkUndefinedVariables(node);
     }
 
-
     /*
     * Function for CH01: Controleer of er geen variabelen worden gebruikt die niet gedefinieerd zijn.
     * @param toBeChecked: The node that needs to be checked
