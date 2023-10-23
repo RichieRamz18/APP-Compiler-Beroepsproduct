@@ -674,8 +674,14 @@ public class Fixtures {
     		padding: 20px;
 		}
 		 */
-
-		
+		stylesheet.addChild(new Stylerule())
+				.addChild(new ClassSelector(".footer"))
+					.addChild(new Declaration("background-color")
+							.addChild(new VariableReference("PrimaryColor")))
+					.addChild(new Declaration("color")
+							.addChild(new ColorLiteral("#ffffff")))
+					.addChild(new Declaration("padding")
+							.addChild(new PixelLiteral("20px")));
 
 		return new AST(stylesheet);
 	}
