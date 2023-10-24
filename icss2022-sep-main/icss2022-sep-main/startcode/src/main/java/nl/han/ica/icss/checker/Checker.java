@@ -114,13 +114,26 @@ public class Checker {
 
     /*
      * Function for CH05:
-     * "Controleer of er geen kleuren worden gebruikt in operaties (plus, min of keer)."
-     * Checks if either the left or right side of an operation is a Colorliteral
-     * or VariableReference with ExpressionType color, else sets an error.
+     * "Controleer of de conditie bij een if-statement van het type boolean is"
      *
      * @param toBeChecked: The node that needs to be checked
      * */
-    
+    private void checkIfConditionIsBoolean(ASTNode toBeChecked){
+        if (toBeChecked.getChildren().size() != 1 ){
+            if (toBeChecked instanceof IfClause){
+                if (((IfClause) toBeChecked).getConditionalExpression() instanceof VariableReference) {
+                    if (variableTypes.getFirst().containsKey(((VariableReference) ((IfClause) toBeChecked).getConditionalExpression()).name)) {
+                        if (variableTypes.getFirst().get(((VariableReference) ((IfClause) toBeChecked).getConditionalExpression()).name) != ExpressionType.BOOL) {
+                            toBeChecked.setError("The variable in the if-statement must be of type boolean!");
+                        }
+                    }
+                } else if (!(((IfClause) toBeChecked).getConditionalExpression() instanceof BoolLiteral)) {
+                    toBeChecked.setError("The if-statement must be of type boolean!");
+                }
+            }
+        }
+    }
+
 
 
     private void findAllVariables(ASTNode toBeFound){
