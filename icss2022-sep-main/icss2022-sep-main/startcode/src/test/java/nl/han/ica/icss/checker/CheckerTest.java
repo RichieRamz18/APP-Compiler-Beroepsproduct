@@ -21,12 +21,51 @@ class CheckerTest {
         return charStream.toString().replaceAll("\r\n", "\n");
     }
 
+    /* First all the level files, which are correct, are tested
+    *
+    */
     @Test
-    void testCheckCH01() throws IOException {
+    void testLevel0PassesCheckerSuccesfully() throws IOException {
         Pipeline pipeline = new Pipeline();
-        pipeline.parseString(this.readFile("CH01testbestand.icss"));
+        pipeline.parseString(this.readFile("level0.icss"));
         boolean success = pipeline.check();
         assertTrue(success);
     }
+
+    @Test
+    void testLevel0PassesCheckerSuccesfully() throws IOException {
+        Pipeline pipeline = new Pipeline();
+        pipeline.parseString(this.readFile("level0.icss"));
+        boolean success = pipeline.check();
+        assertTrue(success);
+    }
+
+    @Test
+    void testLevel0PassesCheckerSuccesfully() throws IOException {
+        Pipeline pipeline = new Pipeline();
+        pipeline.parseString(this.readFile("level0.icss"));
+        boolean success = pipeline.check();
+        assertTrue(success);
+    }
+
+    @Test
+    void testLevel0PassesCheckerSuccesfully() throws IOException {
+        Pipeline pipeline = new Pipeline();
+        pipeline.parseString(this.readFile("level0.icss"));
+        boolean success = pipeline.check();
+        assertTrue(success);
+    }
+
+    @Test
+    void testCheckCH01() throws IOException {
+        Pipeline pipeline = new Pipeline();
+        Checker checker = new Checker();
+
+        pipeline.parseString(this.readFile("CH01testbestand.icss"));
+        boolean success = pipeline.check();
+        assertFalse(success, "The checker should fail on CH01testbestand.icss");
+    }
+
+
 
 }
