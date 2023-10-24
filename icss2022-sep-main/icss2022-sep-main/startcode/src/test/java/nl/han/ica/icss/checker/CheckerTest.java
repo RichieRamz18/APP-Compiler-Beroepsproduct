@@ -30,7 +30,7 @@ class CheckerTest {
     }
 
     @BeforeEach
-    public void setUpStreams(){
+    public void setUpStreams() {
         System.setOut(new PrintStream(outputContent));
         System.setErr(new PrintStream(errorContent));
         pipeline = new Pipeline();
@@ -38,14 +38,14 @@ class CheckerTest {
     }
 
     @AfterEach
-    public void restoreStreams(){
+    public void restoreStreams() {
         System.setOut(originalOutput);
         System.setErr(originalError);
     }
 
     /* First all the level files, which have correct semantics, are tested
-    *  Then the files with incorrect semantics are tested
-    */
+     *  Then the files with incorrect semantics are tested
+     */
     @Test
     void testLevel0PassesCheckerSuccesfully() throws IOException {
         Pipeline pipeline = new Pipeline();
@@ -81,19 +81,36 @@ class CheckerTest {
     @Test
     void testCheckCH01() throws IOException {
         // Read file and parse it
-        String testFile = this.readFile("CH01testbestand.icss");
+        String testFile = this.readFile("CH01testbestand2.icss");
         pipeline.parseString(testFile);
 
         // Execute checkUndefinedVariables-function on AST
         ASTNode rootNode = pipeline.getAST().root;
         checker.checkUndefinedVariables(rootNode);
-
-        String consoleOutput = outputContent.toString();
-        String errorOutput = errorContent.toString();
-
-        assertTrue(errorOutput.contains("Variable a is not defined and can't be used"), "The checker should give an error on line 1");
+        // Check if the error is correct
+        ASTNode nodeWithExpectedError = findNodeWithExpectedError(rootNode, "Variable LankColor is not defined and can't be used");
+        assertNotNull(nodeWithExpectedError, "The checker should give an error on line 1");
+        assertTrue(nodeWithExpectedError.hasError(), "Error should be set for specific node");
     }
 
 
+    /*
+     * Recursive method that tries to find an error with the expected error message among the nodes
+     * */
+    private ASTNode findNodeWithExpectedError(ASTNode node, String expectedError) {
+        if (node.hasError() && node.getError().equals(expectedError)) {
+            return node;
+        } else {
+            for (ASTNode child : node.getChildren()) {
+                ASTNode result = findNodeWithExpectedError(child, expectedError);
+                if (result != null) {
+                    return result;
+                }
+            }
+        }
+        return null;
+    }
+
 
 }
+
