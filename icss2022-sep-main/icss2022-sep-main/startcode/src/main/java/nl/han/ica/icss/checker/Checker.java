@@ -28,6 +28,9 @@ public class Checker {
         checkUndefinedVariables(node);
         //checkOperationTypes(node); TO DO: implementeren
         checkNoColorsInOperation(node);
+        checkIfConditionIsBoolean(node);
+
+        node.getChildren().forEach(this::checkAST);
     }
 
     /*
@@ -132,6 +135,16 @@ public class Checker {
                 }
             }
         }
+    }
+
+    /*
+     * Function for CH06:
+     * "Controleer of variabelen enkel binnen hun scope gebruikt worden"
+     *
+     * @param toBeChecked: The node that needs to be checked
+     * */
+    private void checkVariableScope(ASTNode toBeChecked){
+        //TO DO: implementeren
     }
 
 
