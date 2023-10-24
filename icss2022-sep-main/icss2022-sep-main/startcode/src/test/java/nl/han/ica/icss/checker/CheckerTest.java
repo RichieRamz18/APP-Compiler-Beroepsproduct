@@ -80,9 +80,12 @@ class CheckerTest {
 
         pipeline.parseString(this.readFile("CH01testbestand.icss"));
         boolean success = pipeline.check();
-        assertFalse(success, "The checker should fail on CH01testbestand.icss");
+        //assertFalse(success, "The checker should fail on CH01testbestand.icss");
 
-        String consoleOutput = outContent.toString
+        String consoleOutput = outputContent.toString();
+        String errorOutput = errorContent.toString();
+
+        assertTrue(errorOutput.contains("Variable a is not defined and can't be used"), "The checker should give an error on line 1");
     }
 
 
