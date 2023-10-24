@@ -21,8 +21,8 @@ class CheckerTest {
         return charStream.toString().replaceAll("\r\n", "\n");
     }
 
-    /* First all the level files, which are correct, are tested
-    *
+    /* First all the level files, which have correct semantics, are tested
+    *  Then the files with incorrect semantics are tested
     */
     @Test
     void testLevel0PassesCheckerSuccesfully() throws IOException {
@@ -33,25 +33,25 @@ class CheckerTest {
     }
 
     @Test
-    void testLevel0PassesCheckerSuccesfully() throws IOException {
+    void testLevel1PassesCheckerSuccesfully() throws IOException {
         Pipeline pipeline = new Pipeline();
-        pipeline.parseString(this.readFile("level0.icss"));
+        pipeline.parseString(this.readFile("level1.icss"));
         boolean success = pipeline.check();
         assertTrue(success);
     }
 
     @Test
-    void testLevel0PassesCheckerSuccesfully() throws IOException {
+    void testLevel2PassesCheckerSuccesfully() throws IOException {
         Pipeline pipeline = new Pipeline();
-        pipeline.parseString(this.readFile("level0.icss"));
+        pipeline.parseString(this.readFile("level2.icss"));
         boolean success = pipeline.check();
         assertTrue(success);
     }
 
     @Test
-    void testLevel0PassesCheckerSuccesfully() throws IOException {
+    void testLevel3PassesCheckerSuccesfully() throws IOException {
         Pipeline pipeline = new Pipeline();
-        pipeline.parseString(this.readFile("level0.icss"));
+        pipeline.parseString(this.readFile("level3.icss"));
         boolean success = pipeline.check();
         assertTrue(success);
     }
