@@ -3,6 +3,7 @@ package nl.han.ica.icss.checker;
 import nl.han.ica.icss.Pipeline;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -29,6 +30,12 @@ class CheckerTest {
     public void setUpStreams(){
         System.setOut(new PrintStream(outputContent));
         System.setErr(new PrintStream(errorContent));
+    }
+
+    @AfterEach
+    public void restoreStreams(){
+        System.setOut(originalOutput);
+        System.setErr(originalError);
     }
 
     /* First all the level files, which have correct semantics, are tested
