@@ -17,6 +17,8 @@ class CheckerTest {
     private final ByteArrayOutputStream errorContent = new ByteArrayOutputStream();
     private final PrintStream originalOutput = System.out;
     private final PrintStream originalError = System.err;
+    private Pipeline pipeline;
+    private Checker checker;
 
 
     private String readFile(String resource) throws IOException {
@@ -30,6 +32,8 @@ class CheckerTest {
     public void setUpStreams(){
         System.setOut(new PrintStream(outputContent));
         System.setErr(new PrintStream(errorContent));
+        pipeline = new Pipeline();
+        checker = new Checker();
     }
 
     @AfterEach
