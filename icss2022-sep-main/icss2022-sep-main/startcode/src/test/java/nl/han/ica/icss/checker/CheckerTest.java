@@ -75,7 +75,7 @@ class CheckerTest {
         Pipeline pipeline = new Pipeline();
         pipeline.parseString(this.readFile("level3.icss"));
         boolean success = pipeline.check();
-        assertTrue(success);
+        assertTrue(success, "The checker should not give any errors");
     }
 
     @Test
