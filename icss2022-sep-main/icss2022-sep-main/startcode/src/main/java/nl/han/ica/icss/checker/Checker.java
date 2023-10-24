@@ -101,6 +101,26 @@ public class Checker {
         }
     }
 
+    /*
+     * Function for CH04:
+     * "Controleer of er geen kleuren worden gebruikt in operaties (plus, min of keer)."
+     * Checks if either the left or right side of an operation is a Colorliteral
+     * or VariableReference with ExpressionType color, else sets an error.
+     *
+     * @param toBeChecked: The node that needs to be checked
+     * */
+    //TO Do: implementeren
+
+
+    /*
+     * Function for CH05:
+     * "Controleer of er geen kleuren worden gebruikt in operaties (plus, min of keer)."
+     * Checks if either the left or right side of an operation is a Colorliteral
+     * or VariableReference with ExpressionType color, else sets an error.
+     *
+     * @param toBeChecked: The node that needs to be checked
+     * */
+    
 
 
     private void findAllVariables(ASTNode toBeFound){
