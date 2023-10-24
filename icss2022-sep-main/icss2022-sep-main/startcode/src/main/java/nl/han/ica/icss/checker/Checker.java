@@ -39,7 +39,7 @@ public class Checker {
     *
     * @param toBeChecked: The node that needs to be checked
     * */
-    private void checkUndefinedVariables(ASTNode toBeChecked) {
+    protected void checkUndefinedVariables(ASTNode toBeChecked) {
         if(toBeChecked.getChildren().size() != 1){
             if(toBeChecked instanceof VariableReference){
                 String name = ((VariableReference) toBeChecked).name;

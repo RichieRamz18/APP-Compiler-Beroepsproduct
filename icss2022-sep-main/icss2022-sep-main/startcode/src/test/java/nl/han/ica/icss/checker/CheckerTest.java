@@ -1,6 +1,7 @@
 package nl.han.ica.icss.checker;
 
 import nl.han.ica.icss.Pipeline;
+import nl.han.ica.icss.ast.ASTNode;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.junit.jupiter.api.AfterEach;
@@ -79,12 +80,13 @@ class CheckerTest {
 
     @Test
     void testCheckCH01() throws IOException {
-        Pipeline pipeline = new Pipeline();
-        Checker checker = new Checker();
+        // Read file and parse it
+        String testFile = this.readFile("CH01testbestand.icss");
+        pipeline.parseString(testFile);
 
-        pipeline.parseString(this.readFile("CH01testbestand.icss"));
-        boolean success = pipeline.check();
-        //assertFalse(success, "The checker should fail on CH01testbestand.icss");
+        // Execute checkUndefinedVariables-function on AST
+        ASTNode rootNode = pipeline.getAST().root;
+        checker.checkUndefinedVariables(rootNode);
 
         String consoleOutput = outputContent.toString();
         String errorOutput = errorContent.toString();
