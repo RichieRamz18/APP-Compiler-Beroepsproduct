@@ -106,14 +106,18 @@ public class Checker {
 
     /*
      * Function for CH04:
-     * "Controleer of er geen kleuren worden gebruikt in operaties (plus, min of keer)."
-     * Checks if either the left or right side of an operation is a Colorliteral
-     * or VariableReference with ExpressionType color, else sets an error.
+     * "Controleer of bij declaraties het type van de value klopt met de property.
+     * Declaraties zoals width: #ff0000 of color: 12px zijn natuurlijk onzin."
      *
      * @param toBeChecked: The node that needs to be checked
      * */
-    //TO Do: implementeren
-
+    private void checkIfDeclarationValueMatchesProperty(ASTNode toBeChecked){
+        if (toBeChecked.getChildren().size() != 1){
+            if (toBeChecked instanceof Declaration) {
+                if (((Declaration) toBeChecked).property.name.equals(AllowedAttributes.COLOR.attribute))
+            }
+        }
+    }
 
     /*
      * Function for CH05:
@@ -143,6 +147,11 @@ public class Checker {
      *
      * @param toBeChecked: The node that needs to be checked
      * */
+    private void checkIfVariablesAreUsedInScope(ASTNode toBeChecked){
+        if (toBeChecked.getChildren().size() != 1){
+            
+        }
+    }
     private void checkVariableScope(ASTNode toBeChecked){
         //TO DO: implementeren
     }
