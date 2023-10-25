@@ -32,26 +32,13 @@ public class Checker {
     }
 
     private void checkAST(ASTNode node){
-        checkUndefinedVariables(node);
+       // checkUndefinedVariables(node);
         //checkOperationTypes(node); TO DO: implementeren
         checkNoColorsInOperation(node);
         checkIfConditionIsBoolean(node);
-        checkIfVariablesAreUsedInScope(node, variableScopeStack);
-
+        //checkIfVariablesAreUsedInScope(node, variableScopeStack);
+        checkVariables(node, variableScopeStack);
         node.getChildren().forEach(this::checkAST);
-    }
-
-    private void checkScope(VariableReference reference){
-        boolean exists = false;
-
-        for (int i = 0; i < variableTypes.getSize(); i++){
-            if (variableTypes.get(i).containsKey(reference.name)){
-                exists = true;
-            }
-        }
-        if (!exists){
-            reference.setError("The variable is used outside its scope!");
-        }
     }
 
     /*
@@ -60,32 +47,30 @@ public class Checker {
      *
      * @param toBeChecked: The node that needs to be checked
      * */
-    private void checkVariables(ASTNode toBeChecked, Stack<HashMap<String, ExpressionType>> variableScopeStack){
-        if (toBeChecked.getChildren().size() != 1){
-            if (toBeChecked instanceof VariableReference) {
-                String name = ((VariableReference) toBeChecked).name;
-                boolean found = false;
-                for (HashMap<String, ExpressionType> scope : variableScopeStack){
-                    if (scope.containsKey(name)){
-                        found = true;
-                        break;
-                    }
+    private void checkVariables(ASTNode toBeChecked, Stack<HashMap<String, ExpressionType>> variableScopeStack) {
+        if (toBeChecked instanceof VariableReference) {
+            String name = ((VariableReference) toBeChecked).name;
+            if (!isWithinScope(variableScopeStack, name)) {
+                if (isWithinScope(variableScopeStack, name)) {
+                    toBeChecked.setError("The variable " + name + " is used outside its scope!");
+                } else {
+                    toBeChecked.setError("Variable " + name + " is not defined (within this scope) and can't be used");
                 }
-
-
-
-
-
-
-                if (!found){
-                    toBeChecked.setError("Variable " + name + " is not defined and can't be used");
-                }
-            } else if (toBeChecked instanceof VariableReference) {
-                String name = ((VariableReference) toBeChecked).name;
-                boolean found = false;
-
+            }
+        } else {
+            for (ASTNode child : toBeChecked.getChildren()) {
+                checkVariables(child, variableScopeStack);
             }
         }
+    }
+
+    private boolean isWithinScope(Stack<HashMap<String, ExpressionType>> variableScopeStack, String variableName) {
+        for (HashMap<String, ExpressionType> scope : variableScopeStack) {
+            if (scope.containsKey(variableName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 
