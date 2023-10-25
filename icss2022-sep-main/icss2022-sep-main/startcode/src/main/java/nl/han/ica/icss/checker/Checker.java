@@ -176,13 +176,16 @@ public class Checker {
         }
     }
 
-    private void findAllVariables(ASTNode toBeFound){
+
+    private void findAllVariables(ASTNode toBeFound, HashMap<String, ExpressionType> currentScopeVariables){
         if(toBeFound instanceof VariableAssignment){
             String name = ((VariableAssignment) toBeFound).name.name;
             ExpressionType expressionType = resolveExpressionType(((VariableAssignment) toBeFound).expression);
-            variableTypes.getFirst().put(name, expressionType);
+            currentScopeVariables.put(name, expressionType);
         }
-        toBeFound.getChildren().forEach(this::findAllVariables);
+        for(ASTNode child : toBeFound.getChildren()){
+            findAllVariables(child, currentScopeVariables);
+        }
     }
 
     private ExpressionType resolveExpressionType(Expression expression){
