@@ -10,15 +10,21 @@ import nl.han.ica.icss.ast.types.ExpressionType;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 
 
 public class Checker {
 
     private IHANLinkedList<HashMap<String, ExpressionType>> variableTypes;
+    private Stack<HashMap<String, ExpressionType>> variableScopeStack = new Stack<>();
 
     public void check(AST ast) {
         variableTypes = new HANLinkedList<>();
         variableTypes.addFirst(new HashMap<>());
+        for (int i = 0; i < variableTypes.getSize(); i++){
+            HashMap<String, ExpressionType> scope = variableTypes.get(i);
+            variableScopeStack.push(scope);
+        }
 
         findAllVariables(ast.root);
         checkAST(ast.root);
@@ -29,7 +35,7 @@ public class Checker {
         //checkOperationTypes(node); TO DO: implementeren
         checkNoColorsInOperation(node);
         checkIfConditionIsBoolean(node);
-        checkIfVariablesAreUsedInScope(node, new HashMap<>());
+        checkIfVariablesAreUsedInScope(node, variableScopeStack);
 
         node.getChildren().forEach(this::checkAST);
     }
@@ -163,28 +169,42 @@ public class Checker {
      *
      * @param toBeChecked: The node that needs to be checked
      * */
-    private void checkIfVariablesAreUsedInScope(ASTNode toBeChecked, HashMap<String, ExpressionType> currentScopeVariables){
+    private void checkIfVariablesAreUsedInScope(ASTNode toBeChecked, Stack<HashMap<String, ExpressionType>> variableScopeStack){
         if(toBeChecked instanceof VariableReference){
             String name = ((VariableReference) toBeChecked).name;
-            if(!currentScopeVariables.containsKey(name)){
+            boolean found = false;
+            //Doorzoek de stack van scope-mappen van boven naar beneden
+            for (HashMap<String, ExpressionType> scope : variableScopeStack){
+                if(scope.containsKey(name)) {
+                    found = true;
+                    break;
+                }
+            }
+            if(!found){
                 toBeChecked.setError("The variable " + name + " is used outside its scope!");
             }
-        } else {
-            for (ASTNode child : toBeChecked.getChildren()) {
-                checkIfVariablesAreUsedInScope(child, currentScopeVariables);
-            }
         }
+            for (ASTNode child : toBeChecked.getChildren()) {
+                checkIfVariablesAreUsedInScope(child, variableScopeStack);
+            }
     }
 
 
-    private void findAllVariables(ASTNode toBeFound, HashMap<String, ExpressionType> currentScopeVariables){
+    private void findAllVariables(ASTNode toBeFound, Stack<HashMap<String, ExpressionType>> variableScopeStack){
         if(toBeFound instanceof VariableAssignment){
             String name = ((VariableAssignment) toBeFound).name.name;
             ExpressionType expressionType = resolveExpressionType(((VariableAssignment) toBeFound).expression);
-            currentScopeVariables.put(name, expressionType);
+            variableScopeStack.peek().put(name, expressionType);
+        } else if (toBeFound instanceof Stylerule) {
+            //Betreden nieuwe scope, voegt een nieuwe map toe aan de stack
+            variableScopeStack.push(new HashMap<>());
         }
         for(ASTNode child : toBeFound.getChildren()){
-            findAllVariables(child, currentScopeVariables);
+            findAllVariables(child, variableScopeStack);
+        }
+        if(toBeFound instanceof Stylerule){
+            //Verlaat scope, verwijdert de map van de stack
+            variableScopeStack.pop();
         }
     }
 
@@ -192,7 +212,7 @@ public class Checker {
      * overloaded method for findAllVariables
      */
     private void findAllVariables(ASTNode toBeFound){
-        findAllVariables(toBeFound, new HashMap<>());
+        findAllVariables(toBeFound, null);
     }
 
     private ExpressionType resolveExpressionType(Expression expression){
