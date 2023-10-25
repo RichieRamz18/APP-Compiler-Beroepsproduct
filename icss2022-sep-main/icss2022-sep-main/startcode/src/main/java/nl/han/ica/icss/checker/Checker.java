@@ -30,8 +30,21 @@ public class Checker {
         checkNoColorsInOperation(node);
         checkIfConditionIsBoolean(node);
         checkIfVariablesAreUsedInScope(node);
-
+        checkScope((VariableReference) node);
         node.getChildren().forEach(this::checkAST);
+    }
+
+    private void checkScope(VariableReference reference){
+        boolean exists = false;
+
+        for (int i = 0; i < variableTypes.getSize(); i++){
+            if (variableTypes.get(i).containsKey(reference.name)){
+                exists = true;
+            }
+        }
+        if (!exists){
+            reference.setError("The variable is used outside its scope!");
+        }
     }
 
     /*
