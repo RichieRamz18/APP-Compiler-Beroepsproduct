@@ -151,7 +151,15 @@ public class Checker {
      * */
     private void checkIfVariablesAreUsedInScope(ASTNode toBeChecked){
         if (toBeChecked.getChildren().size() != 1){
-
+            if(toBeChecked instanceof VariableReference){
+                if (!isVariableInScope((VariableReference) toBeChecked)){
+                    toBeChecked.setError("The variable is used outside its scope!");
+                }
+            } else {
+                for (ASTNode child : toBeChecked.getChildren()){
+                    checkIfVariablesAreUsedInScope(child);
+                }
+            }
         }
     }
     private boolean isVariableInScope(VariableReference reference){
