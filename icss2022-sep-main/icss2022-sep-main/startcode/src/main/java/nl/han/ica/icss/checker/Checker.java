@@ -144,15 +144,17 @@ public class Checker {
     /*
      * Function for CH06:
      * "Controleer of variabelen enkel binnen hun scope gebruikt worden"
+     * Recursive function that checks if a variable is used in its scope.
+     * If the variable is used outside its scope, an error is set.
      *
      * @param toBeChecked: The node that needs to be checked
      * */
     private void checkIfVariablesAreUsedInScope(ASTNode toBeChecked){
         if (toBeChecked.getChildren().size() != 1){
-            
+
         }
     }
-    private void checkVariableScope(ASTNode toBeChecked){
+    private boolean isVariableInScope(VariableReference reference){
         //TO DO: implementeren
     }
 
