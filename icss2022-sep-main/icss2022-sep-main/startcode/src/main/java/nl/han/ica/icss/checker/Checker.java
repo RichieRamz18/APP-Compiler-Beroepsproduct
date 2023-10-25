@@ -29,6 +29,7 @@ public class Checker {
         //checkOperationTypes(node); TO DO: implementeren
         checkNoColorsInOperation(node);
         checkIfConditionIsBoolean(node);
+        checkIfVariablesAreUsedInScope(node);
 
         node.getChildren().forEach(this::checkAST);
     }
@@ -111,13 +112,13 @@ public class Checker {
      *
      * @param toBeChecked: The node that needs to be checked
      * */
-    private void checkIfDeclarationValueMatchesProperty(ASTNode toBeChecked){
-        if (toBeChecked.getChildren().size() != 1){
-            if (toBeChecked instanceof Declaration) {
-                if (((Declaration) toBeChecked).property.name.equals(AllowedAttributes.COLOR.attribute))
-            }
-        }
-    }
+//    private void checkIfDeclarationValueMatchesProperty(ASTNode toBeChecked){
+//        if (toBeChecked.getChildren().size() != 1){
+//            if (toBeChecked instanceof Declaration) {
+//                if (((Declaration) toBeChecked).property.name.equals(AllowedAttributes.COLOR.attribute))
+//            }
+//        }
+//    }
 
     /*
      * Function for CH05:
