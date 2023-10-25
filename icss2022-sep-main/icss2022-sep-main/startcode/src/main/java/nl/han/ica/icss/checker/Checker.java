@@ -176,7 +176,6 @@ public class Checker {
                 return variableTypes.getFirst().get(((VariableReference) expression).name);
             }
         }
-
         return ExpressionType.UNDEFINED;
     }
 
