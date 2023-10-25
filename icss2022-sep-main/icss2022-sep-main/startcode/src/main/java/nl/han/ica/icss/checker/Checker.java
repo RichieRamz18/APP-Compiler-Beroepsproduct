@@ -29,7 +29,7 @@ public class Checker {
         //checkOperationTypes(node); TO DO: implementeren
         checkNoColorsInOperation(node);
         checkIfConditionIsBoolean(node);
-        checkIfVariablesAreUsedInScope(node);
+        checkIfVariablesAreUsedInScope(node, new HashMap<>());
 
         node.getChildren().forEach(this::checkAST);
     }
@@ -186,6 +186,13 @@ public class Checker {
         for(ASTNode child : toBeFound.getChildren()){
             findAllVariables(child, currentScopeVariables);
         }
+    }
+
+    /**
+     * overloaded method for findAllVariables
+     */
+    private void findAllVariables(ASTNode toBeFound){
+        findAllVariables(toBeFound, new HashMap<>());
     }
 
     private ExpressionType resolveExpressionType(Expression expression){
