@@ -16,10 +16,12 @@ import java.util.Stack;
 public class Checker {
 
     private IHANLinkedList<HashMap<String, ExpressionType>> variableTypes;
-    private Stack<HashMap<String, ExpressionType>> variableScopeStack = new Stack<>();
+    private Stack<HashMap<String, ExpressionType>> variableScopeStack;
+
 
     public void check(AST ast) {
         variableTypes = new HANLinkedList<>();
+        variableScopeStack = new Stack<>();
         variableTypes.addFirst(new HashMap<>());
         for (int i = 0; i < variableTypes.getSize(); i++){
             HashMap<String, ExpressionType> scope = variableTypes.get(i);
@@ -212,7 +214,7 @@ public class Checker {
      * overloaded method for findAllVariables
      */
     private void findAllVariables(ASTNode toBeFound){
-        findAllVariables(toBeFound, null);
+        findAllVariables(toBeFound, variableScopeStack);
     }
 
     private ExpressionType resolveExpressionType(Expression expression){
