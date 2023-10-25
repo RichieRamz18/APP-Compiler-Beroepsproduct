@@ -9,7 +9,6 @@ import nl.han.ica.icss.ast.operations.SubtractOperation;
 import nl.han.ica.icss.ast.types.ExpressionType;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Stack;
 
 
@@ -54,6 +53,41 @@ public class Checker {
             reference.setError("The variable is used outside its scope!");
         }
     }
+
+    /*
+     * Function for CH01 & CH06:
+     * "Controleer of er geen variabelen worden gebruikt die niet gedefinieerd zijn."
+     *
+     * @param toBeChecked: The node that needs to be checked
+     * */
+    private void checkVariables(ASTNode toBeChecked, Stack<HashMap<String, ExpressionType>> variableScopeStack){
+        if (toBeChecked.getChildren().size() != 1){
+            if (toBeChecked instanceof VariableReference) {
+                String name = ((VariableReference) toBeChecked).name;
+                boolean found = false;
+                for (HashMap<String, ExpressionType> scope : variableScopeStack){
+                    if (scope.containsKey(name)){
+                        found = true;
+                        break;
+                    }
+                }
+
+
+
+
+
+
+                if (!found){
+                    toBeChecked.setError("Variable " + name + " is not defined and can't be used");
+                }
+            } else if (toBeChecked instanceof VariableReference) {
+                String name = ((VariableReference) toBeChecked).name;
+                booleand found = false;
+
+            }
+        }
+    }
+
 
     /*
     * Function for CH01:
