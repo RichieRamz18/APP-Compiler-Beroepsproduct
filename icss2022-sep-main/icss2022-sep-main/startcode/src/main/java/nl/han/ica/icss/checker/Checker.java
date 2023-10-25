@@ -163,10 +163,13 @@ public class Checker {
         }
     }
     private boolean isVariableInScope(VariableReference reference){
-        //TO DO: implementeren
+        for (int i = 0; i < variableTypes.getSize(); i++){
+            if (variableTypes.get(i).containsKey(reference.name)){
+                return true;
+            }
+        }
+        return false;
     }
-
-
 
     private void findAllVariables(ASTNode toBeFound){
         if(toBeFound instanceof VariableAssignment){
