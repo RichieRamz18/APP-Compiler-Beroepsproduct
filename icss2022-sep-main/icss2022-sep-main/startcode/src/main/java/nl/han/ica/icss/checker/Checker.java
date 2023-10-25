@@ -82,7 +82,7 @@ public class Checker {
                 }
             } else if (toBeChecked instanceof VariableReference) {
                 String name = ((VariableReference) toBeChecked).name;
-                booleand found = false;
+                boolean found = false;
 
             }
         }
@@ -217,7 +217,7 @@ public class Checker {
                 }
             }
             if(!found){
-                toBeChecked.setError("The variable " + name + " is used outside its scope!");
+                toBeChecked.setError("The variable " + name + " is not declared in this scope!");
             }
         }
             for (ASTNode child : toBeChecked.getChildren()) {
