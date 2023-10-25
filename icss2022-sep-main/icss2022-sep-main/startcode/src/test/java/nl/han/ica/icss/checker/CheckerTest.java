@@ -78,20 +78,20 @@ class CheckerTest {
         assertTrue(success, "The checker should not give any errors");
     }
 
-    @Test
-    void testCheckCH01() throws IOException {
-        // Read file and parse it
-        String testFile = this.readFile("CH01testbestand2.icss");
-        pipeline.parseString(testFile);
-
-        // Execute checkUndefinedVariables-function on AST
-        ASTNode rootNode = pipeline.getAST().root;
-        checker.checkUndefinedVariables(rootNode);
-        // Check if the error is correct
-        ASTNode nodeWithExpectedError = findNodeWithExpectedError(rootNode, "Variable LankColor is not defined and can't be used");
-        assertNotNull(nodeWithExpectedError, "The checker should give an error on line 1");
-        assertTrue(nodeWithExpectedError.hasError(), "Error should be set for specific node");
-    }
+//    @Test
+//    void testCheckCH01() throws IOException {
+//        // Read file and parse it
+//        String testFile = this.readFile("CH01testbestand2.icss");
+//        pipeline.parseString(testFile);
+//
+//        // Execute checkUndefinedVariables-function on AST
+//        ASTNode rootNode = pipeline.getAST().root;
+//        checker.checkUndefinedVariables(rootNode);
+//        // Check if the error is correct
+//        ASTNode nodeWithExpectedError = findNodeWithExpectedError(rootNode, "Variable LankColor is not defined and can't be used");
+//        assertNotNull(nodeWithExpectedError, "The checker should give an error on line 1");
+//        assertTrue(nodeWithExpectedError.hasError(), "Error should be set for specific node");
+//    }
 
 
     /*

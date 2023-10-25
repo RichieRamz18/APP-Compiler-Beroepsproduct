@@ -30,7 +30,7 @@ public class Checker {
         checkNoColorsInOperation(node);
         checkIfConditionIsBoolean(node);
         checkIfVariablesAreUsedInScope(node);
-        checkScope((VariableReference) node);
+
         node.getChildren().forEach(this::checkAST);
     }
 
@@ -53,7 +53,7 @@ public class Checker {
     *
     * @param toBeChecked: The node that needs to be checked
     * */
-    protected void checkUndefinedVariables(ASTNode toBeChecked) {
+    private void checkUndefinedVariables(ASTNode toBeChecked) {
         if(toBeChecked.getChildren().size() != 1){
             if(toBeChecked instanceof VariableReference){
                 String name = ((VariableReference) toBeChecked).name;
@@ -166,11 +166,12 @@ public class Checker {
     private void checkIfVariablesAreUsedInScope(ASTNode toBeChecked){
         if (toBeChecked.getChildren().size() != 1){
             if(toBeChecked instanceof VariableReference){
-                if (!isVariableInScope((VariableReference) toBeChecked)){
-                    toBeChecked.setError("The variable is used outside its scope!");
+                String name = ((VariableReference) toBeChecked).name;
+                if(!variableTypes.getFirst().containsKey(name)){
+                    toBeChecked.setError("The variable " + name + " is used outside its scope!");
                 }
             } else {
-                for (ASTNode child : toBeChecked.getChildren()){
+                for (ASTNode child : toBeChecked.getChildren()) {
                     checkIfVariablesAreUsedInScope(child);
                 }
             }
@@ -181,14 +182,14 @@ public class Checker {
     * Helper function for CH06: checkIfVariablesAreUsedInScope
     * Checks if a variable is used in its scope.
     * */
-    private boolean isVariableInScope(VariableReference reference){
-        for (int i = 0; i < variableTypes.getSize(); i++){
-            if (variableTypes.get(i).containsKey(reference.name)){
-                return true;
-            }
-        }
-        return false;
-    }
+//    private boolean isVariableInScope(String name){
+//        for (int i = 0; i < variableTypes.getSize(); i++){
+//            if (variableTypes.get(i).containsKey(reference.name)){
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
     private void findAllVariables(ASTNode toBeFound){
         if(toBeFound instanceof VariableAssignment){
