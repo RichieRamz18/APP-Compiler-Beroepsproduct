@@ -24,6 +24,7 @@ public class Generator {
 		variables.addFirst(new HashMap<>());
 		stringBuilder = new StringBuilder();
 
+		findAllVariables(ast.root);
 		generateResult(ast.root);
 
 		return stringBuilder.toString() + "}";
@@ -58,7 +59,7 @@ public class Generator {
 
 	private void generateBodyResult(ASTNode node) {
 		if (node instanceof Declaration) {
-			generateDeclarationResult((Declaration) node);
+			generateDeclarationResult(node.getChildren());
 		}
 	}
 
@@ -93,6 +94,15 @@ public class Generator {
 				generateLiteralResult(variables.getFirst().get(((VariableReference) node).name));
 			}
 		}
+	}
+
+	private void findAllVariables(ASTNode toBeFound) {
+		if (toBeFound instanceof VariableAssignment) {
+			String name = ((VariableAssignment) toBeFound).name.name;
+			Expression expression = ((VariableAssignment) toBeFound).expression;
+			variables.getFirst().put(name, expression);
+		}
+		toBeFound.getChildren().forEach(this::findAllVariables);
 	}
 	
 }
