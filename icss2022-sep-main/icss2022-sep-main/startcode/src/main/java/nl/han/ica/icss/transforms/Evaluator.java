@@ -33,6 +33,7 @@ public class Evaluator implements Transform {
         variableValues.addFirst(new HashMap<>());
         variables = new HANLinkedList<>();
         variables.addFirst(new HashMap<>());
+        findAllVariables(ast.root);
 
         evaluateExpression(ast.root.getChildren(), ast.root);
         evaluateIfStatements(ast.root.getChildren(), ast.root);
