@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Generator {
-
 	private StringBuilder stringBuilder;
 	private IHANLinkedList<HashMap<String, Expression>> variables;
 
@@ -31,9 +30,10 @@ public class Generator {
 	}
 
 	/**
-	 * Generates the final CSS result of the AST using the generateSelectorResult and generateBodyResult methods.
+	 * Generates the final CSS result of the AST
+	 * using the generateSelectorResult and generateBodyResult methods.
 	 *
-	 *
+	 * @param node The ASTnode to start generating the CSS result.
 	* */
 	private void generateCSSResult(ASTNode node) {
 		if (node instanceof Selector) {
