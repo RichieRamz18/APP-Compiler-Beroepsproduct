@@ -286,6 +286,12 @@ public class Evaluator implements Transform {
     }
 
     private void removeIfClause(IfClause ifClause, ASTNode parent) {
+        if (parent instanceof Stylerule) {
+            Stylerule stylerule = (Stylerule) parent;
+            stylerule.body.remove(ifClause);
+        } else if (parent instanceof IfClause) {
+            parent.removeChild(ifClause);
+        }
     }
 
     private BoolLiteral getBoolLiteral(Expression conditionalExpression) {
