@@ -95,9 +95,13 @@ public class Evaluator implements Transform {
         return null;
     }
 
-    private Literal calculateSubtractOperation(Literal left, Literal right) {
-    }
-
+    /**
+     * This method calculates the outcome of the add operation
+     *
+     * @param left the left part of the operation
+     * @param right the right part of the operation
+     * @return literal with the calculated value as result of the operation
+     */
     private Literal calculateAddOperation(Expression left, Expression right) {
         if (left instanceof PercentageLiteral) {
             int outcome = ((PercentageLiteral) left).value + ((PercentageLiteral) right).value;
@@ -113,6 +117,11 @@ public class Evaluator implements Transform {
         }
         return null;
     }
+
+    private Literal calculateSubtractOperation(Literal left, Literal right) {
+    }
+
+
 
     private Literal calculateMultiplyOperation(Literal left, Literal right) {
     }
