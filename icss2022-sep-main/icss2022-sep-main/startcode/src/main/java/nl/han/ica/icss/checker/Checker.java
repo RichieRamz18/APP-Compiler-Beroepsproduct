@@ -154,9 +154,17 @@ public class Checker {
      * */
 //    private void checkIfDeclarationValueMatchesProperty(ASTNode toBeChecked){
 //        if (toBeChecked.getChildren().size() != 1){
-//            if (toBeChecked instanceof Declaration) {
-//                if (((Declaration) toBeChecked).property.name.equals(AllowedAttributes.COLOR.attribute))
-//            }
+//            if (toBeChecked instanceof Declaration){
+//                if (((Declaration) toBeChecked).property == PropertyName.){
+//                    if (((Declaration) toBeChecked).expression instanceof VariableReference) {
+//                        if (variableTypes.getFirst().get(((VariableReference) ((Declaration) toBeChecked).expression).name) != ExpressionType.COLOR) {
+//                            toBeChecked.setError("The variable in the declaration must be of type color!");
+//                        }
+//                    } else if (!(((Declaration) toBeChecked).expression instanceof ColorLiteral)) {
+//                        toBeChecked.setError("The declaration must be of type color!");
+//                    }
+//                } else if (((Declaration) toBeChecked).property == Property.WIDTH || ((Declaration) toBeChecked).property == Property.HEIGHT){
+//                    if (((Declaration) toBeChecked).expression instanceof VariableReference);
 //        }
 //    }
 
