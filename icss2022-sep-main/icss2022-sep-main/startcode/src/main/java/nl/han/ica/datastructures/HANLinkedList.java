@@ -80,19 +80,19 @@ public class HANLinkedList<T> implements IHANLinkedList<T> {
         return size;
     }
 
-    @Override
-    public void removeChild(T value) {
-        LinkedListNode<T> current = head.next;
-
-        while (current.next != null) {
-            if (current.next.value.equals(value)) {
-                current.next = current.next.next;
-                size--;
-                return;
-            }
-            current = current.next;
-        }
-    }
+//    @Override
+//    public void removeChild(T value) {
+//        LinkedListNode<T> current = head.next;
+//
+//        while (current.next != null) {
+//            if (current.next.value.equals(value)) {
+//                current.next = current.next.next;
+//                size--;
+//                return;
+//            }
+//            current = current.next;
+//        }
+//    }
 
     public boolean isEmpty(){
         return size == 0;

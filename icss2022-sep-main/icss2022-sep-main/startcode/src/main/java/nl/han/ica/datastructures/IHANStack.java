@@ -21,5 +21,5 @@ public interface IHANStack<T> {
 
     boolean isEmpty();
 
-    void removeChild(T value);
+   // void removeChild(T value);
 }

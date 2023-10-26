@@ -155,14 +155,18 @@ public class ASTListener extends ICSSBaseListener {
 			}
 
 			addOperation.addChild(multiplyOperation);
-			currentContainer.peek();
-			currentContainer.removeChild(multiplyOperation);
+			currentContainer.peek()
+							.removeChild(multiplyOperation)
+							.addChild(addOperation);
+			currentContainer.push(addOperation);
+			while (multiplyList.peek() != null) {
+				currentContainer.push(multiplyList.pop());
+			}
+
+		} else {
+			currentContainer.peek().addChild(addOperation);
+			currentContainer.push(addOperation);
 		}
-
-
-
-		currentContainer.peek().addChild(addOperation);
-		currentContainer.push(addOperation);
 	}
 
 	@Override public void exitAddOperation(ICSSParser.AddOperationContext ctx) {

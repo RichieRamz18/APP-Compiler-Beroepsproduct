@@ -52,5 +52,5 @@ public interface IHANLinkedList<T> {
     /**
      * Removes first occurence of value
      */
-    void removeChild(T value);
+   // void removeChild(T value);
 }
