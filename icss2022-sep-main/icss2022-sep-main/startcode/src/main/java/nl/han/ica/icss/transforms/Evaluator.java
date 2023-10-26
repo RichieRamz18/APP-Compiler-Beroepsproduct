@@ -20,15 +20,19 @@ import java.util.List;
 public class Evaluator implements Transform {
 
     private IHANLinkedList<HashMap<String, Literal>> variableValues;
+    private IHANLinkedList<HashMap<String, Literal>> variables;
 
     public Evaluator() {
         variableValues = new HANLinkedList<>();
+        variables = new HANLinkedList<>();
     }
 
     @Override
     public void apply(AST ast) {
         variableValues = new HANLinkedList<>();
         variableValues.addFirst(new HashMap<>());
+        variables = new HANLinkedList<>();
+        variables.addFirst(new HashMap<>());
 
         evaluateExpression(ast.root.getChildren(), ast.root);
         evaluateIfStatements(ast.root.getChildren(), ast.root);
@@ -300,7 +304,14 @@ public class Evaluator implements Transform {
         }
     }
 
-    private BoolLiteral getBoolLiteral(Expression conditionalExpression) {
+    private BoolLiteral getBoolLiteral(ASTNode node) {
+        if (node instanceof BoolLiteral) {
+            return (BoolLiteral) node;
+        }
+        if (node instanceof VariableReference) {
+            VariableReference variableReference = (VariableReference) node;
+            if (variables.)
+        }
     }
 
 
