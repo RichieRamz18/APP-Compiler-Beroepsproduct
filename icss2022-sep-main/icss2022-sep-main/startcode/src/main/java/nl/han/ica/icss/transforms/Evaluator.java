@@ -253,6 +253,15 @@ public class Evaluator implements Transform {
         }
     }
 
+    /**
+     * This method checks if the condition of the given ifClause is true or false.
+     * If the condition is true, the body of the ifClause is added to the parent.
+     * If the condition is false, the ifClause is removed from the parent.
+     *
+     * @param ifClause the given ifClause
+     * @param parent the given parent
+     * @return list of ASTNodes, to keep track of the nodes that are added to the parent
+     */
     private List<ASTNode> evaluateIfClause(IfClause ifClause, ASTNode parent) {
         List<ASTNode> values = new ArrayList<>();
 
