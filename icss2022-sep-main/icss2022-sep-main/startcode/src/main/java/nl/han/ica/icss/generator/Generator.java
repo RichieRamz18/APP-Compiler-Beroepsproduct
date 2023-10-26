@@ -25,12 +25,17 @@ public class Generator {
 		stringBuilder = new StringBuilder();
 
 		findAllVariables(ast.root);
-		generateResult(ast.root);
+		generateCSSResult(ast.root);
 
 		return stringBuilder.toString() + "}";
 	}
 
-	private void generateResult(ASTNode node) {
+	/**
+	 * Generates the final CSS result of the AST using the generateSelectorResult and generateBodyResult methods.
+	 *
+	 *
+	* */
+	private void generateCSSResult(ASTNode node) {
 		if (node instanceof Selector) {
 			if (stringBuilder.toString().endsWith(";\n")) {
 				stringBuilder.append("}\n\n");
@@ -43,7 +48,7 @@ public class Generator {
 			}
 			generateBodyResult(node);
 		}
-		node.getChildren().forEach(this::generateResult);
+		node.getChildren().forEach(this::generateCSSResult);
 	}
 
 	private void generateSelectorResult(Selector selector) {
