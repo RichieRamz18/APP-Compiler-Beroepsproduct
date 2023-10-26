@@ -98,7 +98,20 @@ public class Evaluator implements Transform {
     private Literal calculateSubtractOperation(Literal left, Literal right) {
     }
 
-    private Literal calculateAddOperation(Literal left, Literal right) {
+    private Literal calculateAddOperation(Expression left, Expression right) {
+        if (left instanceof PercentageLiteral) {
+            int outcome = ((PercentageLiteral) left).value + ((PercentageLiteral) right).value;
+            return new PercentageLiteral(outcome);
+        }
+        if (left instanceof PixelLiteral) {
+            int outcome = ((PixelLiteral) left).value + ((PixelLiteral) right).value;
+            return new PixelLiteral(outcome);
+        }
+        if (left instanceof ScalarLiteral) {
+            int outcome = ((ScalarLiteral) left).value + ((ScalarLiteral) right).value;
+            return new ScalarLiteral(outcome);
+        }
+        return null;
     }
 
     private Literal calculateMultiplyOperation(Literal left, Literal right) {
