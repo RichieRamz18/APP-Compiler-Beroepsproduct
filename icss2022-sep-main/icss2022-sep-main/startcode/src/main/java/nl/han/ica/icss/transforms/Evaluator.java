@@ -154,6 +154,21 @@ public class Evaluator implements Transform {
                 return new PixelLiteral(outcome);
             }
         }
+        if (right instanceof ScalarLiteral) {
+            if (left instanceof PercentageLiteral) {
+                int outcome = ((PercentageLiteral) left).value * ((ScalarLiteral) right).value;
+                return new PercentageLiteral(outcome);
+            }
+            if (left instanceof PixelLiteral) {
+                int outcome = ((PixelLiteral) left).value * ((ScalarLiteral) right).value;
+                return new PixelLiteral(outcome);
+            }
+        }
+        if (left instanceof ScalarLiteral && right instanceof ScalarLiteral){
+            int outcome = ((ScalarLiteral) left).value * ((ScalarLiteral) right).value;
+            return new ScalarLiteral(outcome);
+        }
+        return null;
     }
 
 
