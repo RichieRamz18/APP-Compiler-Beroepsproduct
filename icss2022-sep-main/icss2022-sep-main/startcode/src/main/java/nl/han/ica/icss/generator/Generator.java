@@ -4,6 +4,9 @@ package nl.han.ica.icss.generator;
 import nl.han.ica.datastructures.HANLinkedList;
 import nl.han.ica.datastructures.IHANLinkedList;
 import nl.han.ica.icss.ast.*;
+import nl.han.ica.icss.ast.literals.ColorLiteral;
+import nl.han.ica.icss.ast.literals.PercentageLiteral;
+import nl.han.ica.icss.ast.literals.PixelLiteral;
 import nl.han.ica.icss.ast.selectors.ClassSelector;
 import nl.han.ica.icss.ast.selectors.IdSelector;
 import nl.han.ica.icss.ast.selectors.TagSelector;
@@ -62,9 +65,30 @@ public class Generator {
 	private void generateDeclarationResult(ArrayList<ASTNode> nodes) {
 		for (ASTNode node : nodes) {
 			if (node instanceof PropertyName) {
-				
+				stringBuilder.append("\t").append(((PropertyName) node).name).append(": ");
+			}
+			if (node instanceof Expression) {
+				generateLiteralResult(node);
+			}
+			if (node instanceof VariableReference) {
+				generateVariableValueByName(node);
 			}
 		}
+		stringBuilder.append(";\n");
+	}
+
+	private void generateLiteralResult(ASTNode node) {
+		if (node instanceof ColorLiteral) {
+			stringBuilder.append(((ColorLiteral) node).value);
+		} else if (node instanceof PercentageLiteral) {
+			stringBuilder.append(((PercentageLiteral) node).value).append("%");
+		} else if (node instanceof PixelLiteral) {
+			stringBuilder.append(((PixelLiteral) node).value).append("px");
+		}
+	}
+
+	private void generateVariableValueByName(ASTNode node) {
+		
 	}
 	
 }
