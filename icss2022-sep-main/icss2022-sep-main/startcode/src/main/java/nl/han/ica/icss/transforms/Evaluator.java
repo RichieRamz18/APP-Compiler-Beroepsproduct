@@ -47,6 +47,12 @@ public class Evaluator implements Transform {
 
     }
 
+    /**
+     * This method returns the literal from the given expression
+     *
+     * @param expression the given expression
+     * @return literal of null
+     */
     private Literal getLiteralFromExpression (Expression expression){
         Literal literal = null;
         if (expression instanceof Operation){
