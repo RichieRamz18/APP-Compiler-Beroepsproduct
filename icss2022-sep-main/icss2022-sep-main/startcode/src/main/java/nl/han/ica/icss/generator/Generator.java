@@ -88,7 +88,11 @@ public class Generator {
 	}
 
 	private void generateVariableValueByName(ASTNode node) {
-		
+		if (node instanceof VariableReference) {
+			if (variables.getFirst().containsKey(((VariableReference) node).name)) {
+				generateLiteralResult(variables.getFirst().get(((VariableReference) node).name));
+			}
+		}
 	}
 	
 }
