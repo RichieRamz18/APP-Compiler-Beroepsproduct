@@ -304,14 +304,24 @@ public class Evaluator implements Transform {
         }
     }
 
+    /**
+     * This method checks if the node is a BoolLiteral or VariableReference
+     * and returns the value of the node, which can be True or False
+     *
+     * @param node the given node
+     * @return boolean value of the given node
+     */
     private BoolLiteral getBoolLiteral(ASTNode node) {
         if (node instanceof BoolLiteral) {
             return (BoolLiteral) node;
         }
         if (node instanceof VariableReference) {
             VariableReference variableReference = (VariableReference) node;
-            if (variables.)
+            if (variables.getFirst().containsKey(variableReference.name)) {
+                return (BoolLiteral) variables.getFirst().get(variableReference.name);
+            }
         }
+        return null;
     }
 
 
