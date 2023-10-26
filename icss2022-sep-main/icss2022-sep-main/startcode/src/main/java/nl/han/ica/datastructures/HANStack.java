@@ -32,9 +32,4 @@ public class HANStack<T> implements IHANStack<T>{
     public boolean isEmpty() {
         return stack.isEmpty();
     }
-
-//    @Override
-//    public void removeChild(T value) {
-//        stack.removeChild(value);
-//    }
 }

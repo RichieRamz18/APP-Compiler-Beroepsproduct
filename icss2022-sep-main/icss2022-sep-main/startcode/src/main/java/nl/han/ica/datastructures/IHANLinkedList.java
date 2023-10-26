@@ -49,8 +49,4 @@ public interface IHANLinkedList<T> {
      */
     int getSize();
 
-    /**
-     * Removes first occurence of value
-     */
-   // void removeChild(T value);
 }
