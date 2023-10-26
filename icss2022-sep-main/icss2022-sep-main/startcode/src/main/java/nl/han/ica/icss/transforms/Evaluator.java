@@ -14,6 +14,7 @@ import nl.han.ica.icss.ast.operations.SubtractOperation;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Evaluator implements Transform {
 
@@ -29,6 +30,7 @@ public class Evaluator implements Transform {
         variableValues.addFirst(new HashMap<>());
 
         evaluateExpression(ast.root.getChildren(), ast.root);
+        evaluateIfStatements(ast.root.getChildren(), ast.root);
     }
 
     /**
@@ -239,6 +241,18 @@ public class Evaluator implements Transform {
             return new ScalarLiteral(outcome);
         }
         return null;
+    }
+
+    private void evaluateIfStatements(List<ASTNode> children, ASTNode parent) {
+        for (ASTNode child : children) {
+            if (child instanceof IfClause) {
+                evaluateIfClause((IfClause) child, parent);
+            }
+            evaluateIfStatements(child.getChildren(), child);
+        }
+    }
+
+    private void evaluateIfClause(IfClause child, ASTNode parent) {
     }
 
 
