@@ -26,5 +26,32 @@ public class Evaluator implements Transform {
         variableValues = new HANLinkedList<>();
     }
 
+    private void transformStyleSheet(Stylesheet stylesheet){
+        variableValues.addFirst(new HashMap<>());
+
+    }
+
+    private void transformStylerule(Stylerule stylerule){
+        variableValues.addFirst(new HashMap<>());
+    }
+
+//    private void transformVariableAssignment(VariableAssignment variableAssignment){
+//        variableValues.getFirst().put(variableAssignment.name.name, variableAssignment.value);
+//    }
+
+    private void transformIfClause(IfClause ifClause){
+        variableValues.addFirst(new HashMap<>());
+    }
+
+    private Literal transformOperation(Operation operation){
+
+    }
+
+    private Literal tranformToLiteral(Literal literal){
+        return null;
+    }
+
+
+
     
 }
