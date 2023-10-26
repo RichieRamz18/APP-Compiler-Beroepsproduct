@@ -4,6 +4,7 @@ import com.google.errorprone.annotations.Var;
 import nl.han.ica.datastructures.HANLinkedList;
 import nl.han.ica.datastructures.IHANLinkedList;
 import nl.han.ica.icss.ast.*;
+import nl.han.ica.icss.ast.literals.BoolLiteral;
 import nl.han.ica.icss.ast.literals.PercentageLiteral;
 import nl.han.ica.icss.ast.literals.PixelLiteral;
 import nl.han.ica.icss.ast.literals.ScalarLiteral;
@@ -252,7 +253,33 @@ public class Evaluator implements Transform {
         }
     }
 
-    private void evaluateIfClause(IfClause child, ASTNode parent) {
+    private List<ASTNode> evaluateIfClause(IfClause ifClause, ASTNode parent) {
+        List<ASTNode> values = new ArrayList<>();
+
+        if (ifClause.conditionalExpression instanceof BoolLiteral || ifClause.conditionalExpression instanceof VariableReference) {
+            if (getBoolLiteral(ifClause.conditionalExpression).value) {
+                for (ASTNode node : ifClause.body) {
+                    if (node instanceof IfClause) {
+                        values.addAll(evaluateIfClause((IfClause) node, ifClause));
+                    } else {
+                        values.add(node);
+                    }
+                }
+            }
+        }
+        removeIfClause(ifClause, parent);
+        if (!(parent instanceof IfClause)) {
+           for (ASTNode node : values) {
+               parent.addChild(node);
+           }
+        }
+        return values;
+    }
+
+    private void removeIfClause(IfClause ifClause, ASTNode parent) {
+    }
+
+    private BoolLiteral getBoolLiteral(Expression conditionalExpression) {
     }
 
 
