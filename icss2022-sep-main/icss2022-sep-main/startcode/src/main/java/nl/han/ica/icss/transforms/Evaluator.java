@@ -47,11 +47,27 @@ public class Evaluator implements Transform {
 
     }
 
-    private Literal tranformToLiteral(Literal literal){
-        return null;
+    private Literal getLiteralFromExpression (Expression expression){
+        Literal literal = null;
+        if (expression instanceof Operation){
+            literal = calculateOperation((Operation) expression);
+        } else if (expression instanceof VariableReference) {
+            VariableReference variableReference = (VariableReference) expression;
+            for (int i = 0; i < variableValues.getSize(); i++) {
+                HashMap<String, Literal> map = variableValues.get(i);
+                if(map.containsKey(variableReference.name)){
+                    literal = map.get(variableReference.name);
+                    break;
+                }
+            }
+        } else if (expression instanceof Literal){
+            literal = (Literal) expression;
+        }
+        return literal;
+    }
+
+    private Literal calculateOperation(Operation expression) {
     }
 
 
-
-    
 }
