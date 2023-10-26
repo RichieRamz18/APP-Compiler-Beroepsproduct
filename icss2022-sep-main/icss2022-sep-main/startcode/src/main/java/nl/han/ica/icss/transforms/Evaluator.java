@@ -142,7 +142,13 @@ public class Evaluator implements Transform {
     }
 
 
-
+    /**
+     * This method calculates the outcome of the multiply operation
+     *
+     * @param left the left part of the expression (operation)
+     * @param right the right part of the expression (operation)
+     * @return literal with the calculated value as result of the operation
+     */
     private Literal calculateMultiplyOperation(Expression left, Expression right) {
         if (left instanceof ScalarLiteral) {
             if (right instanceof PercentageLiteral) {
