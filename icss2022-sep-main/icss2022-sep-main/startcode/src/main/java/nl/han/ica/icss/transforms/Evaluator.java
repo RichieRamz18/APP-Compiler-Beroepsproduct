@@ -1,5 +1,6 @@
 package nl.han.ica.icss.transforms;
 
+import com.google.errorprone.annotations.Var;
 import nl.han.ica.datastructures.HANLinkedList;
 import nl.han.ica.datastructures.IHANLinkedList;
 import nl.han.ica.icss.ast.*;
@@ -69,7 +70,34 @@ public class Evaluator implements Transform {
         return literal;
     }
 
-    private Literal calculateExpression(Expression lhs) {
+    /**
+     * This method decides the type of the expression and can return three different types of literals:
+     * 1. returns the retrieved variable value if the expression is a VariableReference
+     * 2. returns the calculated value of the operation if the expression is an Operation
+     * 3. returns the literal if the expression is a literal
+     * or returns null
+     *
+     * @param expression the given expression
+     * @return literal or null
+     */
+    /
+    private Literal calculateExpression(Expression expression) {
+        if (expression instanceof VariableReference) {
+            VariableReference variableReference = (VariableReference) expression;
+            for (int i = 0; i < variableValues.getSize(); i++){
+                HashMap<String, Literal> map = variableValues.get(i);
+                if (map.containsKey(variableReference.name)){
+                    return map.get(variableReference.name);
+                }
+            }
+        }
+        if (expression instanceof Operation) {
+            return calculateOperation((Operation) expression);
+        }
+        if (expression instanceof Literal) {
+            return (Literal) expression;
+        }
+        return null;
     }
 
     /**
