@@ -248,6 +248,12 @@ public class Evaluator implements Transform {
         return null;
     }
 
+    /**
+     * This method evaluates for every child, if the child is an ifClause, using the evaluateIfClause method.
+     *
+     * @param children the children of the given parent
+     * @param parent the given parent node to evaluate
+     */
     private void evaluateIfStatements(List<ASTNode> children, ASTNode parent) {
         for (ASTNode child : children) {
             if (child instanceof IfClause) {
