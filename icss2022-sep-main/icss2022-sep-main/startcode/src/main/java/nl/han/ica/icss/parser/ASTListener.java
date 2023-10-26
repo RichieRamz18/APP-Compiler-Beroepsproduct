@@ -125,8 +125,6 @@ public class ASTListener extends ICSSBaseListener {
 		LOGGER.info("Exiting PropertyName");
 	}
 
-
-
 	@Override public void enterMultiplyOperation(ICSSParser.MultiplyOperationContext ctx) {
 		LOGGER.info("Entering MultiplyOperation");
 		ASTNode multiplyOperation = new MultiplyOperation();
@@ -177,8 +175,31 @@ public class ASTListener extends ICSSBaseListener {
 	@Override public void enterSubtractOperation(ICSSParser.SubtractOperationContext ctx) {
 		LOGGER.info("Entering SubtractOperation");
 		ASTNode subtractOperation = new SubtractOperation();
-		currentContainer.peek().addChild(subtractOperation);
-		currentContainer.push(subtractOperation);
+
+		if (currentContainer.peek() instanceof MultiplyOperation) {
+			var multiplyList = new HANStack<MultiplyOperation>();
+
+			var multiplyOperation = currentContainer.pop();
+			multiplyList.push((MultiplyOperation) multiplyOperation);
+
+			while (currentContainer.peek() instanceof MultiplyOperation) {
+				multiplyOperation = currentContainer.pop();
+				multiplyList.push((MultiplyOperation) multiplyOperation);
+			}
+
+			subtractOperation.addChild(multiplyOperation);
+			currentContainer.peek()
+					.removeChild(multiplyOperation)
+					.addChild(subtractOperation);
+			currentContainer.push(subtractOperation);
+			while (multiplyList.peek() != null) {
+				currentContainer.push(multiplyList.pop());
+			}
+
+		} else {
+			currentContainer.peek().addChild(subtractOperation);
+			currentContainer.push(subtractOperation);
+		}
 	}
 
 	@Override public void exitSubtractOperation(ICSSParser.SubtractOperationContext ctx) {
