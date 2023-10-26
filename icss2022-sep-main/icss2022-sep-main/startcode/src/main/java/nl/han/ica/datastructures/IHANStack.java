@@ -20,4 +20,6 @@ public interface IHANStack<T> {
     T peek();
 
     boolean isEmpty();
+
+    void removeChild(T value);
 }

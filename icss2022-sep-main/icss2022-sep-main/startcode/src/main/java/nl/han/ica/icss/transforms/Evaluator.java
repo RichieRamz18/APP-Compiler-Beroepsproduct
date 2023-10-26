@@ -175,15 +175,15 @@ public class Evaluator implements Transform {
      * @return literal with the calculated value as result of the operation
      */
     private Literal calculateAddOperation(Expression left, Expression right) {
-        if (left instanceof PercentageLiteral) {
+        if (left instanceof PercentageLiteral && right instanceof PercentageLiteral) {
             int outcome = ((PercentageLiteral) left).value + ((PercentageLiteral) right).value;
             return new PercentageLiteral(outcome);
         }
-        if (left instanceof PixelLiteral) {
+        if (left instanceof PixelLiteral && right instanceof PixelLiteral) {
             int outcome = ((PixelLiteral) left).value + ((PixelLiteral) right).value;
             return new PixelLiteral(outcome);
         }
-        if (left instanceof ScalarLiteral) {
+        if (left instanceof ScalarLiteral && right instanceof ScalarLiteral) {
             int outcome = ((ScalarLiteral) left).value + ((ScalarLiteral) right).value;
             return new ScalarLiteral(outcome);
         }
@@ -198,20 +198,37 @@ public class Evaluator implements Transform {
      * @return literal with the calculated value as result of the operation
      */
     private Literal calculateSubtractOperation(Expression left, Expression right) {
-        if (left instanceof PercentageLiteral) {
+        if (left instanceof PercentageLiteral && right instanceof PercentageLiteral) {
             int outcome = ((PercentageLiteral) left).value - ((PercentageLiteral) right).value;
             return new PercentageLiteral(outcome);
         }
-        if (left instanceof PixelLiteral) {
+        if (left instanceof PixelLiteral && right instanceof PixelLiteral) {
             int outcome = ((PixelLiteral) left).value - ((PixelLiteral) right).value;
             return new PixelLiteral(outcome);
         }
-        if (left instanceof ScalarLiteral) {
+        if (left instanceof ScalarLiteral && right instanceof ScalarLiteral){
             int outcome = ((ScalarLiteral) left).value - ((ScalarLiteral) right).value;
             return new ScalarLiteral(outcome);
         }
         return null;
     }
+
+//    private Literal calculateSubtractOperation(Expression left, Expression right) {
+//        if (left.getClass() == right.getClass()){
+//            switch (left.getClass().getSimpleName()) {
+//                case "PercentageLiteral":
+//                    int outcomePercentage = ((PercentageLiteral) left).value - ((PercentageLiteral) right).value;
+//                    return new PercentageLiteral(outcomePercentage);
+//                case "PixelLiteral":
+//                    int outcomePixel = ((PixelLiteral) left).value - ((PixelLiteral) right).value;
+//                    return new PixelLiteral(outcomePixel);
+//                case "ScalarLiteral":
+//                    int outcomeScalar = ((ScalarLiteral) left).value - ((ScalarLiteral) right).value;
+//                    return new ScalarLiteral(outcomeScalar);
+//            }
+//        }
+//        return null;
+//    }
 
 
     /**

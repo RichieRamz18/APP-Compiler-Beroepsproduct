@@ -142,6 +142,25 @@ public class ASTListener extends ICSSBaseListener {
 	@Override public void enterAddOperation(ICSSParser.AddOperationContext ctx) {
 		LOGGER.info("Entering AddOperation");
 		ASTNode addOperation = new AddOperation();
+
+		if (currentContainer.peek() instanceof MultiplyOperation) {
+			var multiplyList = new HANStack<MultiplyOperation>();
+
+			var multiplyOperation = currentContainer.pop();
+			multiplyList.push((MultiplyOperation) multiplyOperation);
+
+			while (currentContainer.peek() instanceof MultiplyOperation) {
+				multiplyOperation = currentContainer.pop();
+				multiplyList.push((MultiplyOperation) multiplyOperation);
+			}
+
+			addOperation.addChild(multiplyOperation);
+			currentContainer.peek();
+			currentContainer.removeChild(multiplyOperation);
+		}
+
+
+
 		currentContainer.peek().addChild(addOperation);
 		currentContainer.push(addOperation);
 	}
