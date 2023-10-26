@@ -11,6 +11,7 @@ import nl.han.ica.icss.ast.operations.AddOperation;
 import nl.han.ica.icss.ast.operations.MultiplyOperation;
 import nl.han.ica.icss.ast.operations.SubtractOperation;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -25,24 +26,52 @@ public class Evaluator implements Transform {
     @Override
     public void apply(AST ast) {
         variableValues = new HANLinkedList<>();
-    }
-
-    private void transformStyleSheet(Stylesheet stylesheet){
         variableValues.addFirst(new HashMap<>());
 
+        evaluateExpression(ast.root.getChildren(), ast.root);
     }
 
-    private void transformStylerule(Stylerule stylerule){
-        variableValues.addFirst(new HashMap<>());
+    private void evaluateExpression(ArrayList<ASTNode> children, ASTNode parent) {
+        HashMap<String, Literal> hashMap = new HashMap<>();
+        variableValues.addFirst(hashMap);
+        for (ASTNode child : children) {
+            if (child  instanceof VariableAssignment){
+                hashMap.put(((VariableAssignment) child).name.name, getLiteralFromExpression(((VariableAssignment) child).expression));
+            }
+            if (parent instanceof Declaration) {
+                Declaration declaration = (Declaration) parent;
+                if (child instanceof Operation) {
+                    declaration.expression = calculateExpression((Expression) child);
+                }
+                if (child instanceof VariableReference) {
+                    VariableReference variableReference = (VariableReference) child;
+                    for (int i = 0; i < variableValues.getSize(); i++) {
+                        HashMap<String, Literal> map = variableValues.get(i);
+                        if (map.containsKey(variableReference.name)) {
+                            ((Declaration) parent).expression = map.get(variableReference.name);
+                        }
+                    }
+                }
+            }
+            evaluateExpression(child.getChildren(), child);
+        }
+        variableValues.removeFirst();
     }
 
+
+//    private void transformStyleSheet(Stylesheet stylesheet){
+//        variableValues.addFirst(new HashMap<>());
+//
+//    }
+//    private void transformStylerule(Stylerule stylerule){
+//
+//    }
 //    private void transformVariableAssignment(VariableAssignment variableAssignment){
 //        variableValues.getFirst().put(variableAssignment.name.name, variableAssignment.value);
 //    }
-
-    private void transformIfClause(IfClause ifClause){
-        variableValues.addFirst(new HashMap<>());
-    }
+//    private void transformIfClause(IfClause ifClause){
+//        variableValues.addFirst(new HashMap<>());
+//    }
 
 
     /**
@@ -80,7 +109,6 @@ public class Evaluator implements Transform {
      * @param expression the given expression
      * @return literal or null
      */
-    /
     private Literal calculateExpression(Expression expression) {
         if (expression instanceof VariableReference) {
             VariableReference variableReference = (VariableReference) expression;
