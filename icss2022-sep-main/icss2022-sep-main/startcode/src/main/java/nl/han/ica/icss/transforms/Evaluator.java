@@ -72,7 +72,30 @@ public class Evaluator implements Transform {
         return literal;
     }
 
-    private Literal calculateOperation(Operation expression) {
+    private Literal calculateExpression(Expression lhs) {
+    }
+
+    private Literal calculateOperation(Operation operation) {
+        Literal left = calculateExpression(operation.lhs);
+        Literal right = calculateExpression(operation.rhs);
+
+        if (operation instanceof MultiplyOperation) {
+            return calculateMultiplyOperation(left, right);
+        } else if (operation instanceof AddOperation){
+            return calculateAddOperation(left, right);
+        } else if (operation instanceof SubtractOperation){
+            return calculateSubtractOperation(left, right);
+        }
+        return null;
+    }
+
+    private Literal calculateSubtractOperation(Literal left, Literal right) {
+    }
+
+    private Literal calculateAddOperation(Literal left, Literal right) {
+    }
+
+    private Literal calculateMultiplyOperation(Literal left, Literal right) {
     }
 
 
