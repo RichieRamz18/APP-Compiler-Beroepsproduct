@@ -330,5 +330,14 @@ public class Evaluator implements Transform {
         return null;
     }
 
+    private void findAllVariables (ASTNode toBeFound) {
+        if (toBeFound instanceof VariableAssignment) {
+            String name = ((VariableAssignment) toBeFound).name.name;
+            Expression expression = ((VariableAssignment) toBeFound).expression;
+            variables.getFirst().put(name, (Literal) expression);
+        }
+        toBeFound.getChildren().forEach(this::findAllVariables);
+    }
+
 
 }
