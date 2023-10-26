@@ -98,8 +98,8 @@ public class Evaluator implements Transform {
     /**
      * This method calculates the outcome of the add operation
      *
-     * @param left the left part of the operation
-     * @param right the right part of the operation
+     * @param left the left part of the expression (operation)
+     * @param right the right part of the expression (operation)
      * @return literal with the calculated value as result of the operation
      */
     private Literal calculateAddOperation(Expression left, Expression right) {
@@ -118,7 +118,27 @@ public class Evaluator implements Transform {
         return null;
     }
 
-    private Literal calculateSubtractOperation(Literal left, Literal right) {
+    /**
+     * This method calculates the outcome of the subtract operation
+     *
+     * @param left the left part of the expression (operation)
+     * @param right the right part of the expression (operation)
+     * @return literal with the calculated value as result of the operation
+     */
+    private Literal calculateSubtractOperation(Expression left, Expression right) {
+        if (left instanceof PercentageLiteral) {
+            int outcome = ((PercentageLiteral) left).value - ((PercentageLiteral) right).value;
+            return new PercentageLiteral(outcome);
+        }
+        if (left instanceof PixelLiteral) {
+            int outcome = ((PixelLiteral) left).value - ((PixelLiteral) right).value;
+            return new PixelLiteral(outcome);
+        }
+        if (left instanceof ScalarLiteral) {
+            int outcome = ((ScalarLiteral) left).value - ((ScalarLiteral) right).value;
+            return new ScalarLiteral(outcome);
+        }
+        return null;
     }
 
 
