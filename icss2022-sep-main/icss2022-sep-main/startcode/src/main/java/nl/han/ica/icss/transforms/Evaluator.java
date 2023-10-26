@@ -31,6 +31,15 @@ public class Evaluator implements Transform {
         evaluateExpression(ast.root.getChildren(), ast.root);
     }
 
+    /**
+     * This method evaluates the expression of the given children and parent
+     * For every child is decided which type the parent is, then it is checked if the child is an operation.
+     * Then sets the parents expression to the calculated expression.
+     * When the child is a VariableReference, the parents expression is set to the value of the variable.
+     *
+     * @param children the children of the given parent
+     * @param parent the given parent
+     */
     private void evaluateExpression(ArrayList<ASTNode> children, ASTNode parent) {
         HashMap<String, Literal> hashMap = new HashMap<>();
         variableValues.addFirst(hashMap);
@@ -136,7 +145,6 @@ public class Evaluator implements Transform {
      * @param operation the given operation
      * @return literal with the calculated value as result of the operation
      */
-    /
     private Literal calculateOperation(Operation operation) {
         Literal left = calculateExpression(operation.lhs);
         Literal right = calculateExpression(operation.rhs);
