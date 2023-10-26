@@ -285,6 +285,12 @@ public class Evaluator implements Transform {
         return values;
     }
 
+    /**
+     * This method removes the given ifClause from the parent
+     *
+     * @param ifClause the given ifClause
+     * @param parent the given parent
+    * */
     private void removeIfClause(IfClause ifClause, ASTNode parent) {
         if (parent instanceof Stylerule) {
             Stylerule stylerule = (Stylerule) parent;
