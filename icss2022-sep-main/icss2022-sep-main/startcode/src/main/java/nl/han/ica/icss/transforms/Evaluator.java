@@ -43,9 +43,6 @@ public class Evaluator implements Transform {
         variableValues.addFirst(new HashMap<>());
     }
 
-    private Literal transformOperation(Operation operation){
-
-    }
 
     /**
      * This method returns the literal from the given expression
@@ -75,6 +72,15 @@ public class Evaluator implements Transform {
     private Literal calculateExpression(Expression lhs) {
     }
 
+    /**
+     * This method sets the left and right part of the operation to a literal
+     * using the calculateExpression method. It then decides which type of operation it is
+     * and returns the result of the operation with the compliant calculateOperation method
+     *
+     * @param operation the given operation
+     * @return literal with the calculated value as result of the operation
+     */
+    /
     private Literal calculateOperation(Operation operation) {
         Literal left = calculateExpression(operation.lhs);
         Literal right = calculateExpression(operation.rhs);
