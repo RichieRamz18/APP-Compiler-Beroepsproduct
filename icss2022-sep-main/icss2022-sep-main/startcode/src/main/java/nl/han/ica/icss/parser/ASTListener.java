@@ -10,8 +10,7 @@ import nl.han.ica.icss.ast.operations.SubtractOperation;
 import nl.han.ica.icss.ast.selectors.ClassSelector;
 import nl.han.ica.icss.ast.selectors.IdSelector;
 import nl.han.ica.icss.ast.selectors.TagSelector;
-import org.antlr.v4.runtime.ParserRuleContext;
-import java.util.logging.*;
+import java.util.logging.Logger;
 
 /**
  * This class extracts the ICSS Abstract Syntax Tree from the Antlr Parse tree.
@@ -23,7 +22,7 @@ public class ASTListener extends ICSSBaseListener {
 
 	//Use this to keep track of the parent nodes when recursively traversing the ast
 	private final IHANStack<ASTNode> currentContainer;
-	/* Added a logging to keep track of entering and exiting rules*/
+	/* Added a logging to keep track of entering and exiting rules */
 	private static final Logger LOGGER = Logger.getLogger(ASTListener.class.getName());
 
 	public ASTListener() {
@@ -55,13 +54,6 @@ public class ASTListener extends ICSSBaseListener {
 		ASTNode styleRule = currentContainer.pop();
 		currentContainer.peek().addChild(styleRule);
 	}
-//	@Override public void enterSelector(ICSSParser.SelectorContext ctx) {
-//	}
-//	@Override public void exitSelector(ICSSParser.SelectorContext ctx) { }
-
-//	@Override public void enterBody(ICSSParser.BodyContext ctx) { }
-//
-//	@Override public void exitBody(ICSSParser.BodyContext ctx) { }
 
 	@Override public void enterTagSelector(ICSSParser.TagSelectorContext ctx) {
 		LOGGER.info("Entering TagSelector");
@@ -288,18 +280,7 @@ public class ASTListener extends ICSSBaseListener {
 
 	@Override public void exitIfClause(ICSSParser.IfClauseContext ctx) {
 		LOGGER.info("Exiting IfClause");
-		//ASTNode ifClause = currentContainer.pop();
 		currentContainer.pop();
-
-		// Checks the body size of the ifClause, because of bug with ElseClause
-//		if (ifClause instanceof IfClause) {
-//			IfClause ifClauseNode = (IfClause) ifClause;
-//			int bodySize = ifClauseNode.body.size();
-//			System.out.println("IfClause body size: " + bodySize);
-//		}
-//
-//		// Add ifClause to the parent node
-//		currentContainer.peek().addChild(ifClause);
 	}
 
 	@Override public void enterElseClause(ICSSParser.ElseClauseContext ctx) {
@@ -311,11 +292,6 @@ public class ASTListener extends ICSSBaseListener {
 	@Override public void exitElseClause(ICSSParser.ElseClauseContext ctx) {
 		LOGGER.info("Exiting ElseClause");
 		currentContainer.pop();
-//		ASTNode elseClause = currentContainer.pop();
-
-//		ASTNode ifClause = currentContainer.pop();
-//		currentContainer.peek().addChild(ifClause);
-//		currentContainer.peek().addChild(elseClause);
 	}
 
 }
