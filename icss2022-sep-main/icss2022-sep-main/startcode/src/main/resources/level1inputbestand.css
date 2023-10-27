@@ -1,32 +1,27 @@
-LinkTextColor := #0078d4;
-HeadColor := #333333;
-MenuWidth := 540px;
-ShowHeader := TRUE;
-
 h1 {
-    font-size: 28px;
-    color: LinkTextColor;
+  font-size: 28px;
+  color: #0078d4;
 }
 
 ul {
-    margin-left: 20px;
+  margin-left: 20px;
 }
 
 li {
-    color: LinkTextColor;
-    font-size: 18px;
+  color: #0078d4;
+  font-size: 18px;
 }
 
 #header {
-    background-color: HeadColor;
-    height: 80px;
-    color: #ffffff;
-    padding: 10px;
+  background-color: #333333;
+  height: 80px;
+  color: #ffffff;
+  padding: 10px;
 }
 
 .button {
-    background-color: HeadColor;
-    color: #ffffff;
-    padding: 10px;
-    font-size: 18px;
+  background-color: #333333;
+  color: #ffffff;
+  padding: 10px;
+  font-size: 18px;
 }

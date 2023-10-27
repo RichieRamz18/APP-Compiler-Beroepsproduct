@@ -1,20 +1,14 @@
-TextColour := #0088cc;
-Background := #ffffff;
-FontSize := 16px;
-UseBackgroundColour := TRUE;
-UseTextColour := TRUE;
-
 body {
-  background-color: Background;
-  color: TextColour;
+  background-color: #ffffff;
+  color: #0088cc;
 }
 
 h1 {
-  color: TextColour;
-  font-size: FontSize + 16px - 4px;
+  color: #0088cc;
+  font-size: 28px;
 }
 
 #sidebar {
-  background-color: Background;
+  background-color: #ffffff;
   width: 200px;
 }

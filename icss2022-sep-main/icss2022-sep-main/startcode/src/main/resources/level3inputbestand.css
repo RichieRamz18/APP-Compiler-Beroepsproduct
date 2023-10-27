@@ -1,32 +1,24 @@
-PrimaryColor := #3498db;
-SecondaryColor := #e74c3c;
-UseSecondaryColor := TRUE;
-
 body {
-    background-color: #ffffff;
-    color: PrimaryColor;
-    font-size: 16px;
+  background-color: #ffffff;
+  color: #3498db;
+  font-size: 16px;
 }
 
 h1 {
-    font-size: 24px;
-    color: SecondaryColor;
-    margin-top: 20px;
+  font-size: 24px;
+  color: #e74c3c;
+  margin-top: 20px;
 }
 
 .button {
-    background-color: PrimaryColor;
-     if[UseSecondaryColor] {
-        background-color: SecondaryColor;
-     } else {
-        background-color: #000000;
-     }
-    color: #ffffff;
-    padding: 10px;
+  background-color: #3498db;
+  color: #ffffff;
+  padding: 10px;
+  background-color: #e74c3c;
 }
 
 .footer {
-    background-color: PrimaryColor;
-    color: #ffffff;
-    padding: 20px;
+  background-color: #3498db;
+  color: #ffffff;
+  padding: 20px;
 }
