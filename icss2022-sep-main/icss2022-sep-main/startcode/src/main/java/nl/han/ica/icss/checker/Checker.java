@@ -83,6 +83,9 @@ public class Checker {
      * "Controleer of de operanden van de operaties plus en min van gelijke type zijn.
      * Je mag geen pixels bij percentages optellen bijvoorbeeld.
      * Controleer dat bij vermenigvuldigen minimaal een operand een scalaire waarde is."
+     * Checks if the operands of the operations plus and minus are of the same type.
+     * Checks if the operands of the operation multiply are of type scalar and pixel or percentage.
+     * Else sets an error.
      *
      * @param toBeChecked: The node that needs to be checked
      * */
@@ -201,6 +204,9 @@ public class Checker {
     /**
      * Function for CH05:
      * "Controleer of de conditie bij een if-statement van het type boolean is"
+     * Checks if the condition of an if-statement is of type boolean.
+     * If the condition is a VariableReference, checks if the variable is of type boolean.
+     * Else sets an error.
      *
      * @param toBeChecked: The node that needs to be checked
      * */
@@ -250,6 +256,8 @@ public class Checker {
 
     /**
      * This method resolves the ExpressionType of the given Expression.
+     * If the Expression is a VariableReference, it checks if the variable is defined and returns the ExpressionType of the variable.
+     * Else it returns the ExpressionType of the Expression.
      *
      * @param expression: The expression that needs to be checked
      * @return ExpressionType: The ExpressionType of the given Expression
@@ -278,6 +286,7 @@ public class Checker {
     /**
      * This recursive method gets the left and right side of an ExpressionType, it then checks which type of operation it is
      * and returns the ExpressionType of the result of the operation.
+     * If the operation is not valid, it returns ExpressionType.UNDEFINED.
      *
      * @param operation: The operation that needs to be checked (AddOperation, SubtractOperation or MultiplyOperation)
      * @return ExpressionType or Undefined: The ExpressionType of the result of the operation
