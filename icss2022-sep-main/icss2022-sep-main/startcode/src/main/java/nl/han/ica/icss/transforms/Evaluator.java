@@ -1,6 +1,5 @@
 package nl.han.ica.icss.transforms;
 
-import com.google.errorprone.annotations.Var;
 import nl.han.ica.datastructures.HANLinkedList;
 import nl.han.ica.datastructures.IHANLinkedList;
 import nl.han.ica.icss.ast.*;
@@ -14,7 +13,6 @@ import nl.han.ica.icss.ast.operations.SubtractOperation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 
 public class Evaluator implements Transform {
@@ -35,7 +33,6 @@ public class Evaluator implements Transform {
         variables.addFirst(new HashMap<>());
         findAllVariables(ast.root);
 
-        List<ASTNode> children = ast.root.getChildren();
         evaluateExpression(ast.root.getChildren(), ast.root);
         evaluateIfStatements(ast.root.getChildren(), ast.root);
     }
@@ -198,24 +195,6 @@ public class Evaluator implements Transform {
         return null;
     }
 
-//    private Literal calculateSubtractOperation(Expression left, Expression right) {
-//        if (left.getClass() == right.getClass()){
-//            switch (left.getClass().getSimpleName()) {
-//                case "PercentageLiteral":
-//                    int outcomePercentage = ((PercentageLiteral) left).value - ((PercentageLiteral) right).value;
-//                    return new PercentageLiteral(outcomePercentage);
-//                case "PixelLiteral":
-//                    int outcomePixel = ((PixelLiteral) left).value - ((PixelLiteral) right).value;
-//                    return new PixelLiteral(outcomePixel);
-//                case "ScalarLiteral":
-//                    int outcomeScalar = ((ScalarLiteral) left).value - ((ScalarLiteral) right).value;
-//                    return new ScalarLiteral(outcomeScalar);
-//            }
-//        }
-//        return null;
-//    }
-
-
     /**
      * This method calculates the outcome of the multiply operation
      *
@@ -333,6 +312,12 @@ public class Evaluator implements Transform {
         return null;
     }
 
+    /**
+     * This method finds all variables in the given ASTNode
+     * and adds them to the variables list hashmap
+     *
+     * @param toBeFound the given ASTNode
+     */
     private void findAllVariables (ASTNode toBeFound) {
         if (toBeFound instanceof VariableAssignment) {
             String name = ((VariableAssignment) toBeFound).name.name;
