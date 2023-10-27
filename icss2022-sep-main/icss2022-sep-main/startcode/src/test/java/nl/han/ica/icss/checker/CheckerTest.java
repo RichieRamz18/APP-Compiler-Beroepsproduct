@@ -68,6 +68,10 @@ class CheckerTest {
         boolean success = pipeline.check();
         assertTrue(success, "The checker should not give any errors");
     }
+
+    /**
+     * The following tests are for the CH01, CH03, CH05 and CH06 checks with files that have incorrect semantics
+     */
     @Test
     void testCheckCH01OnUndefinedVariable() throws IOException {
         pipeline.parseString(this.readFile("CH01testbestand.icss"));
@@ -87,6 +91,13 @@ class CheckerTest {
         pipeline.parseString(this.readFile("CH05testbestand.icss"));
         boolean success = pipeline.check();
         assertFalse(success, "The checker should give an error because of the wrong use of a condition in an if clause");
+    }
+
+    @Test
+    void testCheckCH06OnUseOfVariablesWithinOwnScope() throws IOException{
+        pipeline.parseString(this.readFile("CH06testbestand.icss"));
+        boolean success = pipeline.check();
+        assertFalse(success, "The checker should give an error because of the use of variables within their own scope");
     }
 }
 
