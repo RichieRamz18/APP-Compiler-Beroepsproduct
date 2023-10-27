@@ -33,10 +33,11 @@ public class Checker {
     }
 
     private void checkAST(ASTNode node){
-        //checkOperationTypes(node); TO DO: implementeren
+        checkVariables(node, variableScopeStack);
+        checkOperationTypes(node);
         checkNoColorsInOperation(node);
         checkIfConditionIsBoolean(node);
-        checkVariables(node, variableScopeStack);
+
         node.getChildren().forEach(this::checkAST);
     }
 
@@ -95,8 +96,23 @@ public class Checker {
                     }
                 } else if (((Operation) toBeChecked).rhs instanceof VariableReference) {
                     if (variableTypes.getFirst().containsKey(((VariableReference) ((Operation) toBeChecked).rhs).name)) {
-
+                        if (variableTypes.getFirst().get(((VariableReference) ((Operation) toBeChecked).rhs).name) != resolveExpressionType(((Operation) toBeChecked).lhs)) {
+                            toBeChecked.setError("The operand types must be of the same type!");
+                        }
                     }
+                } else if (((Operation) toBeChecked).lhs instanceof VariableReference && ((Operation) toBeChecked).rhs instanceof VariableReference) {
+                    if (variableTypes.getFirst().containsKey(((VariableReference) ((Operation) toBeChecked).lhs).name) && variableTypes.getFirst().containsKey(((VariableReference) ((Operation) toBeChecked).rhs).name)) {
+                        if (variableTypes.getFirst().get(((VariableReference) ((Operation) toBeChecked).lhs).name) != variableTypes.getFirst().get(((VariableReference) ((Operation) toBeChecked).rhs).name)) {
+                            toBeChecked.setError("The operand types must be of the same type!");
+                        }
+                    }
+                } else if (resolveExpressionType(((Operation) toBeChecked).lhs) != resolveExpressionType(((Operation) toBeChecked).rhs)) {
+                    toBeChecked.setError("The operand types must be of the same type!");
+                }
+            } else if (toBeChecked instanceof MultiplyOperation) {
+                if ((resolveExpressionType(((MultiplyOperation) toBeChecked).lhs) != ExpressionType.SCALAR && resolveExpressionType(((MultiplyOperation) toBeChecked).rhs) != ExpressionType.SCALAR) ||
+                        (resolveExpressionType(((MultiplyOperation) toBeChecked).lhs) == ExpressionType.SCALAR && resolveExpressionType(((MultiplyOperation) toBeChecked).rhs) == ExpressionType.SCALAR)) {
+                    toBeChecked.setError("One of the operands must be of type scalar!");
                 }
             }
         }
@@ -175,6 +191,9 @@ public class Checker {
         }
     }
 
+    /**
+     * This method finds all the variables in the AST and adds them to the variableScopeStack.
+     */
     private void findAllVariables(ASTNode toBeFound, Stack<HashMap<String, ExpressionType>> variableScopeStack){
         if(toBeFound instanceof VariableAssignment){
             String name = ((VariableAssignment) toBeFound).name.name;
@@ -199,6 +218,13 @@ public class Checker {
     private void findAllVariables(ASTNode toBeFound){
         findAllVariables(toBeFound, variableScopeStack);
     }
+
+    /**
+     * This method resolves the ExpressionType of the given Expression.
+     *
+     * @param expression: The expression that needs to be checked
+     * @return ExpressionType: The ExpressionType of the given Expression
+     */
     private ExpressionType resolveExpressionType(Expression expression){
         if(expression instanceof BoolLiteral){
             return ExpressionType.BOOL;
