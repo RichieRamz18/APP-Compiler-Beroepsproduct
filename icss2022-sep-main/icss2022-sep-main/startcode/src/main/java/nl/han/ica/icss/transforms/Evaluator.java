@@ -35,6 +35,7 @@ public class Evaluator implements Transform {
         variables.addFirst(new HashMap<>());
         findAllVariables(ast.root);
 
+        List<ASTNode> children = ast.root.getChildren();
         evaluateExpression(ast.root.getChildren(), ast.root);
         evaluateIfStatements(ast.root.getChildren(), ast.root);
     }

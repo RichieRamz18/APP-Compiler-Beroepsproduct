@@ -1,0 +1,32 @@
+LinkTextColor := #0078d4;
+HeadColor := #333333;
+MenuWidth := 540px;
+ShowHeader := TRUE;
+
+h1 {
+    font-size: 28px;
+    color: LinkTextColor;
+}
+
+ul {
+    margin-left: 20px;
+}
+
+li {
+    color: LinkTextColor;
+    font-size: 18px;
+}
+
+#header {
+    background-color: HeadColor;
+    height: 80px;
+    color: #ffffff;
+    padding: 10px;
+}
+
+.button {
+    background-color: HeadColor;
+    color: #ffffff;
+    padding: 10px;
+    font-size: 18px;
+}

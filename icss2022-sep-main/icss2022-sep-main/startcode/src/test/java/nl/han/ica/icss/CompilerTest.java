@@ -59,4 +59,32 @@ public class CompilerTest {
         assertEquals(expected, output);
     }
 
+    @Test
+    public void testLevel0Inputbestand() throws IOException {
+        String output = this.getCSSOutput("level0inputbestand.icss");
+        String expected = this.readFile("level0inputbestand.css");
+        assertEquals(expected, output);
+    }
+
+    @Test
+    public void testLevel1Inputbestand()throws IOException {
+        String output = this.getCSSOutput("level1inputbestand.icss");
+        String expected = this.readFile("level1inputbestand.css");
+        assertEquals(expected, output);
+    }
+
+    @Test
+    public void testLevel2Inputbestand() throws IOException {
+        String output = this.getCSSOutput("level2inputbestand.icss");
+        String expected = this.readFile("level2inputbestand.css");
+        assertEquals(expected, output);
+    }
+
+    @Test
+    public void testLevel3Inputbestand() throws IOException {
+        String output = this.getCSSOutput("level3inputbestand.icss");
+        String expected = this.readFile("level3inputbestand.css");
+        assertEquals(expected, output);
+    }
+
 }

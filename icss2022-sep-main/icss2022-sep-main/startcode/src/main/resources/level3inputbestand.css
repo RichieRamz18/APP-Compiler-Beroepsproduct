@@ -1,0 +1,32 @@
+PrimaryColor := #3498db;
+SecondaryColor := #e74c3c;
+UseSecondaryColor := TRUE;
+
+body {
+    background-color: #ffffff;
+    color: PrimaryColor;
+    font-size: 16px;
+}
+
+h1 {
+    font-size: 24px;
+    color: SecondaryColor;
+    margin-top: 20px;
+}
+
+.button {
+    background-color: PrimaryColor;
+     if[UseSecondaryColor] {
+        background-color: SecondaryColor;
+     } else {
+        background-color: #000000;
+     }
+    color: #ffffff;
+    padding: 10px;
+}
+
+.footer {
+    background-color: PrimaryColor;
+    color: #ffffff;
+    padding: 20px;
+}
