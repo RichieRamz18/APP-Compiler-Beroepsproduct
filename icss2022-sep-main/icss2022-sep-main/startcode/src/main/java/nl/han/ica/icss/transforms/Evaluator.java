@@ -75,22 +75,6 @@ public class Evaluator implements Transform {
         variableValues.removeFirst();
     }
 
-
-//    private void transformStyleSheet(Stylesheet stylesheet){
-//        variableValues.addFirst(new HashMap<>());
-//
-//    }
-//    private void transformStylerule(Stylerule stylerule){
-//
-//    }
-//    private void transformVariableAssignment(VariableAssignment variableAssignment){
-//        variableValues.getFirst().put(variableAssignment.name.name, variableAssignment.value);
-//    }
-//    private void transformIfClause(IfClause ifClause){
-//        variableValues.addFirst(new HashMap<>());
-//    }
-
-
     /**
      * This method returns the literal from the given expression
      *

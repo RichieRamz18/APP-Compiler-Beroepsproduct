@@ -190,7 +190,7 @@ public class Checker {
         }
     }
 
-    /*
+    /**
      * Function for CH06:
      * "Controleer of variabelen enkel binnen hun scope gebruikt worden"
      * Recursive function that checks if a variable is used in its scope.
