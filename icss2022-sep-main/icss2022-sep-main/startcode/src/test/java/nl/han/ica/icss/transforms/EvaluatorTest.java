@@ -30,10 +30,12 @@ class EvaluatorTest {
     }
 
     @Test
-    public void testTransformTR01() throws IOException {
-        String output = this.getCSSOutput("TR01.icss");
-        String expected = this.readFile("TR01.css");
+    public void testTransformTR01Expressions() throws IOException {
+        String output = this.getCSSOutput("TR01testbestand1.icss");
+        String expected = this.readFile("TR01testbestand1.css");
         assertEquals(expected, output);
     }
+
+    
 
 }
