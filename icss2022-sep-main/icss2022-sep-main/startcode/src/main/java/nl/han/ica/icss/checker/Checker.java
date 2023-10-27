@@ -36,6 +36,7 @@ public class Checker {
         checkVariables(node, variableScopeStack);
         checkOperationTypes(node);
         checkNoColorsInOperation(node);
+        checkIfDeclarationValueMatchesProperty(node);
         checkIfConditionIsBoolean(node);
 
         node.getChildren().forEach(this::checkAST);
@@ -153,21 +154,38 @@ public class Checker {
      *
      * @param toBeChecked: The node that needs to be checked
      * */
-//    private void checkIfDeclarationValueMatchesProperty(ASTNode toBeChecked){
-//        if (toBeChecked.getChildren().size() != 1){
-//            if (toBeChecked instanceof Declaration){
-//                if (((Declaration) toBeChecked).property == PropertyName.){
-//                    if (((Declaration) toBeChecked).expression instanceof VariableReference) {
-//                        if (variableTypes.getFirst().get(((VariableReference) ((Declaration) toBeChecked).expression).name) != ExpressionType.COLOR) {
-//                            toBeChecked.setError("The variable in the declaration must be of type color!");
-//                        }
-//                    } else if (!(((Declaration) toBeChecked).expression instanceof ColorLiteral)) {
-//                        toBeChecked.setError("The declaration must be of type color!");
-//                    }
-//                } else if (((Declaration) toBeChecked).property == Property.WIDTH || ((Declaration) toBeChecked).property == Property.HEIGHT){
-//                    if (((Declaration) toBeChecked).expression instanceof VariableReference);
-//        }
-//    }
+    private void checkIfDeclarationValueMatchesProperty(ASTNode toBeChecked) {
+        if (toBeChecked.getChildren().size() != 1) {
+            if (toBeChecked instanceof Declaration) {
+                PropertyName propertyName = ((Declaration) toBeChecked).property;
+                Expression expressionOfProperty = ((Declaration) toBeChecked).expression;
+                if ((propertyName.name.equals("color") || propertyName.name.equals("background-color"))) {
+                    if (expressionOfProperty instanceof Operation) {
+                        toBeChecked.setError("Operations are not allowed in color declarations!");
+                    }
+                    if (expressionOfProperty instanceof VariableReference) {
+                        if (variableTypes.getFirst().containsKey(((VariableReference) expressionOfProperty).name)) {
+                            if (variableTypes.getFirst().get(((VariableReference) expressionOfProperty).name) != ExpressionType.COLOR) {
+                                toBeChecked.setError("The variable in the declaration must be of type color!");
+                            }
+                        }
+                    } else if (resolveExpressionType(expressionOfProperty) != ExpressionType.COLOR) {
+                        toBeChecked.setError("The declaration must be of type color!");
+                    }
+                }
+                if ((propertyName.name.equals("width")|| propertyName.name.equals("height"))) {
+                    ExpressionType valueType = resolveExpressionType(((Declaration) toBeChecked).expression);
+
+                    if (propertyName.name.equals("width") && (valueType == ExpressionType.COLOR || valueType == ExpressionType.PERCENTAGE)) {
+                       toBeChecked.setError("The value of the width property must be of type scalar or pixel!");
+                    }
+                    if (propertyName.name.equals("height") && (valueType == ExpressionType.COLOR || valueType == ExpressionType.PIXEL)) {
+                        toBeChecked.setError("The value of the height property must be of type scalar or percentage!");
+                    }
+                }
+            }
+        }
+    }
 
     /**
      * Function for CH05:
