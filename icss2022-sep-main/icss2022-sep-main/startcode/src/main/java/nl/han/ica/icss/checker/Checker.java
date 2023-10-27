@@ -5,6 +5,7 @@ import nl.han.ica.datastructures.IHANLinkedList;
 import nl.han.ica.icss.ast.*;
 import nl.han.ica.icss.ast.literals.*;
 import nl.han.ica.icss.ast.operations.AddOperation;
+import nl.han.ica.icss.ast.operations.MultiplyOperation;
 import nl.han.ica.icss.ast.operations.SubtractOperation;
 import nl.han.ica.icss.ast.types.ExpressionType;
 
@@ -41,7 +42,8 @@ public class Checker {
 
     /**
      * Function for CH01 & CH06:
-     * "Controleer of er geen variabelen worden gebruikt die niet gedefinieerd zijn."
+     * CH01: "Controleer of er geen variabelen worden gebruikt die niet gedefinieerd zijn."
+     * CH06: "Controleer of variabelen niet buiten hun scope worden gebruikt."
      *
      * @param toBeChecked: The node that needs to be checked
      * */
@@ -63,7 +65,7 @@ public class Checker {
     }
 
     /**
-     * This function checks if a variable is within the scope of the current scope.
+     * This helper function checks if a variable is within the scope of the current scope.
      */
     private boolean isWithinScope(Stack<HashMap<String, ExpressionType>> variableScopeStack, String variableName) {
         for (HashMap<String, ExpressionType> scope : variableScopeStack) {
@@ -100,7 +102,7 @@ public class Checker {
         }
     }
 
-    /*
+    /**
      * Function for CH03:
      * "Controleer of er geen kleuren worden gebruikt in operaties (plus, min of keer)."
      * Checks if either the left or right side of an operation is a Colorliteral
@@ -128,7 +130,7 @@ public class Checker {
         }
     }
 
-    /*
+    /**
      * Function for CH04:
      * "Controleer of bij declaraties het type van de value klopt met de property.
      * Declaraties zoals width: #ff0000 of color: 12px zijn natuurlijk onzin."
@@ -151,7 +153,7 @@ public class Checker {
 //        }
 //    }
 
-    /*
+    /**
      * Function for CH05:
      * "Controleer of de conditie bij een if-statement van het type boolean is"
      *
@@ -197,7 +199,6 @@ public class Checker {
     private void findAllVariables(ASTNode toBeFound){
         findAllVariables(toBeFound, variableScopeStack);
     }
-
     private ExpressionType resolveExpressionType(Expression expression){
         if(expression instanceof BoolLiteral){
             return ExpressionType.BOOL;
@@ -219,8 +220,43 @@ public class Checker {
         return ExpressionType.UNDEFINED;
     }
 
+    /**
+     * 
+     */
     private ExpressionType checkOperationResultType(Operation operation){
+        ExpressionType left = resolveExpressionType(operation.lhs);
+        ExpressionType right = resolveExpressionType(operation.rhs);
+
+        if(operation instanceof MultiplyOperation) {
+            if (left == ExpressionType.SCALAR) {
+                if (right == ExpressionType.PIXEL) {
+                    return ExpressionType.PIXEL;
+                }
+                if (right == ExpressionType.PERCENTAGE){
+                    return ExpressionType.PERCENTAGE;
+                }
+            } else if (right == ExpressionType.SCALAR) {
+                if (left == ExpressionType.PIXEL) {
+                    return ExpressionType.PIXEL;
+                }
+                if (left == ExpressionType.PERCENTAGE){
+                    return ExpressionType.PERCENTAGE;
+                }
+            }
+        }
+        if (operation instanceof AddOperation || operation instanceof SubtractOperation){
+            if (left == ExpressionType.PIXEL) {
+                if (left == right) {
+                    return ExpressionType.PIXEL;
+                }
+            }
+            if (right == ExpressionType.PERCENTAGE) {
+                if (left == right) {
+                    return ExpressionType.PERCENTAGE;
+                }
+            }
+        }
+
         return ExpressionType.UNDEFINED;
-        //TODO: implementeren
     }
 }

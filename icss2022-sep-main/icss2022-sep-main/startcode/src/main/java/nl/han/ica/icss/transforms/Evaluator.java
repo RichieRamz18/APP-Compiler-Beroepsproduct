@@ -341,6 +341,4 @@ public class Evaluator implements Transform {
         }
         toBeFound.getChildren().forEach(this::findAllVariables);
     }
-
-
 }
