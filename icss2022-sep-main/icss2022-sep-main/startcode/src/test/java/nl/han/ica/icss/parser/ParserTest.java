@@ -55,7 +55,6 @@ class ParserTest {
 
 	@Test
 	void testParseLevel0() throws IOException {
-
 		AST sut = parseTestFile("level0.icss");
 		AST exp = Fixtures.uncheckedLevel0();
 		assertEquals(exp,sut);
@@ -70,7 +69,6 @@ class ParserTest {
 
 	@Test
 	void testParseLevel1() throws IOException {
-
 		AST sut = parseTestFile("level1.icss");
 		AST exp = Fixtures.uncheckedLevel1();
 		assertEquals(exp,sut);
@@ -78,14 +76,12 @@ class ParserTest {
 
 	@Test
 	void testParseLevel1inputBestand() throws IOException {
-
 		AST sut = parseTestFile("level1inputbestand.icss");
 		AST exp = Fixtures.uncheckedLevel1inputBestand();
 		assertEquals(exp,sut);
 	}
 	@Test
 	void testParseLevel2() throws IOException {
-
 		AST sut = parseTestFile("level2.icss");
 		AST exp = Fixtures.uncheckedLevel2();
 		assertEquals(exp,sut);
@@ -93,14 +89,12 @@ class ParserTest {
 
 	@Test
 	void testParseLevel2inputBestand() throws IOException {
-
 		AST sut = parseTestFile("level2inputbestand.icss");
 		AST exp = Fixtures.uncheckedLevel2inputBestand();
 		assertEquals(exp,sut);
 	}
 	@Test
 	void testParseLevel3() throws IOException {
-
 		AST sut = parseTestFile("level3.icss");
 		AST exp = Fixtures.uncheckedLevel3();
 		assertEquals(exp,sut);
@@ -108,7 +102,6 @@ class ParserTest {
 
 	@Test
 	void testParseLevel3inputBestand() throws IOException {
-
 		AST sut = parseTestFile("level3inputbestand.icss");
 		AST exp = Fixtures.uncheckedLevel3inputBestand();
 		assertEquals(exp,sut);
