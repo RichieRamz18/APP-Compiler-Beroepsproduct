@@ -211,7 +211,7 @@ public class Checker {
         } else if (expression instanceof ScalarLiteral){
             return ExpressionType.SCALAR;
         } else if (expression instanceof Operation){
-            //return //checkOperationResultType implementeren
+            return checkOperationResultType((Operation) expression);
         } else if (expression instanceof VariableReference){
             if(variableTypes.getFirst().containsKey(((VariableReference) expression).name)){
                 return variableTypes.getFirst().get(((VariableReference) expression).name);
@@ -221,7 +221,11 @@ public class Checker {
     }
 
     /**
-     * 
+     * This recursive method gets the left and right side of an ExpressionType, it then checks which type of operation it is
+     * and returns the ExpressionType of the result of the operation.
+     *
+     * @param operation: The operation that needs to be checked (AddOperation, SubtractOperation or MultiplyOperation)
+     * @return ExpressionType or Undefined: The ExpressionType of the result of the operation
      */
     private ExpressionType checkOperationResultType(Operation operation){
         ExpressionType left = resolveExpressionType(operation.lhs);
