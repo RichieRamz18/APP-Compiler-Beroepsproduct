@@ -46,8 +46,12 @@ public class Checker {
      * Function for CH01 & CH06:
      * CH01: "Controleer of er geen variabelen worden gebruikt die niet gedefinieerd zijn."
      * CH06: "Controleer of variabelen niet buiten hun scope worden gebruikt."
+     * Checks if the variable is defined in the current scope.
+     * If the variable is not defined in the current scope, it checks if the variable is defined in a higher scope.
+     * If the variable is not defined in a higher scope, it sets an error.
      *
      * @param toBeChecked: The node that needs to be checked
+     * @param variableScopeStack: The stack that contains all the scopes
      * */
     private void checkVariables(ASTNode toBeChecked, Stack<HashMap<String, ExpressionType>> variableScopeStack) {
         if (toBeChecked instanceof VariableReference) {
@@ -68,6 +72,12 @@ public class Checker {
 
     /**
      * This helper function checks if a variable is within the scope of the current scope.
+     * If the variable is defined in the current scope or in a higher scope, it returns true.
+     *
+     * @param variableScopeStack: The stack that contains all the scopes
+     *                          (the current scope is the last element in the stack)
+     *                          (the highest scope is the first element in the stack)
+     * @param variableName: The name of the variable that needs to be checked
      */
     private boolean isWithinScope(Stack<HashMap<String, ExpressionType>> variableScopeStack, String variableName) {
         for (HashMap<String, ExpressionType> scope : variableScopeStack) {
@@ -228,6 +238,10 @@ public class Checker {
 
     /**
      * This method finds all the variables in the AST and adds them to the variableScopeStack.
+     * It checks if the variable is already defined in the current scope, if so it sets an error.
+     *
+     * @param toBeFound: The node that needs to be checked
+     * @param variableScopeStack: The stack that contains all the scopes
      */
     private void findAllVariables(ASTNode toBeFound, Stack<HashMap<String, ExpressionType>> variableScopeStack){
         if(toBeFound instanceof VariableAssignment){
@@ -249,6 +263,9 @@ public class Checker {
 
     /**
      * overloaded method for findAllVariables
+     * This method finds all the variables in the AST and adds them to the variableScopeStack.
+     *
+     * @param toBeFound: The node that needs to be checked
      */
     private void findAllVariables(ASTNode toBeFound){
         findAllVariables(toBeFound, variableScopeStack);
