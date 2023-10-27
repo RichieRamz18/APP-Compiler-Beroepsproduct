@@ -71,7 +71,7 @@ public class Generator {
 	private void generateDeclarationResult(ArrayList<ASTNode> nodes) {
 		for (ASTNode node : nodes) {
 			if (node instanceof PropertyName) {
-				stringBuilder.append("\t").append(((PropertyName) node).name).append(": ");
+				stringBuilder.append("  ").append(((PropertyName) node).name).append(": ");
 			}
 			if (node instanceof Expression) {
 				generateLiteralResult(node);
