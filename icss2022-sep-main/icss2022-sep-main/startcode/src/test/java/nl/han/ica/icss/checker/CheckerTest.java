@@ -70,13 +70,19 @@ class CheckerTest {
     }
 
     /**
-     * The following tests are for the CH01, CH03, CH05 and CH06 checks with files that have incorrect semantics
+     * The following tests are for the CH01, CH02, CH03, CH05 and CH06 checks with files that have incorrect semantics
      */
     @Test
     void testCheckCH01OnUndefinedVariable() throws IOException {
         pipeline.parseString(this.readFile("CH01testbestand.icss"));
         boolean success = pipeline.check();
         assertFalse(success, "The checker should give an error because of an undefined variable");
+    }
+    @Test
+    void testCheckCH02OnEqualOperationTypes() throws IOException {
+        pipeline.parseString(this.readFile("CH02testbestand.icss"));
+        boolean success = pipeline.check();
+        assertFalse(success, "The checker should give an error because of an unequal operation type");
     }
 
     @Test
