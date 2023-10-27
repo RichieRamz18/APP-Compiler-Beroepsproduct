@@ -29,6 +29,4 @@ public class CompilerTest {
         return pipeline.generate();
     }
 
-
-
 }
