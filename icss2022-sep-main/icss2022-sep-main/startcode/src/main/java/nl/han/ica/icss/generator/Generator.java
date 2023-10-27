@@ -51,6 +51,11 @@ public class Generator {
 		node.getChildren().forEach(this::generateCSSResult);
 	}
 
+	/**
+	 * This method checks the type of the selector and appends the correct value to the stringBuilder.
+	 *
+	 * @param selector The selector to check the type of.
+	 * */
 	private void generateSelectorResult(Selector selector) {
 		if (selector instanceof ClassSelector) {
 			stringBuilder.append(((ClassSelector) selector).cls);
@@ -62,12 +67,22 @@ public class Generator {
 		stringBuilder.append(" ");
 	}
 
+	/**
+	 * This method calls generateDeclarationResult if the node is a Declaration.
+	 *
+	 * @param node The node to check the type of.
+	 * */
 	private void generateBodyResult(ASTNode node) {
 		if (node instanceof Declaration) {
 			generateDeclarationResult(node.getChildren());
 		}
 	}
 
+	/**
+	 * This method generates the CSS result of a declaration for the final result.
+	 *
+	 * @param nodes The nodes to generate the CSS result of.
+	 * */
 	private void generateDeclarationResult(ArrayList<ASTNode> nodes) {
 		for (ASTNode node : nodes) {
 			if (node instanceof PropertyName) {
