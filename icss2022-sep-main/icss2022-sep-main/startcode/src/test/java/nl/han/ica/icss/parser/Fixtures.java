@@ -426,7 +426,7 @@ public class Fixtures {
 		/*
 		h1 {
   			color: TextColour;
-  			font-size: FontSize + 16 - 4px;
+  			font-size: FontSize + 16px - 4px;
 		}
 		*/
 		stylesheet.addChild((new Stylerule())
@@ -437,7 +437,7 @@ public class Fixtures {
 						.addChild((new SubtractOperation())
 								.addChild(new AddOperation()
 										.addChild(new VariableReference("FontSize"))
-										.addChild(new ScalarLiteral("16")))
+										.addChild(new PixelLiteral("16px")))
 								.addChild(new PixelLiteral("4px")))));
 
 

@@ -79,7 +79,7 @@ public class HANLinkedList<T> implements IHANLinkedList<T> {
     public int getSize() {
         return size;
     }
-    
+
     public boolean isEmpty(){
         return size == 0;
     }
