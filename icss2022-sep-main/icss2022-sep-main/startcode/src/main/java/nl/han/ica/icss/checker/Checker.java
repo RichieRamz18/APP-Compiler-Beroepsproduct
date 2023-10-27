@@ -32,16 +32,14 @@ public class Checker {
     }
 
     private void checkAST(ASTNode node){
-       // checkUndefinedVariables(node);
         //checkOperationTypes(node); TO DO: implementeren
         checkNoColorsInOperation(node);
         checkIfConditionIsBoolean(node);
-        //checkIfVariablesAreUsedInScope(node, variableScopeStack);
         checkVariables(node, variableScopeStack);
         node.getChildren().forEach(this::checkAST);
     }
 
-    /*
+    /**
      * Function for CH01 & CH06:
      * "Controleer of er geen variabelen worden gebruikt die niet gedefinieerd zijn."
      *
@@ -64,6 +62,9 @@ public class Checker {
         }
     }
 
+    /**
+     * This function checks if a variable is within the scope of the current scope.
+     */
     private boolean isWithinScope(Stack<HashMap<String, ExpressionType>> variableScopeStack, String variableName) {
         for (HashMap<String, ExpressionType> scope : variableScopeStack) {
             if (scope.containsKey(variableName)) {
@@ -73,25 +74,7 @@ public class Checker {
         return false;
     }
 
-
-    /*
-    * Function for CH01:
-    * "Controleer of er geen variabelen worden gebruikt die niet gedefinieerd zijn."
-    *
-    * @param toBeChecked: The node that needs to be checked
-    * */
-    private void checkUndefinedVariables(ASTNode toBeChecked) {
-        if(toBeChecked.getChildren().size() != 1){
-            if(toBeChecked instanceof VariableReference){
-                String name = ((VariableReference) toBeChecked).name;
-                if(!variableTypes.getFirst().containsKey(name)) {
-                    toBeChecked.setError("Variable " + name + " is not defined and can't be used");
-                }
-            }
-        }
-    }
-
-    /*
+    /**
      * Function for CH02:
      * "Controleer of de operanden van de operaties plus en min van gelijke type zijn.
      * Je mag geen pixels bij percentages optellen bijvoorbeeld.
@@ -189,35 +172,6 @@ public class Checker {
             }
         }
     }
-
-    /**
-     * Function for CH06:
-     * "Controleer of variabelen enkel binnen hun scope gebruikt worden"
-     * Recursive function that checks if a variable is used in its scope.
-     * If the variable is used outside its scope, an error is set.
-     *
-     * @param toBeChecked: The node that needs to be checked
-     * */
-    private void checkIfVariablesAreUsedInScope(ASTNode toBeChecked, Stack<HashMap<String, ExpressionType>> variableScopeStack){
-        if(toBeChecked instanceof VariableReference){
-            String name = ((VariableReference) toBeChecked).name;
-            boolean found = false;
-            //Doorzoek de stack van scope-mappen van boven naar beneden
-            for (HashMap<String, ExpressionType> scope : variableScopeStack){
-                if(scope.containsKey(name)) {
-                    found = true;
-                    break;
-                }
-            }
-            if(!found){
-                toBeChecked.setError("The variable " + name + " is not declared in this scope!");
-            }
-        }
-            for (ASTNode child : toBeChecked.getChildren()) {
-                checkIfVariablesAreUsedInScope(child, variableScopeStack);
-            }
-    }
-
 
     private void findAllVariables(ASTNode toBeFound, Stack<HashMap<String, ExpressionType>> variableScopeStack){
         if(toBeFound instanceof VariableAssignment){
