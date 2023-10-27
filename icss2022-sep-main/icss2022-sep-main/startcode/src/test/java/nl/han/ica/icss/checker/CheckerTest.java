@@ -84,6 +84,13 @@ class CheckerTest {
     }
 
     @Test
+    void testCheckCH04OnInvalidDeclarations() throws IOException {
+        pipeline.parseString(this.readFile("CH04testbestand.icss"));
+        boolean success = pipeline.check();
+        assertFalse(success, "The checker should give an error because of an invalid declaration");
+    }
+
+    @Test
     void testCheckCH05OnWrongUseOfConditionInIfClause() throws IOException {
         pipeline.parseString(this.readFile("CH05testbestand.icss"));
         boolean success = pipeline.check();

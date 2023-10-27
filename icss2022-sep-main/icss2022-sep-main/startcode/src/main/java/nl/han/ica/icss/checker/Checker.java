@@ -151,6 +151,11 @@ public class Checker {
      * Function for CH04:
      * "Controleer of bij declaraties het type van de value klopt met de property.
      * Declaraties zoals width: #ff0000 of color: 12px zijn natuurlijk onzin."
+     * Checks for the properties color and background-color if the value is of type color.
+     * Checks for the properties width and height if the value is of type pixel or percentage.
+     * Checks if the value is a VariableReference if the variable is of type color, pixel or percentage.
+     * If the value is an Operation, checks if the result of the operation is of type color, pixel or percentage.
+     * Else sets an error.
      *
      * @param toBeChecked: The node that needs to be checked
      * */
@@ -174,13 +179,19 @@ public class Checker {
                     }
                 }
                 if ((propertyName.name.equals("width")|| propertyName.name.equals("height"))) {
-                    ExpressionType valueType = resolveExpressionType(((Declaration) toBeChecked).expression);
-
-                    if (propertyName.name.equals("width") && (valueType == ExpressionType.COLOR || valueType == ExpressionType.PERCENTAGE)) {
-                       toBeChecked.setError("The value of the width property must be of type scalar or pixel!");
+                    if (expressionOfProperty instanceof Operation) {
+                        if (checkOperationResultType((Operation) expressionOfProperty) != ExpressionType.PIXEL && checkOperationResultType((Operation) expressionOfProperty) != ExpressionType.PERCENTAGE) {
+                            toBeChecked.setError("Operations in width and height declarations must be of type pixel or percentage!");
+                        }
                     }
-                    if (propertyName.name.equals("height") && (valueType == ExpressionType.COLOR || valueType == ExpressionType.PIXEL)) {
-                        toBeChecked.setError("The value of the height property must be of type scalar or percentage!");
+                    if (expressionOfProperty instanceof VariableReference) {
+                        if (variableTypes.getFirst().containsKey(((VariableReference) expressionOfProperty).name)) {
+                            if (variableTypes.getFirst().get(((VariableReference) expressionOfProperty).name) != ExpressionType.PIXEL && variableTypes.getFirst().get(((VariableReference) expressionOfProperty).name) != ExpressionType.PERCENTAGE) {
+                                toBeChecked.setError("Variables in width and height declarations must be of type pixel or percentage!");
+                            }
+                        }
+                    } else if (resolveExpressionType(expressionOfProperty) != ExpressionType.PIXEL && resolveExpressionType(expressionOfProperty) != ExpressionType.PERCENTAGE) {
+                        toBeChecked.setError("The declaration must be of type pixel or percentage!");
                     }
                 }
             }
