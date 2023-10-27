@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CompilerTest {
-    //Testklasse om alle onderdelen van de compiler te testen met testbestanden
+    //Testklasse om alle onderdelen van de compiler te testen met de aangeleverde level-bestanden en eigen input testbestanden
 
     private String readFile(String resource) throws IOException {
         File file = new File(String.format("./src/main/resources/%s", resource));
