@@ -98,6 +98,12 @@ public class Generator {
 		stringBuilder.append(";\n");
 	}
 
+	/**
+	 * This method generates the CSS result of a literal for the final result.
+	 * BoolLiteral and ScalarLiteral are not used in the final result, because they are not supported by CSS.
+	 *
+	 * @param node The node to get the value of.
+	 * */
 	private void generateLiteralResult(ASTNode node) {
 		if (node instanceof ColorLiteral) {
 			stringBuilder.append(((ColorLiteral) node).value);
@@ -108,6 +114,12 @@ public class Generator {
 		}
 	}
 
+	/**
+	 * This method retrieves the value of a variable by its name,
+	 * and calls generateLiteralResult to generate the CSS result.
+	 *
+	 * @param node The node to get the value of.
+	 * */
 	private void generateVariableValueByName(ASTNode node) {
 		if (node instanceof VariableReference) {
 			if (variables.getFirst().containsKey(((VariableReference) node).name)) {
@@ -116,6 +128,11 @@ public class Generator {
 		}
 	}
 
+	/**
+	 * This method adds the variable name and expression to the variables list hashmap.
+	 *
+	 * @param toBeFound The node to find.
+	 * */
 	private void findAllVariables(ASTNode toBeFound) {
 		if (toBeFound instanceof VariableAssignment) {
 			String name = ((VariableAssignment) toBeFound).name.name;
